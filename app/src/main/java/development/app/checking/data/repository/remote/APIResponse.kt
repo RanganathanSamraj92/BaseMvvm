@@ -1,13 +1,8 @@
 package development.app.checking.data.repository.remote
 
-import android.graphics.drawable.shapes.Shape
 import com.google.gson.annotations.SerializedName
-import development.app.checking.data.repository.OTPResult
 import development.app.checking.data.repository.remote.response.Meta
 import development.app.checking.data.repository.remote.response.ResponseData
-import development.app.checking.model.AndroidVersion
-import java.lang.Error
-import java.lang.Exception
 
 open class APIResponse{
 
@@ -20,14 +15,14 @@ open class APIResponse{
 
     class Success(val result: Any) : APIResponse()
 
-    class Error(val code: Int,val message: String) : APIResponse()
+    class Error(val code: Int,val errorMessage: Any) : APIResponse()
 
     class Exception(val error:   Any) : APIResponse()
 
-    class Processing(val state: LoadinState ) : APIResponse()
+    class Processing(val state: LoadingState ) : APIResponse()
 
 
-    enum class LoadinState{
+    enum class LoadingState{
         LOADING,
         HIDE,
         SHOW

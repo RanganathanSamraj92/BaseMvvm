@@ -10,14 +10,24 @@ import android.view.View.VISIBLE
 import android.view.ViewStub
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
 import development.app.checking.R
+import development.app.checking.ui.fragment.BottomSheetEx
 import kotlinx.android.synthetic.main.app_bar.*
 import kotlinx.android.synthetic.main.container_ly.*
+import kotlinx.android.synthetic.main.container_ly.view.*
 import kotlinx.android.synthetic.main.error_ly.*
+import kotlinx.android.synthetic.main.error_ly.view.*
+import kotlinx.android.synthetic.main.fragment_bottom_sheet_ex.*
 import kotlinx.android.synthetic.main.progress_ly.*
+import kotlinx.android.synthetic.main.progress_ly.view.*
 
-open class BaseActivity : AppCompatActivity() {
+open class BaseActivity : AppCompatActivity(), BottomSheetEx.BottomSheetListener {
+
+    override fun onOptionClick(text: String) {
+
+    }
 
 
     companion object {
@@ -46,11 +56,18 @@ open class BaseActivity : AppCompatActivity() {
             .setAction("Action", null).show()
     }
 
+    open fun showErrorMsg(view: View, msg: String) {
+        makeLog(msg)
+        Snackbar.make(view, "Error - $msg", Snackbar.LENGTH_LONG)
+            .setAction("Action", null).show()
+    }
+
     private fun makeLog(msg: String) {
         Log.w("base", msg)
     }
 
     fun setAppBar(msg: String) {
+        toolbar.title = "android architecture"
         toolbar.navigationIcon = getDrawable(R.drawable.ic_arrow_back_black_24dp)
         setSupportActionBar(toolbar)
         toolbar.setNavigationOnClickListener { onBackPressed() }
@@ -73,10 +90,12 @@ open class BaseActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     open fun showException(message: String) {
-        containerLy.visibility = VISIBLE
-        progressLy.visibility = GONE
-        errorLy.visibility = VISIBLE
-        txtErrorMessage.text = "Error : $message"
+        val bottomSheet = BottomSheetEx()
+        val view = layoutInflater.inflate(R.layout.fragment_bottom_sheet_ex, null)
+        view.errorLy.txtErrorMessage.text = message
+        val dialog = BottomSheetDialog(this)
+        dialog.setContentView(view)
+        dialog.show()
     }
 
 

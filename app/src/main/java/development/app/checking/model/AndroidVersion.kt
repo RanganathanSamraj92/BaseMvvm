@@ -8,3 +8,7 @@ class AndroidVersion{
     lateinit var  images: List<Image>
 
 }
+
+data class TmdbMovieResponse(
+    val results: List<AndroidVersion>
+)

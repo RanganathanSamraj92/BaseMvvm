@@ -4,6 +4,7 @@
           package="development.app.checking">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
             android:allowBackup="true"
@@ -13,11 +14,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
-        <activity
-                android:name=".ui.activity.Main2Activity"
-                android:label="@string/title_activity_main2"
-                android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+
         <activity android:name=".ui.base.BaseActivity">
         </activity>
         <activity
@@ -47,6 +44,12 @@
         </activity>
         <activity
                 android:name=".ui.activity.AndroidVersionActivity"
+                android:label="@string/app_name"
+                android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <activity
+                android:name=".ui.activity.MovieActivity"
                 android:label="@string/app_name"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
