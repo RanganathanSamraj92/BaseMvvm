@@ -1,15 +1,16 @@
 package development.app.checking.data.repository
 
-import development.app.checking.data.repository.remote.ApiCallInterface
+import android.view.View
+import development.app.checking.data.source.remote.ApiCallInterface
 import development.app.checking.model.AndroidVersion
 
 open class MovieRepository(private val api : ApiCallInterface) : BaseRepository() {
 
-     suspend fun getPopularMovies() : MutableList<AndroidVersion>?{
+     suspend fun getPopularMovies(view :View) : MutableList<AndroidVersion>?{
 
-        val movieResponse = safeApiCall( call = {api.getVersions().await()})
+        val movieResponse = safeApiCall( view,call = {api.getVersions().await()})
 
-        return movieResponse!!.data.results.toMutableList()
+        return movieResponse!!.data.versions.toMutableList()
 
     }
 

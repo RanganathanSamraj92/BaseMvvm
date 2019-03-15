@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import development.app.checking.R
-import development.app.checking.data.repository.remote.APIResponse
+import development.app.checking.data.source.remote.APIResponse
 import development.app.checking.model.AndroidVersion
 import development.app.checking.ui.base.BaseActivity
 import development.app.checking.viewmodel.VersionViewModel
@@ -24,7 +24,13 @@ class AndroidVersionActivity : BaseActivity() {
         viewModel = ViewModelProviders.of(this).get(VersionViewModel::class.java)
 
         viewModel.response.observe(this, loadingListener)
-       // viewModel.getAndroidVerions().observe(this, loadingListener)
+        viewModel.getAndroidVerions().observe(this, Observer {versions->
+            val s = StringBuilder()
+            versions.forEach {
+                s.append(" ${it.name} ${it.api_level} + \n")
+            }
+            txtContent.text = s.toString()
+        })
 
 
     }
@@ -36,7 +42,7 @@ class AndroidVersionActivity : BaseActivity() {
                 hideProgress()
                 val versions = res.result as List<AndroidVersion>
 
-                val s: StringBuilder = StringBuilder()
+                val s = StringBuilder()
                 versions.forEach {
                     s.append(" ${it.name} ${it.api_level} + \n")
                 }
@@ -63,7 +69,7 @@ class AndroidVersionActivity : BaseActivity() {
     private fun initListeners() {
 
         btnLoad.setOnClickListener {
-            viewModel.fetchMovies()
+            viewModel.fetchMovies(it)
         }
     }
 

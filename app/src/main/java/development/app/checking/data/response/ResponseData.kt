@@ -1,4 +1,4 @@
-package development.app.checking.data.repository.remote.response
+package development.app.checking.data.response
 
 import com.google.gson.annotations.SerializedName
 import development.app.checking.model.AndroidVersion
@@ -6,5 +6,5 @@ import development.app.checking.model.AndroidVersion
 open class ResponseData{
 
     @SerializedName("versions")
-    open var  results: List<AndroidVersion> = listOf()
+    open var  versions: List<AndroidVersion> = listOf()
 }

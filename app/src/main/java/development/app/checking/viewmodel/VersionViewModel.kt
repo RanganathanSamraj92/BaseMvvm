@@ -1,9 +1,10 @@
 package development.app.checking.viewmodel
 
+import android.view.View
 import androidx.lifecycle.MutableLiveData
-import development.app.checking.data.VersionsRepository
-import development.app.checking.data.repository.remote.APIResponse
-import development.app.checking.data.repository.remote.RetrofitFactory
+import development.app.checking.data.repository.VersionsRepository
+import development.app.checking.data.source.remote.APIResponse
+import development.app.checking.data.source.remote.RetrofitFactory
 import development.app.checking.model.AndroidVersion
 import development.app.checking.viewmodel.BaseViewModel.BaseViewModel
 import kotlinx.coroutines.*
@@ -18,7 +19,8 @@ class VersionViewModel : BaseViewModel() {
 
     private val scope = CoroutineScope(coroutineContext)
 
-    private val repository : VersionsRepository = VersionsRepository(RetrofitFactory.makeRetrofitService())
+    private val repository : VersionsRepository =
+        VersionsRepository(RetrofitFactory.makeRetrofitService())
 
     val response = MutableLiveData<APIResponse>()
     private val androidVersions =  MutableLiveData<MutableList<AndroidVersion>>()
@@ -27,10 +29,11 @@ class VersionViewModel : BaseViewModel() {
         return androidVersions
     }
 
-    fun fetchMovies(){
+    fun fetchMovies(view : View){
         scope.launch {
-          //repository.getVersions(response)
-            androidVersions.postValue(repository.getAndroidVerions())
+         // repository.getVersions(response)
+         //   response.postValue( repository.getOSVersions())
+          androidVersions.postValue(repository.getAndroidVerions(view))
         }
     }
 

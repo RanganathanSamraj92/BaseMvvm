@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.View
 import development.app.checking.R
-import development.app.checking.databinding.ActivityMainBinding
 import development.app.checking.ui.base.BaseActivity
 import development.app.checking.viewmodel.CustomViewModelFactory
 import development.app.checking.viewmodel.UserViewModel
@@ -15,7 +14,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : BaseActivity() {
 
     private lateinit var viewModel: UserViewModel
-    private lateinit var binding: ActivityMainBinding
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

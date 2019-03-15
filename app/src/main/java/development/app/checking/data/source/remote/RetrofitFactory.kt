@@ -1,9 +1,8 @@
-package development.app.checking.data.repository.remote
+package development.app.checking.data.source.remote
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.converter.moshi.MoshiConverterFactory
 
 open class RetrofitFactory {
 

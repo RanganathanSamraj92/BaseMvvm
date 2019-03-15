@@ -38,6 +38,17 @@ open class BaseActivity : AppCompatActivity(), BottomSheetEx.BottomSheetListener
             return Intent(context, cls)
         }
 
+        open fun showMsg(view: View, msg: String) {
+            makeLog(msg)
+
+            Snackbar.make(view, msg, Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show()
+        }
+
+        private fun makeLog(msg: String) {
+            Log.w("base", msg)
+        }
+
 
     }
 
@@ -49,12 +60,7 @@ open class BaseActivity : AppCompatActivity(), BottomSheetEx.BottomSheetListener
         viewStub.inflate()
     }
 
-    open fun showMsg(view: View, msg: String) {
-        makeLog(msg)
 
-        Snackbar.make(view, msg, Snackbar.LENGTH_LONG)
-            .setAction("Action", null).show()
-    }
 
     open fun showErrorMsg(view: View, msg: String) {
         makeLog(msg)
@@ -62,9 +68,7 @@ open class BaseActivity : AppCompatActivity(), BottomSheetEx.BottomSheetListener
             .setAction("Action", null).show()
     }
 
-    private fun makeLog(msg: String) {
-        Log.w("base", msg)
-    }
+
 
     fun setAppBar(msg: String) {
         toolbar.title = "android architecture"

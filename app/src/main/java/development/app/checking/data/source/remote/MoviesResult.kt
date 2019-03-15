@@ -1,4 +1,4 @@
-package development.app.checking.data.repository.remote
+package development.app.checking.data.source.remote
 
 sealed class MoviesResult<out T: Any> {
     data class Success<out T : Any>(val data: T) : MoviesResult<T>()

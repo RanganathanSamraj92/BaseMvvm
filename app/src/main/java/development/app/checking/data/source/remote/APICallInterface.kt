@@ -1,7 +1,5 @@
-package development.app.checking.data.repository.remote
+package development.app.checking.data.source.remote
 
-import development.app.checking.model.AndroidVersion
-import development.app.checking.model.TmdbMovieResponse
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
 import retrofit2.http.GET
