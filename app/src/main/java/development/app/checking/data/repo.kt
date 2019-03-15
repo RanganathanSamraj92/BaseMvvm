@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import development.app.checking.data.repository.BaseRepository
 import development.app.checking.data.repository.remote.APIResponse
 import development.app.checking.data.repository.remote.ApiCallInterface
+import development.app.checking.model.AndroidVersion
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.io.IOException
@@ -20,6 +21,8 @@ class VersionsRepository constructor(private val apiService: ApiCallInterface) :
         GlobalScope.launch {
             try {
                 val request = apiService.getVersionsAsync()
+
+                //val response  = request.await()
                 val response  = safeApiCall( call = {apiService.getVersions().await()})
 
                 if (response!!.meta.status) {
@@ -37,6 +40,15 @@ class VersionsRepository constructor(private val apiService: ApiCallInterface) :
             }
         }
 
+
+    }
+
+
+    suspend fun getAndroidVerions() : MutableList<AndroidVersion>?{
+
+        val movieResponse = safeApiCall( call = {apiService.getVersions().await()})
+
+        return movieResponse!!.data.results.toMutableList()
 
     }
 

@@ -24,6 +24,7 @@ class AndroidVersionActivity : BaseActivity() {
         viewModel = ViewModelProviders.of(this).get(VersionViewModel::class.java)
 
         viewModel.response.observe(this, loadingListener)
+       // viewModel.getAndroidVerions().observe(this, loadingListener)
 
 
     }
