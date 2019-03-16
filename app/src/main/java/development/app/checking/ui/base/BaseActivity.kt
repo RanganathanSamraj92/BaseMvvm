@@ -15,6 +15,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
 import development.app.checking.R
 import development.app.checking.ui.fragment.BottomSheetEx
+import development.app.checking.utils.Utils
 import development.app.checking.viewmodel.BaseViewModel.BaseViewModel
 import kotlinx.android.synthetic.main.alert_ly.view.*
 import kotlinx.android.synthetic.main.app_bar.*
@@ -22,6 +23,7 @@ import kotlinx.android.synthetic.main.container_ly.*
 import kotlinx.android.synthetic.main.error_ly.*
 import kotlinx.android.synthetic.main.error_ly.view.*
 import kotlinx.android.synthetic.main.progress_ly.*
+import kotlinx.android.synthetic.main.progress_ly.view.*
 
 open class BaseActivity : AppCompatActivity(), BottomSheetEx.BottomSheetListener {
 
@@ -110,18 +112,32 @@ open class BaseActivity : AppCompatActivity(), BottomSheetEx.BottomSheetListener
     open fun showException(message: String) {
         val view = layoutInflater.inflate(R.layout.fragment_bottom_sheet_ex, null)
         view.errorLy.txtErrorMessage.text = message
+        view.alertLy.visibility= GONE
         val dialog = BottomSheetDialog(this)
         dialog.setContentView(view)
         dialog.show()
     }
 
     @SuppressLint("SetTextI18n")
-    open fun showAlert(title: String, message: String, alertOkListner: Any?) {
+    open fun showAlert(title: String, message: String, alertOkListner: Any?,cancelListner: Any?) {
+        val dialog = BottomSheetDialog(this)
         val view = layoutInflater.inflate(R.layout.fragment_bottom_sheet_ex, null)
         view.errorLy.visibility= GONE
         view.alertLy.txtAlertMessage.text = message
         view.alertLy.txtAlertTitle.text = title
-        val dialog = BottomSheetDialog(this)
+
+        view.alertLy.btnUpdate.setOnClickListener {
+            alertOkListner as Utils.OnClickListener
+            alertOkListner.onClick(it)
+            dialog.dismiss()
+        }
+        view.alertLy.btnSkip.setOnClickListener {
+            cancelListner as Utils.OnClickListener
+            cancelListner.onClick(it)
+            dialog.dismiss()
+        }
+
+
         dialog.setContentView(view)
         dialog.show()
     }

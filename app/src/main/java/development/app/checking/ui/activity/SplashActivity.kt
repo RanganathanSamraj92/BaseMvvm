@@ -46,15 +46,19 @@ class SplashActivity : BaseActivity() {
             viewModelSetup(this, splashViewModel)
             splashViewModel.getAppVersion().observe(this@SplashActivity, Observer {
                 if (BuildConfig.VERSION_NAME.equals(it!!.appVersion.version)){
-                    GlobalScope.launch {
-                        newIntent(this@SplashActivity, AndroidVersionActivity::class.java)
-                    }
+                    newIntent(this@SplashActivity, AndroidVersionActivity::class.java)
+
                 }else{
                     if (it!!.appVersion.mandatory == "1") {
                         showAlert("Update!","New Version Available v:${it!!.appVersion.version} \ncurrent v:${BuildConfig.VERSION_NAME}",
                             object : Utils.OnClickListener {
                                 override fun onClick(v: View) {
-                                    Toast.makeText(v.getContext(), "Click", Toast.LENGTH_SHORT).show()
+                                   // Toast.makeText(v.getContext(), "Click", Toast.LENGTH_SHORT).show()
+                                    showMsg(txtAppVersion,"Click")
+                                }
+                            },object : Utils.OnClickListener {
+                                override fun onClick(v: View) {
+                                    newIntent(this@SplashActivity, AndroidVersionActivity::class.java)
                                 }
                             }
                         )

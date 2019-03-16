@@ -1,18 +1,24 @@
 package development.app.checking.ui.activity
 
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import development.app.checking.R
 import development.app.checking.data.source.remote.APIResponse
+import development.app.checking.model.AndroidVersion
+import development.app.checking.ui.adapter.RecyclerAdapter
 import development.app.checking.ui.base.BaseActivity
+import development.app.checking.utils.Utils
 import development.app.checking.viewmodel.VersionViewModel
 import kotlinx.android.synthetic.main.content_android_versions.*
+import kotlinx.android.synthetic.main.recyclerview_ly.*
 
 class AndroidVersionActivity : BaseActivity() {
 
     private lateinit var viewModel: VersionViewModel
 
+    private lateinit var adapter: RecyclerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,15 +31,14 @@ class AndroidVersionActivity : BaseActivity() {
 
         viewModel.androidVersions.observe(this, Observer {versions->
 
-            val s = StringBuilder()
-            versions.forEach {
-                s.append(" ${it.name} ${it.api_level} + \n")
-            }
-            txtContent.text = s.toString()
+            adapter = RecyclerAdapter( object : Utils.OnItemClickListener {
+                override fun onClick(v: View,item:Any) {
+                    item as AndroidVersion
+                    showMsg(v,"${item.name} v : ${item.images.get(0).image}")
+                }
+            },versions.toCollection(ArrayList<AndroidVersion>()))
+            recyclerAndroidVersions.adapter = adapter
         })
-
-
-        //viewModel.baseApiResponse.observe(this, loadingListener)
     }
 
 
@@ -57,7 +62,7 @@ class AndroidVersionActivity : BaseActivity() {
                     versions.forEach {
                         s.append(" ${it.name} ${it.api_level} + \n")
                     }
-                    txtContent.text = s.toString()
+                    //txtContent.text = s.toString()
                 }else{
                     showMsg(btnLoad, res.successResult.meta.message)
                 }
