@@ -8,7 +8,7 @@ open class MovieRepository(private val api : ApiCallInterface) : BaseRepository(
 
      suspend fun getPopularMovies(view :View) : MutableList<AndroidVersion>?{
 
-        val movieResponse = safeApiCall( view,call = {api.getVersions().await()})
+        val movieResponse = safeApiCall( call = {api.getVersions().await()})
 
         return movieResponse!!.data.versions.toMutableList()
 

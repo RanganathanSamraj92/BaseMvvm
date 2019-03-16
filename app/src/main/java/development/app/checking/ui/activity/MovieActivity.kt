@@ -17,7 +17,7 @@ class MovieActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_base)
         setStub(R.layout.content_android_versions)
-        setAppBar("")
+        setAppBar("Demo")
         initListeners()
         viewModel = ViewModelProviders.of(this).get(TmdbViewModel::class.java)
 

@@ -10,20 +10,36 @@ import android.view.View.VISIBLE
 import android.view.ViewStub
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
 import development.app.checking.R
 import development.app.checking.ui.fragment.BottomSheetEx
+import development.app.checking.viewmodel.BaseViewModel.BaseViewModel
+import kotlinx.android.synthetic.main.alert_ly.view.*
 import kotlinx.android.synthetic.main.app_bar.*
 import kotlinx.android.synthetic.main.container_ly.*
-import kotlinx.android.synthetic.main.container_ly.view.*
 import kotlinx.android.synthetic.main.error_ly.*
 import kotlinx.android.synthetic.main.error_ly.view.*
-import kotlinx.android.synthetic.main.fragment_bottom_sheet_ex.*
 import kotlinx.android.synthetic.main.progress_ly.*
-import kotlinx.android.synthetic.main.progress_ly.view.*
 
 open class BaseActivity : AppCompatActivity(), BottomSheetEx.BottomSheetListener {
+
+
+    open fun viewModelSetup(activity: BaseActivity, viewModel: BaseViewModel) {
+
+
+        viewModel.loadingStatus.observe(activity, Observer {
+            if (it) {
+                showProgress("")
+            } else {
+                hideProgress()
+            }
+        })
+        viewModel.errorStatus.observe(activity, Observer { error ->
+            showException(error)
+        })
+    }
 
     override fun onOptionClick(text: String) {
 
@@ -61,7 +77,6 @@ open class BaseActivity : AppCompatActivity(), BottomSheetEx.BottomSheetListener
     }
 
 
-
     open fun showErrorMsg(view: View, msg: String) {
         makeLog(msg)
         Snackbar.make(view, "Error - $msg", Snackbar.LENGTH_LONG)
@@ -69,9 +84,8 @@ open class BaseActivity : AppCompatActivity(), BottomSheetEx.BottomSheetListener
     }
 
 
-
-    fun setAppBar(msg: String) {
-        toolbar.title = "android architecture"
+    fun setAppBar(title: String) {
+        toolbar.title = title
         toolbar.navigationIcon = getDrawable(R.drawable.ic_arrow_back_black_24dp)
         setSupportActionBar(toolbar)
         toolbar.setNavigationOnClickListener { onBackPressed() }
@@ -86,17 +100,27 @@ open class BaseActivity : AppCompatActivity(), BottomSheetEx.BottomSheetListener
     }
 
     open fun showError(message: String) {
-        // containerLy.visibility = VISIBLE
+        containerLy.visibility = VISIBLE
         progressLy.visibility = GONE
-        //   errorLy.visibility = VISIBLE
+        errorLy.visibility = VISIBLE
         txtErrorMessage.text = message
     }
 
     @SuppressLint("SetTextI18n")
     open fun showException(message: String) {
-        val bottomSheet = BottomSheetEx()
         val view = layoutInflater.inflate(R.layout.fragment_bottom_sheet_ex, null)
         view.errorLy.txtErrorMessage.text = message
+        val dialog = BottomSheetDialog(this)
+        dialog.setContentView(view)
+        dialog.show()
+    }
+
+    @SuppressLint("SetTextI18n")
+    open fun showAlert(title:String,message: String) {
+        val view = layoutInflater.inflate(R.layout.fragment_bottom_sheet_ex, null)
+        view.errorLy.visibility= GONE
+        view.alertLy.txtAlertMessage.text = message
+        view.alertLy.txtAlertTitle.text = title
         val dialog = BottomSheetDialog(this)
         dialog.setContentView(view)
         dialog.show()

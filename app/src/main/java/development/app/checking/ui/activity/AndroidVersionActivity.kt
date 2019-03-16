@@ -5,7 +5,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import development.app.checking.R
 import development.app.checking.data.source.remote.APIResponse
-import development.app.checking.model.AndroidVersion
 import development.app.checking.ui.base.BaseActivity
 import development.app.checking.viewmodel.VersionViewModel
 import kotlinx.android.synthetic.main.content_android_versions.*
@@ -19,12 +18,13 @@ class AndroidVersionActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_base)
         setStub(R.layout.content_android_versions)
-        setAppBar("")
+        setAppBar("Android Arch")
         initListeners()
         viewModel = ViewModelProviders.of(this).get(VersionViewModel::class.java)
+        viewModelSetup(this,viewModel)
 
-        viewModel.response.observe(this, loadingListener)
-        viewModel.getAndroidVerions().observe(this, Observer {versions->
+        viewModel.androidVersions.observe(this, Observer {versions->
+
             val s = StringBuilder()
             versions.forEach {
                 s.append(" ${it.name} ${it.api_level} + \n")
@@ -33,26 +33,38 @@ class AndroidVersionActivity : BaseActivity() {
         })
 
 
+        //viewModel.baseApiResponse.observe(this, loadingListener)
+    }
+
+
+
+    private fun initListeners() {
+        btnLoad.setOnClickListener {
+            viewModel.fetchVersions()
+        }
     }
 
     private val loadingListener = Observer<APIResponse> { res ->
 
         when (res) {
+
             is APIResponse.Success -> {
                 hideProgress()
-                val versions = res.result as List<AndroidVersion>
-
-                val s = StringBuilder()
-                versions.forEach {
-                    s.append(" ${it.name} ${it.api_level} + \n")
+                res.successResult as APIResponse?
+                if (res.successResult.meta.status){
+                    val versions = res.successResult.data.versions
+                    val s = StringBuilder()
+                    versions.forEach {
+                        s.append(" ${it.name} ${it.api_level} + \n")
+                    }
+                    txtContent.text = s.toString()
+                }else{
+                    showMsg(btnLoad, res.successResult.meta.message)
                 }
-                txtContent.text = s.toString()
-                newIntent(this@AndroidVersionActivity,MovieActivity::class.java)
             }
             is APIResponse.Error -> {
                 hideProgress()
                 showMsg(btnLoad, res.errorMessage as String)
-                // showError(res.message)
             }
 
             is APIResponse.Processing -> {
@@ -60,17 +72,10 @@ class AndroidVersionActivity : BaseActivity() {
             }
             is APIResponse.Exception -> {
                 hideProgress()
-                showException(res.error as String)
+                showException(res.exception as String)
             }
         }
 
-    }
-
-    private fun initListeners() {
-
-        btnLoad.setOnClickListener {
-            viewModel.fetchMovies(it)
-        }
     }
 
 

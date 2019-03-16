@@ -1,52 +1,34 @@
 package development.app.checking.data.repository
 
-import android.util.Log
-import android.view.View
-import development.app.checking.data.response.Meta
 import development.app.checking.data.source.remote.APIResponse
-import development.app.checking.ui.base.BaseActivity.Companion.showMsg
-import kotlinx.android.synthetic.main.content_android_versions.*
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import retrofit2.Response
+import retrofit2.Retrofit
+import java.io.IOException
+import java.net.UnknownHostException
 
+@Suppress("UNCHECKED_CAST")
 open class BaseRepository {
 
-    suspend fun <T : Any> safeApiCall(view: View, call: suspend () -> Response<T>): T? {
+    suspend fun <T : Any> safeApiCall(call: suspend () -> Response<T>): T? {
         var data: T? = null
-        val result: APIResponse = safeApiResult(call)
-
-
-        when (result) {
-            is APIResponse.Success -> {
-                data = result.result as T
-
-                Log.d("1.DataRepository", " & Exception - ${result}")
-            }
-
-
-            is APIResponse.Error -> {
-                data = result.errorMessage as T
-                Log.d("1.DataRepository", " & Exception - ${result.errorMessage}")
-            }
-
-            is APIResponse.Exception -> {
-                data = result.error as T
-                Log.d("1.DataRepository", " & Exception - ${result.error}")
-            }
-
-        }
-
-
-        return data
+        val response = safeApiResult(call)
+        return response as T
     }
 
 }
 
 private suspend fun <T : Any> safeApiResult(call: suspend () -> Response<T>): APIResponse {
-    val response = call.invoke()
-    if (response.isSuccessful)
-        return APIResponse.Success(response.body()!!)
 
-    return APIResponse.Error( response.code() )
+    try {
+        val response = call.invoke()
+        if (response.isSuccessful)
+            return APIResponse.Success(response.body()!!)
+        return APIResponse.Error("Api Error ${response.code()} ${response.errorBody()}")
+    } catch (e: UnknownHostException) {
+        return APIResponse.Exception("No Internet connection Exception : ${e.localizedMessage}")
+    } catch (e: IOException) {
+        return APIResponse.Exception("safeApiResult IOException : ${e.localizedMessage}")
+    } catch (e: Exception) {
+        return APIResponse.Exception("safeApiResult Exception : ${e.localizedMessage}")
+    }
 }

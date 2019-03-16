@@ -1,6 +1,5 @@
 package development.app.checking.viewmodel
 
-import android.view.View
 import androidx.lifecycle.MutableLiveData
 import development.app.checking.data.repository.VersionsRepository
 import development.app.checking.data.source.remote.APIResponse
@@ -8,35 +7,27 @@ import development.app.checking.data.source.remote.RetrofitFactory
 import development.app.checking.model.AndroidVersion
 import development.app.checking.viewmodel.BaseViewModel.BaseViewModel
 import kotlinx.coroutines.*
-import kotlin.coroutines.CoroutineContext
 
 class VersionViewModel : BaseViewModel() {
 
-    private val parentJob = Job()
+    private val repository: VersionsRepository = VersionsRepository(RetrofitFactory.makeRetrofitService())
 
-    private val coroutineContext: CoroutineContext
-        get() = parentJob + Dispatchers.Default
+    val androidVersions = MutableLiveData<MutableList<AndroidVersion>>()
 
-    private val scope = CoroutineScope(coroutineContext)
 
-    private val repository : VersionsRepository =
-        VersionsRepository(RetrofitFactory.makeRetrofitService())
+    fun fetchVersions() {
+        loadingStatus.value = true
 
-    val response = MutableLiveData<APIResponse>()
-    private val androidVersions =  MutableLiveData<MutableList<AndroidVersion>>()
-
-    open fun getAndroidVerions(): MutableLiveData<MutableList<AndroidVersion>> {
-        return androidVersions
-    }
-
-    fun fetchMovies(view : View){
         scope.launch {
-         // repository.getVersions(response)
-         //   response.postValue( repository.getOSVersions())
-          androidVersions.postValue(repository.getAndroidVerions(view))
+            val apiResponse = repository.getOSVersions()
+            baseApiResponse.postValue(apiResponse)
+            val res= handleResponses(apiResponse!!)
+            try {
+                androidVersions.postValue(res.data.versions.toMutableList())
+            } catch (e: Exception) {
+                /*ignore the exception*/
+            }
         }
     }
-
-    fun cancelAllRequests() = coroutineContext.cancel()
 }
 

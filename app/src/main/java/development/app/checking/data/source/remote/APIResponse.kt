@@ -14,11 +14,11 @@ open class APIResponse {
      var  data: ResponseData = ResponseData()
 
 
-    open class Success(val result: Any) : APIResponse()
+    open class Success(val successResult: Any) : APIResponse()
 
     class Error(val errorMessage: Any) : APIResponse()
 
-    class Exception(val error: Any) : APIResponse()
+    class Exception(val exception: Any) : APIResponse()
 
     class Processing(val state: LoadingState) : APIResponse()
 

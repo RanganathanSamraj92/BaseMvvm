@@ -17,4 +17,7 @@ interface ApiCallInterface {
 
     @GET("android_versions.json")
     fun getVersions():  Deferred<Response<APIResponse>>
+
+    @GET("versions.json")
+    fun getAppVersion():  Deferred<Response<APIResponse>>
 }
