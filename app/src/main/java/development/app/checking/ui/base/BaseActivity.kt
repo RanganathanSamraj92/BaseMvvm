@@ -116,7 +116,7 @@ open class BaseActivity : AppCompatActivity(), BottomSheetEx.BottomSheetListener
     }
 
     @SuppressLint("SetTextI18n")
-    open fun showAlert(title:String,message: String) {
+    open fun showAlert(title: String, message: String, alertOkListner: Any?) {
         val view = layoutInflater.inflate(R.layout.fragment_bottom_sheet_ex, null)
         view.errorLy.visibility= GONE
         view.alertLy.txtAlertMessage.text = message

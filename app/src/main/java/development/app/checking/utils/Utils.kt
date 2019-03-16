@@ -1,7 +1,9 @@
 package development.app.checking.utils
 
-open class Utils{
-   interface AlertOkListner{
-       fun onClick()
-   }
+import android.view.View
+
+open class Utils {
+    interface OnClickListener {
+        fun onClick(v: View)
+    }
 }
