@@ -19,18 +19,6 @@
                 android:textSize="@dimen/fab_margin"
                 android:text="@string/android_versions"/>
 
-
-
-        <com.google.android.material.button.MaterialButton
-                android:layout_margin="@dimen/fab_margin"
-                android:id="@+id/btnLoad"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorWhite"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:text="@string/app_name"/>
-
-
         <include layout="@layout/recyclerview_ly"/>
 
     </LinearLayout>

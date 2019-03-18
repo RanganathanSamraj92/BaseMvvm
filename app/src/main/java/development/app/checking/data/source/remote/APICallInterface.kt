@@ -6,18 +6,13 @@ import retrofit2.http.GET
 
 interface ApiCallInterface {
 
-    /*@GET("api/someRandomPath")
-    fun getOTPForNumber(@Query("mobile_number") mobileNumber: String): Deferred<Response>
+    @GET(NetworkUtils.getAndroidVersions)
+    fun getVersionsAsync():  Deferred<Response<APIResponse>>
 
-    @GET("movie/popular")
-    fun getPopularMovies() : Deferred<Response<MoviesResult.Success>>*/
+    @GET(NetworkUtils.checkVersion)
+    fun getAppVersionAsync():  Deferred<Response<APIResponse>>
 
-    @GET("android_versions.json")
-    fun getVersionsAsync(): Deferred<APIResponse>
+    @GET(NetworkUtils.versionDetails)
+    fun getAppVersionDetailAsync():  Deferred<Response<APIResponse>>
 
-    @GET("android_versions.json")
-    fun getVersions():  Deferred<Response<APIResponse>>
-
-    @GET("versions.json")
-    fun getAppVersion():  Deferred<Response<APIResponse>>
 }

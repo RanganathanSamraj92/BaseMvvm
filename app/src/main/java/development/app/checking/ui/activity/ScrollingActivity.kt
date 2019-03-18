@@ -1,39 +1,43 @@
 package development.app.checking.ui.activity
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
-import androidx.appcompat.app.AppCompatActivity
-import android.view.Menu
-import android.view.MenuItem
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import com.squareup.picasso.Picasso
 import development.app.checking.R
-import kotlinx.android.synthetic.main.activity_scrolling.*
+import development.app.checking.model.AndroidVersion
+import development.app.checking.ui.base.BaseActivity
+import development.app.checking.viewmodel.DetailViewModel
+import kotlinx.android.synthetic.main.app_bar_collapse.*
+import kotlinx.android.synthetic.main.content_scrolling.*
 
-class ScrollingActivity : AppCompatActivity() {
+class ScrollingActivity : BaseActivity() {
+
+    private lateinit var viewModel: DetailViewModel
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_scrolling)
-        setSupportActionBar(toolbar)
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
+        setContentView(R.layout.activity_base_collapse)
+        setStub(R.layout.content_scrolling)
+        setAppBarCollapse("Details")
+        viewModel = ViewModelProviders.of(this).get(DetailViewModel::class.java)
+        viewModelSetup(this, viewModel)
+
+        val version = intent.extras.getSerializable("intent_data") as? AndroidVersion
+        viewModel = ViewModelProviders.of(this).get(DetailViewModel::class.java)
+        viewModelSetup(this, viewModel)
+
+        viewModel.versionDetail.observe(this, Observer { details ->
+            txtScroll.text = details.description
+            toolbar_layout.title = version!!.name
+            Picasso.get().load(version!!.images[0].image).into(imgCollapse)
+
+        })
+        viewModel.fetchDetails()
+
+
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_scrolling, menu)
-        return true
-    }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-
-        return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
 }

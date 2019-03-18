@@ -4,39 +4,33 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import development.app.checking.data.repository.VersionsRepository
 import development.app.checking.data.source.remote.RetrofitFactory
+import development.app.checking.model.AndroidVersion
 import development.app.checking.model.AppVersion
+import development.app.checking.model.VersionDetail
 import development.app.checking.viewmodel.BaseViewModel.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class SplashViewModel : BaseViewModel() {
+class DetailViewModel : BaseViewModel() {
 
     private val repository: VersionsRepository = VersionsRepository(RetrofitFactory.makeRetrofitService())
 
-    private val appVersion: MutableLiveData<AppVersion> = MutableLiveData()
-
-    init {
-        loadAppVersion()
-    }
+    val versionDetail = MutableLiveData<VersionDetail>()
 
 
-    fun getAppVersion(): LiveData<AppVersion> {
-        return appVersion
-    }
-
-    private fun loadAppVersion() {
+    fun fetchDetails() {
+        loadingStatus.value = true
 
         scope.launch {
-            val apiResponse = repository.getAppVersion()
+            val apiResponse = repository.getAppVersionDetail()
             val res= handleResponses(apiResponse!!)
             try {
-                appVersion.postValue(res.data.appVersion)
+                versionDetail.postValue(res.data.versionDetails)
             } catch (e: Exception) {
                 /*ignore the exception*/
             }
         }
-
     }
 }

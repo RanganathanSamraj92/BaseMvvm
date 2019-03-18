@@ -5,33 +5,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
     <include layout="@layout/app_bar"/>
 
 
-    <LinearLayout
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+    <include layout="@layout/content_base"/>
 
-        <include layout="@layout/container_ly"/>
-
-        <ViewStub
-                android:background="@color/colorWhite"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                android:layout_width="match_parent" android:layout_height="match_parent"
-                android:layout="@layout/content_android_versions"
-                android:id="@+id/viewStub"/>
-
-    </LinearLayout>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
-            android:visibility="gone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="@dimen/fab_margin"
-            app:srcCompat="@android:drawable/ic_dialog_email"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

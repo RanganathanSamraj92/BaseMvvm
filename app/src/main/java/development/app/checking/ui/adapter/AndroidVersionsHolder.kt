@@ -9,9 +9,9 @@ import com.squareup.picasso.Picasso
 import development.app.checking.model.AndroidVersion
 import development.app.checking.utils.Utils
 import kotlinx.android.synthetic.main.list_item_android_version.view.*
-import java.lang.Exception
 
-class AndroidVersionsHolder(val v1: Utils.OnItemClickListener, v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
+class AndroidVersionsHolder(val v1: Utils.OnItemClickListener, v: View) : RecyclerView.ViewHolder(v),
+    View.OnClickListener {
     //2
     private var view: View = v
     private var androidVersion: AndroidVersion? = null
@@ -25,24 +25,27 @@ class AndroidVersionsHolder(val v1: Utils.OnItemClickListener, v: View) : Recycl
     override fun onClick(v: View) {
         Log.d("RecyclerView", "CLICK!")
         v1.onClick(v, androidVersion!!)
+        Utils.vibrate(v.context)
     }
 
     @SuppressLint("SetTextI18n")
     fun bindAndroidVersions(androidVersion: AndroidVersion) {
         this.androidVersion = androidVersion
-            //Picasso.with(view.context).load(photo.url).into(view.itemImage)
+        //Picasso.with(view.context).load(photo.url).into(view.itemImage)
         Picasso.get().load(androidVersion.images.get(0).image).into(view.imgAndroidVersionIcon,
             object : Callback {
                 override fun onError(e: Exception?) {
                 }
 
                 override fun onSuccess() {
-                   // animateImageView()
+                    // animateImageView()
                 }
 
             })
         view.txtVersionName.text = "${androidVersion.name} "
-        view.txtDescription.text = "version code : ${androidVersion.version_code} \nApi level: ${androidVersion.api_level} "
+        view.txtReleasedDate.text = "${androidVersion.release_date} "
+        view.txtDescription.text =
+            "version code : ${androidVersion.version_code} \nApi level: ${androidVersion.api_level} "
     }
 
     companion object {

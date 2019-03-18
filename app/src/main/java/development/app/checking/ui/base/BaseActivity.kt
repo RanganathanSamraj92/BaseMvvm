@@ -19,11 +19,13 @@ import development.app.checking.utils.Utils
 import development.app.checking.viewmodel.BaseViewModel.BaseViewModel
 import kotlinx.android.synthetic.main.alert_ly.view.*
 import kotlinx.android.synthetic.main.app_bar.*
+import kotlinx.android.synthetic.main.app_bar_collapse.*
 import kotlinx.android.synthetic.main.container_ly.*
 import kotlinx.android.synthetic.main.error_ly.*
 import kotlinx.android.synthetic.main.error_ly.view.*
 import kotlinx.android.synthetic.main.progress_ly.*
 import kotlinx.android.synthetic.main.progress_ly.view.*
+import java.io.Serializable
 
 open class BaseActivity : AppCompatActivity(), BottomSheetEx.BottomSheetListener {
 
@@ -51,9 +53,13 @@ open class BaseActivity : AppCompatActivity(), BottomSheetEx.BottomSheetListener
     companion object {
         private val INTENT_USER_ID = "user_id"
 
-        fun newIntent(context: Context, cls: Class<*>): Intent {
-            ContextCompat.startActivity(context, Intent(context, cls), null)
-            return Intent(context, cls)
+        fun newIntent(context: Context, cls: Class<*>,intentData:Any): Intent {
+            val intent = Intent(context, cls)
+            if (intentData != "") {
+                intent.putExtra("intent_data", intentData as Serializable)
+            }
+            ContextCompat.startActivity(context,intent, null)
+            return intent
         }
 
         open fun showMsg(view: View, msg: String) {
@@ -73,7 +79,6 @@ open class BaseActivity : AppCompatActivity(), BottomSheetEx.BottomSheetListener
 
     public fun setStub(id: Int) {
         val viewStub = findViewById<ViewStub>(R.id.viewStub)
-
         viewStub.layoutResource = id
         viewStub.inflate()
     }
@@ -92,6 +97,15 @@ open class BaseActivity : AppCompatActivity(), BottomSheetEx.BottomSheetListener
         setSupportActionBar(toolbar)
         toolbar.setNavigationOnClickListener { onBackPressed() }
     }
+
+    fun setAppBarCollapse(title: String) {
+        app_bar_collapse.visibility = VISIBLE
+        toolbarCollapse.title = title
+        toolbarCollapse.navigationIcon = getDrawable(R.drawable.ic_arrow_back_black_24dp)
+        setSupportActionBar(toolbarCollapse)
+        toolbarCollapse.setNavigationOnClickListener { onBackPressed() }
+    }
+
 
     open fun showProgress(msg: String) {
         containerLy.visibility = VISIBLE

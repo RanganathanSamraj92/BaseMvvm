@@ -46,7 +46,7 @@ class SplashActivity : BaseActivity() {
             viewModelSetup(this, splashViewModel)
             splashViewModel.getAppVersion().observe(this@SplashActivity, Observer {
                 if (BuildConfig.VERSION_NAME.equals(it!!.appVersion.version)){
-                    newIntent(this@SplashActivity, AndroidVersionActivity::class.java)
+                    newIntent(this@SplashActivity, AndroidVersionActivity::class.java,"")
 
                 }else{
                     if (it!!.appVersion.mandatory == "1") {
@@ -58,7 +58,7 @@ class SplashActivity : BaseActivity() {
                                 }
                             },object : Utils.OnClickListener {
                                 override fun onClick(v: View) {
-                                    newIntent(this@SplashActivity, AndroidVersionActivity::class.java)
+                                    newIntent(this@SplashActivity, AndroidVersionActivity::class.java,"")
                                 }
                             }
                         )
