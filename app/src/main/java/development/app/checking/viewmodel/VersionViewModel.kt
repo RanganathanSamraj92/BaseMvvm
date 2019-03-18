@@ -15,6 +15,9 @@ class VersionViewModel : BaseViewModel() {
     val androidVersions = MutableLiveData<MutableList<AndroidVersion>>()
 
 
+    init {
+        fetchVersions()
+    }
     fun fetchVersions() {
         loadingStatus.value = true
 

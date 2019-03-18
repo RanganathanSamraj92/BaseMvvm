@@ -7,6 +7,7 @@ buildscript {
     ext.recyclerview_version = '1.0.0'
     ext.lifecycle_extensions_version = '2.0.0-beta01'
     ext.databinding_version = '3.2.0'
+    ext.palette_version = '1.0.0'
 
     ext.material_version = '1.0.0-beta01'
     ext.constraint_version = '1.1.3'

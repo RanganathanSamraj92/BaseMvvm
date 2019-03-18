@@ -111,4 +111,7 @@ dependencies {
     implementation "com.squareup.picasso:picasso:$picasso_version"
     /*circleImageview*/
     implementation "de.hdodenhof:circleimageview:$circle_imageview_version"
+
+    /*palette*/
+    implementation "androidx.palette:palette:$palette_version"
 }

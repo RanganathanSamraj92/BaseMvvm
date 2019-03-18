@@ -45,7 +45,7 @@ class AndroidVersionActivity : BaseActivity() {
             }, versions.toCollection(ArrayList<AndroidVersion>()))
             recyclerAndroidVersions.adapter = adapter
         })
-        viewModel.fetchVersions()
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
