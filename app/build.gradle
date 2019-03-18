@@ -114,4 +114,9 @@ dependencies {
 
     /*palette*/
     implementation "androidx.palette:palette:$palette_version"
+
+    // Dagger 2
+    implementation "com.google.dagger:dagger:$dagger2_version"
+    kapt "com.google.dagger:dagger-compiler:$dagger2_version"
+
 }

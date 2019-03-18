@@ -4,6 +4,12 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import development.app.checking.data.source.remote.APIResponse
+import development.app.checking.data.source.remote.DaggerViewModelInjector
+import development.app.checking.data.source.remote.NetworkModule
+import development.app.checking.data.source.remote.ViewModelInjector
+import development.app.checking.viewmodel.DetailViewModel
+import development.app.checking.viewmodel.SplashViewModel
+import development.app.checking.viewmodel.VersionViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -11,6 +17,25 @@ import kotlinx.coroutines.cancel
 import kotlin.coroutines.CoroutineContext
 
 open class BaseViewModel : ViewModel() {
+
+    private val injector: ViewModelInjector = DaggerViewModelInjector.builder()
+        .networkModule(networkModule = NetworkModule).build()
+
+    init {
+        inject()
+    }
+
+
+    fun inject() {
+        when (this) {
+            is SplashViewModel -> injector.inject(this)
+
+            is VersionViewModel -> injector.inject(this)
+
+            is DetailViewModel -> injector.inject(this)
+        }
+
+    }
 
     open var baseApiResponse: MutableLiveData<APIResponse> = MutableLiveData()
 

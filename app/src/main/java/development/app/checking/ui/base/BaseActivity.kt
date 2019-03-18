@@ -10,6 +10,7 @@ import android.view.View.VISIBLE
 import android.view.ViewStub
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
@@ -31,6 +32,7 @@ open class BaseActivity : AppCompatActivity(), BottomSheetEx.BottomSheetListener
 
 
     open fun viewModelSetup(activity: BaseActivity, viewModel: BaseViewModel) {
+
 
 
         viewModel.loadingStatus.observe(activity, Observer {

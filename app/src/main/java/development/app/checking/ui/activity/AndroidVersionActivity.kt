@@ -8,8 +8,10 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.view.menu.MenuBuilder
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import development.app.checking.R
 import development.app.checking.model.AndroidVersion
 import development.app.checking.ui.adapter.RecyclerAdapter
 import development.app.checking.ui.base.BaseActivity
