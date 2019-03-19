@@ -14,6 +14,7 @@ open class RetrofitFactory {
 
     companion object {
         val BASE_URL1 = "http://shamlatech.net/android_portal/kotlinApps/api/v1/"
+        val LOCAL_BASE_URL1 = "http://localhost:3000/auth/"
         fun makeRetrofitService(): ApiCallInterface {
             return Retrofit.Builder()
                 .baseUrl(BASE_URL1)

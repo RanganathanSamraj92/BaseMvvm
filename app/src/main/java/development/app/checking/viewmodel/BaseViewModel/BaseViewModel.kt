@@ -8,6 +8,7 @@ import development.app.checking.data.source.remote.DaggerViewModelInjector
 import development.app.checking.data.source.remote.NetworkModule
 import development.app.checking.data.source.remote.ViewModelInjector
 import development.app.checking.viewmodel.DetailViewModel
+import development.app.checking.viewmodel.LoginViewModel
 import development.app.checking.viewmodel.SplashViewModel
 import development.app.checking.viewmodel.VersionViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -33,6 +34,8 @@ open class BaseViewModel : ViewModel() {
             is VersionViewModel -> injector.inject(this)
 
             is DetailViewModel -> injector.inject(this)
+
+            is LoginViewModel -> injector.inject(this)
         }
 
     }
