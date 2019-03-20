@@ -30,5 +30,7 @@ interface ViewModelInjector {
         fun build() : ViewModelInjector
 
         fun networkModule(networkModule: NetworkModule):Builder
+
+        fun localNetworkModule(localNetworkModule: LocalNetworkModule):Builder
     }
 }

@@ -35,7 +35,7 @@ object NetworkModule {
     @JvmStatic
     internal fun provideRetrofit(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(RetrofitFactory.BASE_URL1)
+            .baseUrl(RetrofitFactory.LOCAL_BASE_URL1)
             .addConverterFactory(GsonConverterFactory.create())
             /*.addConverterFactory(MoshiConverterFactory.create())*/
             .addCallAdapterFactory(CoroutineCallAdapterFactory())

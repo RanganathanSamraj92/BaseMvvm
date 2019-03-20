@@ -22,23 +22,9 @@ object LocalNetworkModule {
     @Provides
     @Reusable
     @JvmStatic
-    internal fun provideVersionsApi(retrofit: Retrofit): AuthApiCallInterface {
+    internal fun provideAuthApi(retrofit: Retrofit): AuthApiCallInterface {
         return retrofit.create(AuthApiCallInterface::class.java)
     }
 
-    /**
-     * Provides the Retrofit object.
-     * @return the Retrofit object
-     */
-    @Provides
-    @Reusable
-    @JvmStatic
-    internal fun provideRetrofit(): Retrofit {
-        return Retrofit.Builder()
-            .baseUrl(RetrofitFactory.LOCAL_BASE_URL1)
-            .addConverterFactory(GsonConverterFactory.create())
-            /*.addConverterFactory(MoshiConverterFactory.create())*/
-            .addCallAdapterFactory(CoroutineCallAdapterFactory())
-            .build()
-    }
+
 }

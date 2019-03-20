@@ -62,7 +62,7 @@ class SplashActivity : BaseActivity() {
                             },
                             object : Utils.OnClickListener {
                                 override fun onClick(v: View) {
-                                    newIntent(this@SplashActivity, AndroidVersionActivity::class.java, "")
+                                    newIntent(this@SplashActivity, LoginActivity::class.java, "")
                                 }
                             }
                         )

@@ -5,6 +5,6 @@ open class NetworkUtils {
         const val checkVersion: String = "versions.json"
         const val versionDetails: String = "version_details.json"
         const val getAndroidVersions: String = "android_versions.json"
-        const val login: String = "login"
+        const val login: String = "auth/login"
     }
 }

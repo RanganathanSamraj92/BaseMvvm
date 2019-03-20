@@ -3,10 +3,7 @@ package development.app.checking.viewmodel.BaseViewModel
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import development.app.checking.data.source.remote.APIResponse
-import development.app.checking.data.source.remote.DaggerViewModelInjector
-import development.app.checking.data.source.remote.NetworkModule
-import development.app.checking.data.source.remote.ViewModelInjector
+import development.app.checking.data.source.remote.*
 import development.app.checking.viewmodel.DetailViewModel
 import development.app.checking.viewmodel.LoginViewModel
 import development.app.checking.viewmodel.SplashViewModel
@@ -20,7 +17,9 @@ import kotlin.coroutines.CoroutineContext
 open class BaseViewModel : ViewModel() {
 
     private val injector: ViewModelInjector = DaggerViewModelInjector.builder()
-        .networkModule(networkModule = NetworkModule).build()
+        .networkModule(networkModule = NetworkModule)
+        .localNetworkModule(localNetworkModule = LocalNetworkModule)
+        .build()
 
     init {
         inject()
