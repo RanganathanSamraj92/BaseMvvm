@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.app_bar_collapse.*
 import kotlinx.android.synthetic.main.content_login.*
 
 
-class LoginActivity : BaseActivity() {
+class RegisterActivity : BaseActivity() {
 
     private lateinit var loginViewModel: LoginViewModel
 
@@ -22,7 +22,7 @@ class LoginActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(development.app.checking.R.layout.activity_base_collapse)
-        setStub(development.app.checking.R.layout.content_login)
+        setStub(development.app.checking.R.layout.content_register)
         setAppBarCollapse(resources.getString(R.string.app_name))
         loginViewModel = ViewModelProviders.of(this).get(LoginViewModel::class.java)
         viewModelSetup(this, loginViewModel)
@@ -53,10 +53,6 @@ class LoginActivity : BaseActivity() {
 
         btnLogin.setOnClickListener {
             loginViewModel.login(txtEmail.text.toString(), txtPassword.text.toString())
-        }
-
-        txtSignUp.setOnClickListener {
-           newIntent(this@LoginActivity,RegisterActivity::class.java,"")
         }
 
 

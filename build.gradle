@@ -9,6 +9,9 @@ buildscript {
     ext.databinding_version = '3.2.0'
     ext.palette_version = '1.0.0'
     ext.dagger2_version = '2.16'
+    ext.caligraphy_version = '2.3.0'
+    ext.material_edittext_version = '2.1.4'
+    ext.sdp_version = '1.0.6'
 
     ext.material_version = '1.0.0-beta01'
     ext.constraint_version = '1.1.3'

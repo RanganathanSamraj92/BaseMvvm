@@ -119,4 +119,11 @@ dependencies {
     implementation "com.google.dagger:dagger:$dagger2_version"
     kapt "com.google.dagger:dagger-compiler:$dagger2_version"
 
+    /*caligraphy*/
+    implementation "uk.co.chrisjenx:calligraphy:$caligraphy_version"
+    /*materialEditext*/
+    implementation "com.rengwuxian.materialedittext:library:$material_edittext_version"
+    /*sdp*/
+    implementation "com.intuit.sdp:sdp-android:$sdp_version"
+
 }
