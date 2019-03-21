@@ -12,6 +12,7 @@ import development.app.checking.utils.Utils
 import development.app.checking.viewmodel.LoginViewModel
 import kotlinx.android.synthetic.main.app_bar_collapse.*
 import kotlinx.android.synthetic.main.content_login.*
+import kotlinx.android.synthetic.main.content_register.*
 
 
 class RegisterActivity : BaseActivity() {
@@ -51,23 +52,19 @@ class RegisterActivity : BaseActivity() {
 
         })
 
-        btnLogin.setOnClickListener {
-            loginViewModel.login(txtEmail.text.toString(), txtPassword.text.toString())
+        btnSignUp.setOnClickListener {
+            loginViewModel.login(mTxtEmail.text.toString(), mTxtPassword.text.toString())
         }
+        txtSignIn.setOnClickListener {
+            newIntent(this@RegisterActivity,LoginActivity::class.java,"")
+        }
+
 
 
     }
 
 
-    private fun dynamicColor(bitmap: Bitmap?) {
-        Palette.from(bitmap!!).generate { palette ->
-            window.statusBarColor =
-                palette!!.getMutedColor(resources.getColor(development.app.checking.R.color.colorPrimaryDark))
-            toolbar_layout!!.setContentScrimColor(palette!!.getMutedColor(resources.getColor(development.app.checking.R.color.colorPrimary)))
-            toolbar_layout!!.setStatusBarScrimColor(palette.getMutedColor(resources.getColor(development.app.checking.R.color.colorPrimaryDark)))
-        }
 
-    }
 
 
 }
