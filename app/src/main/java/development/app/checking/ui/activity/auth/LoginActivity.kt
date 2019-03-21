@@ -1,11 +1,9 @@
-package development.app.checking.ui.activity
+package development.app.checking.ui.activity.auth
 
-import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.palette.graphics.Palette
 import development.app.checking.R
 import development.app.checking.ui.base.BaseActivity
 import development.app.checking.utils.Utils
@@ -56,11 +54,11 @@ class LoginActivity : BaseActivity() {
         }
 
         txtSignUp.setOnClickListener {
-           newIntent(this@LoginActivity,RegisterActivity::class.java,"")
+           newIntent(this@LoginActivity, RegisterActivity::class.java,"")
         }
 
         txtForgotPassword.setOnClickListener {
-            newIntent(this@LoginActivity,ForgotPasswordActivity::class.java,"")
+            newIntent(this@LoginActivity, ForgotPasswordActivity::class.java,"")
         }
 
 

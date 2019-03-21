@@ -11,6 +11,8 @@ import development.app.checking.BR
 import development.app.checking.BuildConfig
 import development.app.checking.R
 import development.app.checking.databinding.ActivitySplashBinding
+import development.app.checking.ui.activity.android_verisons.AndroidVersionActivity
+import development.app.checking.ui.activity.auth.LoginActivity
 import development.app.checking.ui.base.BaseActivity
 import development.app.checking.utils.Utils
 import development.app.checking.viewmodel.SplashViewModel

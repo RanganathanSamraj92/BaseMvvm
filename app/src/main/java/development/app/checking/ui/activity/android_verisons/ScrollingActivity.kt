@@ -1,6 +1,5 @@
-package development.app.checking.ui.activity
+package development.app.checking.ui.activity.android_verisons
 
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders

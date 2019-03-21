@@ -27,19 +27,19 @@
         </activity>
 
         <activity
-                android:name=".ui.activity.ScrollingActivity"
+                android:name=".ui.activity.android_verisons.ScrollingActivity"
                 android:label="@string/app_name"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
         <activity
-                android:name=".ui.activity.AndroidVersionActivity"
+                android:name=".ui.activity.android_verisons.AndroidVersionActivity"
                 android:label="@string/app_name"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
         <activity
-                android:name=".ui.activity.LoginActivity"
+                android:name=".ui.activity.auth.LoginActivity"
                 android:label="@string/app_name"
                 android:theme="@style/AppTheme.NoActionBar">
 
@@ -52,13 +52,13 @@
         </activity>
 
         <activity
-                android:name=".ui.activity.RegisterActivity"
+                android:name=".ui.activity.auth.RegisterActivity"
                 android:label="@string/app_name"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
         <activity
-                android:name=".ui.activity.ForgotPasswordActivity"
+                android:name=".ui.activity.auth.ForgotPasswordActivity"
                 android:label="@string/app_name"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>

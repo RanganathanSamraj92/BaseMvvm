@@ -1,17 +1,11 @@
-package development.app.checking.ui.activity
+package development.app.checking.ui.activity.android_verisons
 
-import android.graphics.Color
-import android.graphics.PorterDuff
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import androidx.appcompat.view.menu.MenuBuilder
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import development.app.checking.R
 import development.app.checking.model.AndroidVersion
 import development.app.checking.ui.adapter.RecyclerAdapter
 import development.app.checking.ui.base.BaseActivity
@@ -42,7 +36,8 @@ class AndroidVersionActivity : BaseActivity() {
                 override fun onClick(v: View, item: Any) {
                     item as AndroidVersion
                     showMsg(v, "${item.name} v : ${item.version_code}")
-                    newIntent(this@AndroidVersionActivity,ScrollingActivity::class.java,item)
+                    newIntent(this@AndroidVersionActivity,
+                        ScrollingActivity::class.java,item)
                 }
             }, versions.toCollection(ArrayList<AndroidVersion>()))
             recyclerAndroidVersions.adapter = adapter

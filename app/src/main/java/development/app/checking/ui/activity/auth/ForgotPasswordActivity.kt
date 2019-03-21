@@ -1,4 +1,4 @@
-package development.app.checking.ui.activity
+package development.app.checking.ui.activity.auth
 
 import android.os.Bundle
 import android.view.View
