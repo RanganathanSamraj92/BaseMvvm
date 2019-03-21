@@ -25,26 +25,22 @@ class LoginActivity : BaseActivity() {
         loginViewModel = ViewModelProviders.of(this).get(LoginViewModel::class.java)
         viewModelSetup(this, loginViewModel)
 
+        loginViewModel.errorStatus.observe(this, Observer { error ->
+            showAlert("Authentication Failed",error,object:Utils.OnClickListener{
+               override fun onClick(v: View) {
 
+               }
+
+           },object:Utils.OnClickListener{
+               override fun onClick(v: View) {
+
+               }
+           })
+        })
 
         loginViewModel.loginResult.observe(this, Observer { login ->
-            if (login.auth) {
-                txtContent.text = login.token
-                toolbar_layout.title = login.message
-            }else{
-                showAlert("Authentication Failed",login.message,object:Utils.OnClickListener{
-                    override fun onClick(v: View) {
-
-                    }
-
-                },object:Utils.OnClickListener{
-                    override fun onClick(v: View) {
-
-                    }
-                })
-                txtContent.text = login.token
-                toolbar_layout.title = login.message
-            }
+            txtContent.text = login.token
+            toolbar_layout.title = login.message
 
 
         })

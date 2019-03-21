@@ -3,6 +3,7 @@ package development.app.checking.viewmodel
 import androidx.lifecycle.MutableLiveData
 import development.app.checking.data.repository.AuthRepository
 import development.app.checking.data.request.LoginRequest
+import development.app.checking.data.response.Meta
 import development.app.checking.data.source.remote.AuthApiCallInterface
 import development.app.checking.model.LoginModel
 import development.app.checking.model.LoginResult
@@ -21,6 +22,7 @@ class LoginViewModel : BaseViewModel() {
     val loginResult = MutableLiveData<LoginResult>()
 
 
+
     init {
 
     }
@@ -35,7 +37,9 @@ class LoginViewModel : BaseViewModel() {
             val apiResponse = repository.login(loginRequest)
             val res = handleResponses(apiResponse!!)
             try {
-                loginResult.postValue(res.data.result)
+                if (res.meta.status) {
+                    loginResult.postValue(res.data.result)
+                }
             } catch (e: Throwable) {
 
             }

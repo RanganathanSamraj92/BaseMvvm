@@ -30,15 +30,14 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 import android.R
 
 
-
 open class BaseActivity : AppCompatActivity(), BottomSheetEx.BottomSheetListener {
 
     override fun attachBaseContext(newBase: Context) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase))
     }
 
+    public var showApiMsg = false
     open fun viewModelSetup(activity: BaseActivity, viewModel: BaseViewModel) {
-
 
 
         viewModel.loadingStatus.observe(activity, Observer {
@@ -49,7 +48,8 @@ open class BaseActivity : AppCompatActivity(), BottomSheetEx.BottomSheetListener
             }
         })
         viewModel.errorStatus.observe(activity, Observer { error ->
-            showException(error)
+            if (showApiMsg)
+                showException(error)
         })
     }
 
@@ -61,12 +61,12 @@ open class BaseActivity : AppCompatActivity(), BottomSheetEx.BottomSheetListener
     companion object {
         private val INTENT_USER_ID = "user_id"
 
-        fun newIntent(context: Context, cls: Class<*>,intentData:Any): Intent {
+        fun newIntent(context: Context, cls: Class<*>, intentData: Any): Intent {
             val intent = Intent(context, cls)
             if (intentData != "") {
                 intent.putExtra("intent_data", intentData as Serializable)
             }
-            ContextCompat.startActivity(context,intent, null)
+            ContextCompat.startActivity(context, intent, null)
             return intent
         }
 
@@ -134,17 +134,17 @@ open class BaseActivity : AppCompatActivity(), BottomSheetEx.BottomSheetListener
     open fun showException(message: String) {
         val view = layoutInflater.inflate(development.app.checking.R.layout.fragment_bottom_sheet_ex, null)
         view.errorLy.txtErrorMessage.text = message
-        view.alertLy.visibility= GONE
+        view.alertLy.visibility = GONE
         val dialog = BottomSheetDialog(this)
         dialog.setContentView(view)
         dialog.show()
     }
 
     @SuppressLint("SetTextI18n")
-    open fun showAlert(title: String, message: String, alertOkListner: Any?,cancelListner: Any?) {
+    open fun showAlert(title: String, message: String, alertOkListner: Any?, cancelListner: Any?) {
         val dialog = BottomSheetDialog(this)
         val view = layoutInflater.inflate(development.app.checking.R.layout.fragment_bottom_sheet_ex, null)
-        view.errorLy.visibility= GONE
+        view.errorLy.visibility = GONE
         view.alertLy.txtAlertMessage.text = message
         view.alertLy.txtAlertTitle.text = title
 

@@ -28,22 +28,8 @@ class ForgotPasswordActivity : BaseActivity() {
 
 
         loginViewModel.loginResult.observe(this, Observer { login ->
-            if (login.auth) {
-                txtContent.text = login.token
-                toolbar_layout.title = login.message
-            } else {
-                showAlert("Authentication Failed", login.message, object : Utils.OnClickListener {
-                    override fun onClick(v: View) {
-
-                    }
-
-                }, object : Utils.OnClickListener {
-                    override fun onClick(v: View) {
-
-                    }
-                })
-                txtContent.text = login.token
-            }
+            txtContent.text = login.token
+            toolbar_layout.title = login.message
 
 
         })
