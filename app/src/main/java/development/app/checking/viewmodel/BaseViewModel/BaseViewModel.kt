@@ -5,7 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import development.app.checking.app.App
 import development.app.checking.data.source.remote.*
+import development.app.checking.di.injectors.DaggerViewModelInjector
 import development.app.checking.di.injectors.ViewModelInjector
+import development.app.checking.di.modules.LocalNetworkModule
+import development.app.checking.di.modules.NetworkModule
+import development.app.checking.di.modules.SharedPreferencesModule
 import development.app.checking.viewmodel.DetailViewModel
 import development.app.checking.viewmodel.LoginViewModel
 import development.app.checking.viewmodel.SplashViewModel
@@ -15,7 +19,11 @@ import kotlin.coroutines.CoroutineContext
 
 open class BaseViewModel : ViewModel() {
 
-    private var injector : ViewModelInjector = App().injector
+
+    private val injector : ViewModelInjector = DaggerViewModelInjector.builder()
+    .networkModule(networkModule = NetworkModule)
+    .localNetworkModule(localNetworkModule = LocalNetworkModule)
+    .build()
 
     init {
 

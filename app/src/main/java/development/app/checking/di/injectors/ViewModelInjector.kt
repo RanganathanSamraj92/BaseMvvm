@@ -14,9 +14,11 @@ import javax.inject.Singleton
  * Component providing inject() methods for ViewModels.
  */
 @Singleton
-@Component(modules = [NetworkModule::class,
-    LocalNetworkModule::class,
-    SharedPreferencesModule::class])
+@Component(
+    modules = [NetworkModule::class,
+        LocalNetworkModule::class,
+        SharedPreferencesModule::class]
+)
 interface ViewModelInjector {
 
     /**
@@ -24,13 +26,14 @@ interface ViewModelInjector {
      * @param baseViewModel BaseViewModel in which to inject the dependencies
      */
     fun inject(splashViewModel: SplashViewModel)
+
     fun inject(versionViewModel: VersionViewModel)
     fun inject(detailViewModel: DetailViewModel)
     fun inject(loginViewModel: LoginViewModel)
 
     @Component.Builder
     interface Builder {
-        fun build() : ViewModelInjector
+        fun build(): ViewModelInjector
 
         fun networkModule(networkModule: NetworkModule): Builder
 

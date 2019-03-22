@@ -17,6 +17,7 @@ import br.com.simplepass.loadingbutton.customViews.CircularProgressButton
 import br.com.simplepass.loadingbutton.customViews.ProgressButton
 import development.app.checking.R
 import development.app.checking.pref.Prefs
+import development.app.checking.ui.activity.HomeActivity
 import development.app.checking.ui.base.BaseActivity
 import development.app.checking.utils.Utils
 import development.app.checking.viewmodel.LoginViewModel
@@ -29,8 +30,7 @@ import javax.inject.Inject
 class LoginActivity : BaseActivity() {
 
     private lateinit var loginViewModel: LoginViewModel
-    @Inject
-    lateinit var prefs :Prefs
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,7 +58,7 @@ class LoginActivity : BaseActivity() {
 
             }, object : Utils.OnClickListener {
                 override fun onClick(v: View) {
-                    prefs.putData("token","")
+
                 }
             })
         })
@@ -66,20 +66,18 @@ class LoginActivity : BaseActivity() {
         loginViewModel.loginResult.observe(this, Observer { login ->
             txtContent.text = login.token
             toolbar_layout.title = login.message
-            prefs.putData("token",login.token)
+
+            newIntent(this@LoginActivity,HomeActivity::class.java,"")
 
 
         })
 
         btnLogin.setOnClickListener {
-            if (!prefs.getData("token","").equals("")) {
-                loginViewModel.login(txtEmail.text.toString(), txtPassword.text.toString())
-                btnLogin.progressType = ProgressType.INDETERMINATE
-                btnLogin.startAnimation()
-                // progressAnimator(buttonTest6).start()
-            }else{
-                showMsg(btnLogin,resources.getString(R.string.already_logged_in))
-            }
+            loginViewModel.login(txtEmail.text.toString(), txtPassword.text.toString())
+            btnLogin.progressType = ProgressType.INDETERMINATE
+            btnLogin.startAnimation()
+            // progressAnimator(buttonTest6).start()
+
         }
 
         txtSignUp.setOnClickListener {
