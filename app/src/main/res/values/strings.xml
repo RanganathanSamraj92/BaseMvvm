@@ -105,4 +105,7 @@
     <string name="sign_in_hint">Already have account ?</string>
     <string name="terms_conditions">terms and privacy policies</string>
     <string name="action_next">Next</string>
+    <string name="already_have_account">Already have account?</string>
+    <string name="already_have_account">Already have account?</string>
+    <string name="already_logged_in">Already Logged In</string>
 </resources>

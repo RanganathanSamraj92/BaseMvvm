@@ -125,5 +125,7 @@ dependencies {
     implementation "com.rengwuxian.materialedittext:library:$material_edittext_version"
     /*sdp*/
     implementation "com.intuit.sdp:sdp-android:$sdp_version"
+    /*loading-button*/
+    implementation 'br.com.simplepass:loading-button-android:2.1.0'
 
 }

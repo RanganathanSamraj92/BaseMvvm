@@ -36,19 +36,22 @@ open class BaseActivity : AppCompatActivity(), BottomSheetEx.BottomSheetListener
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase))
     }
 
-    public var showApiMsg = false
+    public var showApiErrorMsg = true
+    internal var showProgress = true
     open fun viewModelSetup(activity: BaseActivity, viewModel: BaseViewModel) {
 
 
         viewModel.loadingStatus.observe(activity, Observer {
-            if (it) {
-                showProgress("")
-            } else {
-                hideProgress()
+            if (showProgress) {
+                if (it) {
+                    showProgress("")
+                } else {
+                    hideProgress()
+                }
             }
         })
         viewModel.errorStatus.observe(activity, Observer { error ->
-            if (showApiMsg)
+            if (showApiErrorMsg)
                 showException(error)
         })
     }

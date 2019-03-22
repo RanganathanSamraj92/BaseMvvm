@@ -1,8 +1,9 @@
-package development.app.checking.data.source.remote
+package development.app.checking.di.injectors
 
 import dagger.Component
-import dagger.Module
-import development.app.checking.viewmodel.BaseViewModel.BaseViewModel
+import development.app.checking.di.modules.LocalNetworkModule
+import development.app.checking.di.modules.NetworkModule
+import development.app.checking.di.modules.SharedPreferencesModule
 import development.app.checking.viewmodel.DetailViewModel
 import development.app.checking.viewmodel.LoginViewModel
 import development.app.checking.viewmodel.SplashViewModel
@@ -13,7 +14,9 @@ import javax.inject.Singleton
  * Component providing inject() methods for ViewModels.
  */
 @Singleton
-@Component(modules = [NetworkModule::class,LocalNetworkModule::class])
+@Component(modules = [NetworkModule::class,
+    LocalNetworkModule::class,
+    SharedPreferencesModule::class])
 interface ViewModelInjector {
 
     /**
@@ -29,8 +32,10 @@ interface ViewModelInjector {
     interface Builder {
         fun build() : ViewModelInjector
 
-        fun networkModule(networkModule: NetworkModule):Builder
+        fun networkModule(networkModule: NetworkModule): Builder
 
-        fun localNetworkModule(localNetworkModule: LocalNetworkModule):Builder
+        fun localNetworkModule(localNetworkModule: LocalNetworkModule): Builder
+
+        fun prefsModule(sharedPreferencesModule: SharedPreferencesModule): Builder
     }
 }

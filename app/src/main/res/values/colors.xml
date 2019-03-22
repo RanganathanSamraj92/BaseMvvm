@@ -8,4 +8,5 @@
     <color name="colorBlackLight">#383838</color>
     <color name="colorGrey">#5C5C5C</color>
     <color name="colorGreyLight">#929292</color>
+    <color name="colorTransparent">@android:color/transparent</color>
 </resources>

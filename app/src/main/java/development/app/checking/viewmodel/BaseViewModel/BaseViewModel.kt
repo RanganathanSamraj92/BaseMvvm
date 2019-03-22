@@ -3,25 +3,22 @@ package development.app.checking.viewmodel.BaseViewModel
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import development.app.checking.app.App
 import development.app.checking.data.source.remote.*
+import development.app.checking.di.injectors.ViewModelInjector
 import development.app.checking.viewmodel.DetailViewModel
 import development.app.checking.viewmodel.LoginViewModel
 import development.app.checking.viewmodel.SplashViewModel
 import development.app.checking.viewmodel.VersionViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.cancel
+import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
 open class BaseViewModel : ViewModel() {
 
-    private val injector: ViewModelInjector = DaggerViewModelInjector.builder()
-        .networkModule(networkModule = NetworkModule)
-        .localNetworkModule(localNetworkModule = LocalNetworkModule)
-        .build()
+    private var injector : ViewModelInjector = App().injector
 
     init {
+
         inject()
     }
 
@@ -42,6 +39,7 @@ open class BaseViewModel : ViewModel() {
     open var baseApiResponse: MutableLiveData<APIResponse> = MutableLiveData()
 
     open var loadingStatus: MutableLiveData<Boolean> = MutableLiveData()
+    open var metaStatus: MutableLiveData<String> = MutableLiveData()
     open var errorStatus: MutableLiveData<String> = MutableLiveData()
 
     private val parentJob = Job()
@@ -71,7 +69,7 @@ open class BaseViewModel : ViewModel() {
                 return if (apiResponse.successResult.meta.status) {
                     apiResponse.successResult
                 } else {
-                    errorStatus.postValue(apiResponse.successResult.meta.message)
+                    metaStatus.postValue(apiResponse.successResult.meta.message)
                     apiResponse.successResult
                 }
             }

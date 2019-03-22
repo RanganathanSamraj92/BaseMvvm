@@ -9,6 +9,7 @@ import development.app.checking.ui.base.BaseActivity
 import development.app.checking.utils.Utils
 import development.app.checking.viewmodel.LoginViewModel
 import kotlinx.android.synthetic.main.app_bar_collapse.*
+import kotlinx.android.synthetic.main.content_forgot_password.*
 import kotlinx.android.synthetic.main.content_login.*
 
 
@@ -34,8 +35,7 @@ class ForgotPasswordActivity : BaseActivity() {
 
         })
 
-        btnLogin.setOnClickListener {
-            loginViewModel.login(txtEmail.text.toString(), txtPassword.text.toString())
+        btnNext.setOnClickListener {
         }
 
 
