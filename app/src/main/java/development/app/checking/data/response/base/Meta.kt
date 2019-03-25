@@ -1,4 +1,4 @@
-package development.app.checking.data.response
+package development.app.checking.data.response.base
 
 open class Meta{
 

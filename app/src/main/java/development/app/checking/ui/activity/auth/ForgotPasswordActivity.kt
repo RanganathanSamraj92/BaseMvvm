@@ -29,7 +29,6 @@ class ForgotPasswordActivity : BaseActivity() {
 
 
         loginViewModel.loginResult.observe(this, Observer { login ->
-            txtContent.text = login.token
             toolbar_layout.title = login.message
 
 

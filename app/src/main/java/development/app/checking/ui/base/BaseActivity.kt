@@ -28,14 +28,43 @@ import kotlinx.android.synthetic.main.progress_ly.view.*
 import java.io.Serializable
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 import android.R
+import development.app.checking.app.App
+import development.app.checking.pref.Prefs
+import development.app.checking.ui.activity.SplashActivity
+import development.app.checking.ui.activity.auth.LoginActivity
+import development.app.checking.ui.activity.profile.ProfileActivity
+import development.app.checking.viewmodel.DetailViewModel
+import development.app.checking.viewmodel.LoginViewModel
+import development.app.checking.viewmodel.SplashViewModel
+import development.app.checking.viewmodel.VersionViewModel
+import javax.inject.Inject
 
 
 open class BaseActivity : AppCompatActivity(), BottomSheetEx.BottomSheetListener {
+
+    @Inject
+    lateinit var prefs: Prefs
 
     override fun attachBaseContext(newBase: Context) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase))
     }
 
+
+    /*injects MyComponents' Prefs instance*/
+    fun inject() {
+        when (this) {
+            is LoginActivity -> (applicationContext as App).myComponent.inject(this)
+
+            is SplashActivity -> (applicationContext as App).myComponent.inject(this)
+
+           // is ProfileActivity -> (applicationContext as App).myComponent.inject(this)
+
+            else -> {
+                (applicationContext as App).myComponent.inject(this)
+            }
+        }
+
+    }
     public var showApiErrorMsg = true
     internal var showProgress = true
     open fun viewModelSetup(activity: BaseActivity, viewModel: BaseViewModel) {

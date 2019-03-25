@@ -9,16 +9,21 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import development.app.checking.R
+import development.app.checking.pref.PrefMgr.Companion.KEY_TOKEN
+import development.app.checking.ui.activity.auth.LoginActivity
+import development.app.checking.ui.activity.profile.ProfileActivity
+import development.app.checking.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.app_bar_home.*
 
-class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class HomeActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         setSupportActionBar(toolbar)
 
+        inject()
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
@@ -60,8 +65,9 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
-            R.id.nav_camera -> {
-                // Handle the camera action
+            R.id.nav_logout -> {
+               prefs.putData(KEY_TOKEN,"")
+                newIntent(this@HomeActivity, LoginActivity::class.java, "")
             }
             R.id.nav_gallery -> {
 
@@ -69,8 +75,9 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_slideshow -> {
 
             }
-            R.id.nav_manage -> {
+            R.id.nav_profile -> {
 
+                newIntent(this@HomeActivity, ProfileActivity::class.java, "")
             }
             R.id.nav_share -> {
 

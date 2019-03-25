@@ -2,14 +2,14 @@ package development.app.checking.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import development.app.checking.data.repository.AuthRepository
-import development.app.checking.data.request.LoginRequest
 import development.app.checking.data.source.remote.AuthApiCallInterface
 import development.app.checking.model.LoginModel
+import development.app.checking.model.ProfileModel
 import development.app.checking.viewmodel.BaseViewModel.BaseViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class LoginViewModel : BaseViewModel() {
+class ProfileViewModel : BaseViewModel() {
 
 
     @Inject
@@ -18,25 +18,21 @@ class LoginViewModel : BaseViewModel() {
 
     private val repository = AuthRepository(authApiCall)
 
-    val loginResult = MutableLiveData<LoginModel>()
+    val userInfo = MutableLiveData<ProfileModel>()
 
 
     init {
 
     }
 
-    fun login(email: String, password: String) {
+    fun getProfile(token: String) {
         loadingStatus.value = true
         scope.launch {
-            var loginRequest = LoginRequest()
-            loginRequest.email = email
-            loginRequest.password = password
-            val apiResponse = repository.login(loginRequest)
+            val apiResponse = repository.me(token)
             val res = handleResponses(apiResponse!!)
             try {
                 if (res.meta.status) {
-                    loginResult.postValue(res.data.loginModel)
-
+                    userInfo.postValue(res.data.userInfo)
                 }
             } catch (e: Throwable) {
 

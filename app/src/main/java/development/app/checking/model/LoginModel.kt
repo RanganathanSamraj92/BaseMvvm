@@ -1,11 +1,8 @@
 package development.app.checking.model
 
-import java.io.Serializable
-
-class LoginModel :Serializable{
+class LoginModel{
     val token: String = ""
     val message: String = ""
-    val auth: Boolean = false
 
 }
 

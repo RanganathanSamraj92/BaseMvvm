@@ -4,10 +4,7 @@ import dagger.Component
 import development.app.checking.di.modules.LocalNetworkModule
 import development.app.checking.di.modules.NetworkModule
 import development.app.checking.di.modules.SharedPreferencesModule
-import development.app.checking.viewmodel.DetailViewModel
-import development.app.checking.viewmodel.LoginViewModel
-import development.app.checking.viewmodel.SplashViewModel
-import development.app.checking.viewmodel.VersionViewModel
+import development.app.checking.viewmodel.*
 import javax.inject.Singleton
 
 /**
@@ -30,6 +27,8 @@ interface ViewModelInjector {
     fun inject(versionViewModel: VersionViewModel)
     fun inject(detailViewModel: DetailViewModel)
     fun inject(loginViewModel: LoginViewModel)
+    fun inject(profileViewModel: ProfileViewModel)
+    fun inject(registerViewModel: RegisterViewModel)
 
     @Component.Builder
     interface Builder {

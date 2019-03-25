@@ -1,5 +1,7 @@
 package development.app.checking.viewmodel.BaseViewModel
 
+import android.content.Context
+import android.content.ContextWrapper
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,10 +12,7 @@ import development.app.checking.di.injectors.ViewModelInjector
 import development.app.checking.di.modules.LocalNetworkModule
 import development.app.checking.di.modules.NetworkModule
 import development.app.checking.di.modules.SharedPreferencesModule
-import development.app.checking.viewmodel.DetailViewModel
-import development.app.checking.viewmodel.LoginViewModel
-import development.app.checking.viewmodel.SplashViewModel
-import development.app.checking.viewmodel.VersionViewModel
+import development.app.checking.viewmodel.*
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
@@ -40,6 +39,10 @@ open class BaseViewModel : ViewModel() {
             is DetailViewModel -> injector.inject(this)
 
             is LoginViewModel -> injector.inject(this)
+
+            is ProfileViewModel -> injector.inject(this)
+
+            is RegisterViewModel  -> injector.inject(this)
         }
 
     }

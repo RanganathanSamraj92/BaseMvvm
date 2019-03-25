@@ -1,9 +1,8 @@
 package development.app.checking.data.source.remote
 
 import com.google.gson.annotations.SerializedName
-import development.app.checking.data.response.Meta
-import development.app.checking.data.response.ResponseData
-import development.app.checking.model.AndroidVersion
+import development.app.checking.data.response.base.Meta
+import development.app.checking.data.response.base.ResponseData
 
 open class APIResponse {
 
@@ -11,7 +10,8 @@ open class APIResponse {
      lateinit var  meta: Meta
 
      @SerializedName("data")
-     var  data: ResponseData = ResponseData()
+     var  data: ResponseData =
+         ResponseData()
 
 
     open class Success(val successResult: Any) : APIResponse()

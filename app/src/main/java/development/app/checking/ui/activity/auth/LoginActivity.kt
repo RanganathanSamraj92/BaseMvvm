@@ -15,7 +15,9 @@ import androidx.lifecycle.ViewModelProviders
 import br.com.simplepass.loadingbutton.animatedDrawables.ProgressType
 import br.com.simplepass.loadingbutton.customViews.CircularProgressButton
 import br.com.simplepass.loadingbutton.customViews.ProgressButton
-import development.app.checking.R
+import development.app.checking.app.App
+import development.app.checking.di.injectors.MyComponent
+import development.app.checking.pref.PrefMgr.Companion.KEY_TOKEN
 import development.app.checking.pref.Prefs
 import development.app.checking.ui.activity.HomeActivity
 import development.app.checking.ui.base.BaseActivity
@@ -25,6 +27,9 @@ import kotlinx.android.synthetic.main.app_bar_collapse.*
 import kotlinx.android.synthetic.main.content_login.*
 import kotlinx.coroutines.delay
 import javax.inject.Inject
+import development.app.checking.R
+
+
 
 
 class LoginActivity : BaseActivity() {
@@ -32,6 +37,8 @@ class LoginActivity : BaseActivity() {
     private lateinit var loginViewModel: LoginViewModel
 
 
+    @Inject
+    lateinit var myPref: Prefs
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +47,8 @@ class LoginActivity : BaseActivity() {
         setAppBarCollapse(resources.getString(R.string.app_name))
         loginViewModel = ViewModelProviders.of(this).get(LoginViewModel::class.java)
         viewModelSetup(this, loginViewModel)
+
+        inject()
 
         showProgress = false
         loginViewModel.errorStatus.observe(this, Observer { error ->
@@ -50,7 +59,7 @@ class LoginActivity : BaseActivity() {
 
             loginViewModel.metaStatus.observe(this, Observer { error ->
 
-
+                btnLogin.revertAnimation()
             showAlert("Authentication Failed", error, object : Utils.OnClickListener {
                 override fun onClick(v: View) {
 
@@ -64,8 +73,9 @@ class LoginActivity : BaseActivity() {
         })
 
         loginViewModel.loginResult.observe(this, Observer { login ->
-            txtContent.text = login.token
+            btnLogin.revertAnimation()
             toolbar_layout.title = login.message
+            myPref.putData(KEY_TOKEN,login.token)
 
             newIntent(this@LoginActivity,HomeActivity::class.java,"")
 
@@ -88,8 +98,6 @@ class LoginActivity : BaseActivity() {
             newIntent(this@LoginActivity, ForgotPasswordActivity::class.java, "")
         }
 
-
-        //buttonTest6.run { setOnClickListener { morphStopRevert(100, 1000) } }
 
 
     }

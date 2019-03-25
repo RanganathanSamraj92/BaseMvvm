@@ -1,10 +1,7 @@
-package development.app.checking.data.response
+package development.app.checking.data.response.base
 
 import com.google.gson.annotations.SerializedName
-import development.app.checking.model.AndroidVersion
-import development.app.checking.model.AppVersion
-import development.app.checking.model.LoginResult
-import development.app.checking.model.VersionDetail
+import development.app.checking.model.*
 
 open class ResponseData{
 
@@ -19,5 +16,8 @@ open class ResponseData{
 
 
     @SerializedName("result")
-    open lateinit var  result: LoginResult
+    open lateinit var  loginModel: LoginModel
+
+    @SerializedName("user_info")
+    open lateinit var  userInfo: ProfileModel
 }

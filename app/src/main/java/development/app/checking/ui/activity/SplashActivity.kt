@@ -1,5 +1,6 @@
 package development.app.checking.ui.activity
 
+import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
@@ -11,12 +12,15 @@ import development.app.checking.BR
 import development.app.checking.BuildConfig
 import development.app.checking.R
 import development.app.checking.databinding.ActivitySplashBinding
+import development.app.checking.pref.PrefMgr.Companion.KEY_TOKEN
+import development.app.checking.pref.Prefs
 import development.app.checking.ui.activity.android_verisons.AndroidVersionActivity
 import development.app.checking.ui.activity.auth.LoginActivity
 import development.app.checking.ui.base.BaseActivity
 import development.app.checking.utils.Utils
 import development.app.checking.viewmodel.SplashViewModel
 import kotlinx.android.synthetic.main.activity_splash.*
+import javax.inject.Inject
 
 
 class SplashActivity : BaseActivity() {
@@ -24,11 +28,14 @@ class SplashActivity : BaseActivity() {
     lateinit var mDelayHandler: Handler
     private lateinit var splashViewModel: SplashViewModel
 
+  /*  @Inject
+    lateinit var prefs: Prefs*/
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
         val binding: ActivitySplashBinding = DataBindingUtil.setContentView(this, R.layout.activity_splash)
-
+        inject()
 
         splashViewModel = ViewModelProviders.of(this).get(SplashViewModel::class.java)
         binding.setVariable(BR.splashViewModel, splashViewModel)
@@ -46,6 +53,12 @@ class SplashActivity : BaseActivity() {
 
 
     val mRunnable: Runnable = Runnable {
+        if (prefs.getData(KEY_TOKEN).equals("")) {
+            newIntent(this@SplashActivity, LoginActivity::class.java, "")
+        }else{
+            newIntent(this@SplashActivity, HomeActivity::class.java, "")
+        }
+
         if (!isFinishing) {
             viewModelSetup(this, splashViewModel)
             splashViewModel.getAppVersion().observe(this@SplashActivity, Observer {
@@ -64,7 +77,11 @@ class SplashActivity : BaseActivity() {
                             },
                             object : Utils.OnClickListener {
                                 override fun onClick(v: View) {
-                                    newIntent(this@SplashActivity, LoginActivity::class.java, "")
+                                    if (prefs.getData(KEY_TOKEN) == "") {
+                                        newIntent(this@SplashActivity, LoginActivity::class.java, "")
+                                    }else{
+                                        newIntent(this@SplashActivity, HomeActivity::class.java, "")
+                                    }
                                 }
                             }
                         )
