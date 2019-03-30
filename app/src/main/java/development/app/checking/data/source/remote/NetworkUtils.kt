@@ -8,5 +8,6 @@ open class NetworkUtils {
         const val login: String = "auth/login"
         const val register: String = "auth/register"
         const val me: String = "auth/me"
+        const val uploadPhoto: String = "images/upload/photo"
     }
 }

@@ -43,6 +43,8 @@ open class BaseViewModel : ViewModel() {
             is ProfileViewModel -> injector.inject(this)
 
             is RegisterViewModel  -> injector.inject(this)
+
+            is ImageUploadViewModel  -> injector.inject(this)
         }
 
     }

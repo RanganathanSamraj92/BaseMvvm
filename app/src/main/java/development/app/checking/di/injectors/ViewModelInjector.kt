@@ -29,6 +29,7 @@ interface ViewModelInjector {
     fun inject(loginViewModel: LoginViewModel)
     fun inject(profileViewModel: ProfileViewModel)
     fun inject(registerViewModel: RegisterViewModel)
+    fun inject(imageUploadViewModel: ImageUploadViewModel)
 
     @Component.Builder
     interface Builder {
