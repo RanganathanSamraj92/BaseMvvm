@@ -135,5 +135,7 @@ dependencies {
     implementation 'br.com.simplepass:loading-button-android:2.1.0'
     /*otp PIN view*/
    // implementation 'com.chaos.view:pinview:1.4.3'
+    /*runtimePermissions*/
+    implementation "com.github.florent37:runtime-permission-kotlin:$rtp_version"
 
 }

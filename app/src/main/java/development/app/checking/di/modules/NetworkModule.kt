@@ -28,6 +28,10 @@ object NetworkModule {
         return retrofit.create(ApiCallInterface::class.java)
     }
 
+
+
+
+
     /**
      * Provides the Retrofit object.
      * @return the Retrofit object

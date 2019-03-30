@@ -12,7 +12,9 @@ interface ImageUploadAPICallInterface {
 
     @Multipart
     @POST(NetworkUtils.uploadPhoto)
-    fun uploadImageAsync(@Part imagePartBody : MultipartBody.Part, @Part("filename") other:RequestBody )
+    fun uploadImageAsync(@Header("x-access-token") token :String,
+                         @Part body : MultipartBody.Part,
+                         @Part("file") file:RequestBody )
             : Deferred<Response<APIResponse>>
 
 

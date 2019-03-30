@@ -20,4 +20,7 @@ open class ResponseData{
 
     @SerializedName("user_info")
     open lateinit var  userInfo: ProfileModel
+
+    @SerializedName("imageUploadResult")
+    open lateinit var  imageResModel: UploadResModel
 }

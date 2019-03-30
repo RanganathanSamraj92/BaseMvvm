@@ -46,7 +46,7 @@ class RegisterActivity : BaseActivity() {
                 mTxtName.text.toString(),
                 mTxtEmail.text.toString(),
                 mTxtPassword.text.toString(),
-                "http://www.developersacademy.org/blog/wp-content/uploads/2018/03/Android-Developer-1024x682.jpg",
+                "",
                 mTxtMobile.text.toString())
         }
         txtSignIn.setOnClickListener {

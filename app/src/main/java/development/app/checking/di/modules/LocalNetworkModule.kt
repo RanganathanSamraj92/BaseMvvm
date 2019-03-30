@@ -4,6 +4,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.Reusable
 import development.app.checking.data.source.remote.AuthApiCallInterface
+import development.app.checking.data.source.remote.ImageUploadAPICallInterface
 import retrofit2.Retrofit
 
 /**
@@ -23,6 +24,13 @@ object LocalNetworkModule {
     @JvmStatic
     internal fun provideAuthApi(retrofit: Retrofit): AuthApiCallInterface {
         return retrofit.create(AuthApiCallInterface::class.java)
+    }
+
+    @Provides
+    @Reusable
+    @JvmStatic
+    internal fun provideUploadApi(retrofit: Retrofit): ImageUploadAPICallInterface {
+        return retrofit.create(ImageUploadAPICallInterface::class.java)
     }
 
 

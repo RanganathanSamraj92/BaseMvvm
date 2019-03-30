@@ -1,5 +1,6 @@
 package development.app.checking.ui.activity
 
+import android.Manifest
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
@@ -70,7 +71,7 @@ class HomeActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                 newIntent(this@HomeActivity, LoginActivity::class.java, "")
             }
             R.id.nav_gallery -> {
-
+                makePermissionsRequest(Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE)
             }
             R.id.nav_slideshow -> {
 

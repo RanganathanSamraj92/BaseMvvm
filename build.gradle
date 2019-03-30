@@ -12,6 +12,7 @@ buildscript {
     ext.caligraphy_version = '2.3.0'
     ext.material_edittext_version = '2.1.4'
     ext.sdp_version = '1.0.6'
+    ext.rtp_version = '1.1.0'
 
     ext.material_version = '1.0.0-beta01'
     ext.constraint_version = '1.1.3'

@@ -1,5 +1,6 @@
 package development.app.checking.ui.base
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
@@ -28,6 +29,10 @@ import kotlinx.android.synthetic.main.progress_ly.view.*
 import java.io.Serializable
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 import android.R
+import androidx.appcompat.app.AlertDialog
+import com.github.florent37.runtimepermission.kotlin.PermissionException
+import com.github.florent37.runtimepermission.kotlin.askPermission
+import com.github.florent37.runtimepermission.kotlin.coroutines.experimental.askPermission
 import development.app.checking.app.App
 import development.app.checking.pref.Prefs
 import development.app.checking.ui.activity.SplashActivity
@@ -37,13 +42,28 @@ import development.app.checking.viewmodel.DetailViewModel
 import development.app.checking.viewmodel.LoginViewModel
 import development.app.checking.viewmodel.SplashViewModel
 import development.app.checking.viewmodel.VersionViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
+import android.os.AsyncTask.execute
+
+
 
 
 open class BaseActivity : AppCompatActivity(), BottomSheetEx.BottomSheetListener {
 
     @Inject
     lateinit var prefs: Prefs
+
+    private val parentJob = Job()
+
+    private val coroutineContext: CoroutineContext
+        get() = parentJob + Dispatchers.Default
+
+    val scope = CoroutineScope(coroutineContext)
 
     override fun attachBaseContext(newBase: Context) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase))
@@ -90,6 +110,48 @@ open class BaseActivity : AppCompatActivity(), BottomSheetEx.BottomSheetListener
     }
 
 
+    internal fun makePermissionsRequest(vararg permissions: String){
+        scope.launch {
+            try {
+                val result = askPermission(*permissions)
+                //all permissions already granted or just granted
+                //your action
+                makeLog("Accepted :${result.accepted.toString()}")
+
+            } catch (e: PermissionException) {
+                if (e.hasDenied()) {
+                    makeLog( "Denied :")
+                    //the list of denied permissions
+                    e.denied.forEach { permission ->
+                        makeLog( permission)
+                    }
+                    //but you can ask them again, eg:
+
+                    runOnUiThread(Runnable {  AlertDialog.Builder(this@BaseActivity)
+                        .setMessage("Please accept our permissions")
+                        .setPositiveButton("yes") { dialog, which ->
+                            e.askAgain()
+                        }
+                        .setNegativeButton("no") { dialog, which ->
+                            dialog.dismiss()
+                        }
+                        .show(); })
+
+                }
+
+                if(e.hasForeverDenied()) {
+                    makeLog( "ForeverDenied")
+                    //the list of forever denied permissions, user has check 'never ask again'
+                    e.foreverDenied.forEach { permission ->
+                        makeLog( permission)
+                    }
+                    //you need to open setting manually if you really need it
+                    e.goToSettings();
+                }
+            }
+        }
+    }
+
     companion object {
         private val INTENT_USER_ID = "user_id"
 
@@ -109,7 +171,7 @@ open class BaseActivity : AppCompatActivity(), BottomSheetEx.BottomSheetListener
                 .setAction("Action", null).show()
         }
 
-        private fun makeLog(msg: String) {
+        internal fun makeLog(msg: String) {
             Log.w("base", msg)
         }
 

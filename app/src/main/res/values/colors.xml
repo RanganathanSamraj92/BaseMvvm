@@ -11,4 +11,5 @@
     <color name="colorGreyLight">#929292</color>
     <color name="colorTransparent">@android:color/transparent</color>
     <color name="colorOverLay">#57F3EAFF</color>
+    <color name="colorOverLayDark">#AB7A1FF5</color>
 </resources>
