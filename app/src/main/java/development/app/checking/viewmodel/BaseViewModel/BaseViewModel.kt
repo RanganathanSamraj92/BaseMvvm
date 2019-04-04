@@ -45,6 +45,8 @@ open class BaseViewModel : ViewModel() {
             is RegisterViewModel  -> injector.inject(this)
 
             is ImageUploadViewModel  -> injector.inject(this)
+
+            is ForgotPasswordViewModel  -> injector.inject(this)
         }
 
     }
@@ -80,6 +82,7 @@ open class BaseViewModel : ViewModel() {
                 loadingStatus.postValue(false)
                 apiResponse.successResult as APIResponse?
                 return if (apiResponse.successResult.meta.status) {
+                    metaStatus.postValue(apiResponse.successResult.meta.message)
                     apiResponse.successResult
                 } else {
                     metaStatus.postValue(apiResponse.successResult.meta.message)

@@ -9,6 +9,10 @@ import development.app.checking.viewmodel.LoginViewModel
 class AuthRepository(private val apiService: AuthApiCallInterface): BaseRepository() {
 
 
+    suspend fun register(registerRequest: RegisterRequest): APIResponse? {
+        return safeApiCall(call = { apiService.registerAsync(registerRequest).await() })
+    }
+
     suspend fun login(loginRequest: LoginRequest): APIResponse? {
         return safeApiCall(call = { apiService.loginAsync(loginRequest).await() })
     }
@@ -16,8 +20,8 @@ class AuthRepository(private val apiService: AuthApiCallInterface): BaseReposito
         return safeApiCall(call = { apiService.profileAsync(token).await() })
     }
 
-    suspend fun register(registerRequest: RegisterRequest): APIResponse? {
-        return safeApiCall(call = { apiService.registerAsync(registerRequest).await() })
+    suspend fun authenticate(emailOrMobile:String): APIResponse? {
+        return safeApiCall(call = { apiService.authenticateAsync(emailOrMobile).await() })
     }
 
 

@@ -8,7 +8,6 @@ open class RetrofitFactory {
 
 
     companion object {
-        val BASE_URL1 = "http://shamlatech.net/android_portal/kotlinApps/api/v1/"
         val LOCAL_BASE_URL1 = "http://192.168.43.119:3000/"
 
 

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto" android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <include layout="@layout/app_bar"/>
+
+
+    <include layout="@layout/container_ly"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <com.mukesh.OtpView
+                android:id="@+id/txtEmail"
+                android:foregroundGravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="72dp"
+                android:inputType="number"
+                android:textColor="@android:color/white"
+                app:itemCount="4"
+                app:lineColor="@color/colorPrimary"
+                app:viewType="line"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="32dp" app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="32dp" app:layout_constraintTop_toTopOf="parent"/>
+
+
+        <androidx.appcompat.widget.AppCompatButton
+                android:text="@string/action_verify"
+                android:layout_width="@dimen/_120sdp"
+                android:layout_height="wrap_content"
+                style="@style/Base.Widget.AppCompat.Button.Colored"
+                android:id="@+id/btnVerify"
+                android:background="@drawable/rounded_corner_button_bg"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="132dp"
+                app:layout_constraintTop_toBottomOf="@+id/txtEmail"/>
+
+        <TextView
+                android:text="@string/action_forgot_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="32dp" android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:fontFamily="monospace" android:typeface="monospace" android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="32dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</LinearLayout>

@@ -1,6 +1,5 @@
 package development.app.checking.ui.base
 
-import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
@@ -9,12 +8,18 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewStub
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import com.github.florent37.runtimepermission.kotlin.PermissionException
+import com.github.florent37.runtimepermission.kotlin.coroutines.experimental.askPermission
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
+import development.app.checking.app.App
+import development.app.checking.pref.Prefs
+import development.app.checking.ui.activity.SplashActivity
+import development.app.checking.ui.activity.auth.LoginActivity
 import development.app.checking.ui.fragment.BottomSheetEx
 import development.app.checking.utils.Utils
 import development.app.checking.viewmodel.BaseViewModel.BaseViewModel
@@ -25,36 +30,19 @@ import kotlinx.android.synthetic.main.container_ly.*
 import kotlinx.android.synthetic.main.error_ly.*
 import kotlinx.android.synthetic.main.error_ly.view.*
 import kotlinx.android.synthetic.main.progress_ly.*
-import kotlinx.android.synthetic.main.progress_ly.view.*
-import java.io.Serializable
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
-import android.R
-import androidx.appcompat.app.AlertDialog
-import com.github.florent37.runtimepermission.kotlin.PermissionException
-import com.github.florent37.runtimepermission.kotlin.askPermission
-import com.github.florent37.runtimepermission.kotlin.coroutines.experimental.askPermission
-import development.app.checking.app.App
-import development.app.checking.pref.Prefs
-import development.app.checking.ui.activity.SplashActivity
-import development.app.checking.ui.activity.auth.LoginActivity
-import development.app.checking.ui.activity.profile.ProfileActivity
-import development.app.checking.viewmodel.DetailViewModel
-import development.app.checking.viewmodel.LoginViewModel
-import development.app.checking.viewmodel.SplashViewModel
-import development.app.checking.viewmodel.VersionViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
+import java.io.Serializable
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
-import android.os.AsyncTask.execute
-
-
 
 
 open class BaseActivity : AppCompatActivity(), BottomSheetEx.BottomSheetListener {
 
+    public val context:Context = this@BaseActivity
     @Inject
     lateinit var prefs: Prefs
 
@@ -77,7 +65,7 @@ open class BaseActivity : AppCompatActivity(), BottomSheetEx.BottomSheetListener
 
             is SplashActivity -> (applicationContext as App).myComponent.inject(this)
 
-           // is ProfileActivity -> (applicationContext as App).myComponent.inject(this)
+            // is ProfileActivity -> (applicationContext as App).myComponent.inject(this)
 
             else -> {
                 (applicationContext as App).myComponent.inject(this)
@@ -85,6 +73,7 @@ open class BaseActivity : AppCompatActivity(), BottomSheetEx.BottomSheetListener
         }
 
     }
+
     public var showApiErrorMsg = true
     internal var showProgress = true
     open fun viewModelSetup(activity: BaseActivity, viewModel: BaseViewModel) {
@@ -110,7 +99,7 @@ open class BaseActivity : AppCompatActivity(), BottomSheetEx.BottomSheetListener
     }
 
 
-    internal fun makePermissionsRequest(vararg permissions: String){
+    internal fun makePermissionsRequest(vararg permissions: String) {
         scope.launch {
             try {
                 val result = askPermission(*permissions)
@@ -120,30 +109,32 @@ open class BaseActivity : AppCompatActivity(), BottomSheetEx.BottomSheetListener
 
             } catch (e: PermissionException) {
                 if (e.hasDenied()) {
-                    makeLog( "Denied :")
+                    makeLog("Denied :")
                     //the list of denied permissions
                     e.denied.forEach { permission ->
-                        makeLog( permission)
+                        makeLog(permission)
                     }
                     //but you can ask them again, eg:
 
-                    runOnUiThread(Runnable {  AlertDialog.Builder(this@BaseActivity)
-                        .setMessage("Please accept our permissions")
-                        .setPositiveButton("yes") { dialog, which ->
-                            e.askAgain()
-                        }
-                        .setNegativeButton("no") { dialog, which ->
-                            dialog.dismiss()
-                        }
-                        .show(); })
+                    runOnUiThread(Runnable {
+                        AlertDialog.Builder(this@BaseActivity)
+                            .setMessage("Please accept our permissions")
+                            .setPositiveButton("yes") { dialog, which ->
+                                e.askAgain()
+                            }
+                            .setNegativeButton("no") { dialog, which ->
+                                dialog.dismiss()
+                            }
+                            .show();
+                    })
 
                 }
 
-                if(e.hasForeverDenied()) {
-                    makeLog( "ForeverDenied")
+                if (e.hasForeverDenied()) {
+                    makeLog("ForeverDenied")
                     //the list of forever denied permissions, user has check 'never ask again'
                     e.foreverDenied.forEach { permission ->
-                        makeLog( permission)
+                        makeLog(permission)
                     }
                     //you need to open setting manually if you really need it
                     e.goToSettings();

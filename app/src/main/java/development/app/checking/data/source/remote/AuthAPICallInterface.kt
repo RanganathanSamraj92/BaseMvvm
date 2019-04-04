@@ -19,5 +19,8 @@ interface AuthApiCallInterface {
     @GET(NetworkUtils.me)
     fun profileAsync(@Header("x-access-token") token :String ): Deferred<Response<APIResponse>>
 
+    @POST(NetworkUtils.authenticate)
+    fun authenticateAsync(@Body emailOrMobile :String ): Deferred<Response<APIResponse>>
+
 
 }
