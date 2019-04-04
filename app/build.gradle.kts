@@ -1,22 +1,20 @@
-import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
-import org.jetbrains.kotlin.resolve.calls.model.ResolvedCallArgument.DefaultArgument.arguments
-
-plugins{
+plugins {
     id("com.android.application")
     id("kotlin-android")
     id("kotlin-android-extensions")
     id("kotlin-kapt")
     kotlin("kapt")
 }
-android{
-    compileSdkVersion(Android.targetSdkVersion)
+
+android {
+    compileSdkVersion(AppConfig.targetSdkVersion)
     flavorDimensions("default")
     defaultConfig {
-        applicationId = Android.applicationId
-        minSdkVersion(Android.minSdkVersion)
-        targetSdkVersion(Android.targetSdkVersion)
-        versionCode = Android.versionCode
-        versionName = Android.versionName
+        applicationId = AppConfig.applicationId
+        minSdkVersion(AppConfig.minSdkVersion)
+        targetSdkVersion(AppConfig.targetSdkVersion)
+        versionCode = AppConfig.versionCode
+        versionName = AppConfig.versionName
         testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
     }
     dataBinding {
@@ -25,41 +23,37 @@ android{
     productFlavors {
         create("demo") {
 
-            applicationId = Android.applicationId
+            applicationId = AppConfig.applicationId
         }
         create("production") {
-            applicationId =  Android.applicationId
+            applicationId = AppConfig.applicationId
         }
     }
     buildTypes {
-        val booleanType = "Boolean"
-        val stringType = "String"
-
 
         getByName("debug") {
-            //buildConfigField(stringType,"SERVER_BASE_URL", Android.baseUrl)
+            resValue("string", "app_name", AppConfig.applicaionName)
             isDebuggable = true
         }
 
         create("qa") {
-
-           // buildConfigField(stringType,"SERVER_BASE_URL", Android.baseUrl)
-
             isShrinkResources = true
             isMinifyEnabled = true
             isUseProguard = true
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
+            resValue("string", "app_type", "Debug")
+            resValue("string", "app_name", AppConfig.applicaionName)
         }
 
         getByName("release") {
 
-            //buildConfigField(stringType,"SERVER_BASE_URL", Android.baseUrl)
+            resValue("string", "app_name", AppConfig.applicaionName)
+
             isShrinkResources = true
             isMinifyEnabled = true
             isUseProguard = true
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
         }
-
 
 
     }
@@ -69,34 +63,30 @@ android{
     }*/
 }
 
+
+
+
 dependencies {
     /*kotlin*/
-    implementation(Libs.kotlin_std)
+    implementation(Libs.Kotlin.kotlin_std)
     /*androidx*/
-    implementation(Libs.appcompat)
-    implementation(Libs.recyclerview)
+    implementation(Libs.Support.appcompat)
+    implementation(Libs.Support.recyclerview)
     implementation(Libs.material)
-    implementation(Libs.constraint)
-
+    implementation(Libs.Support.constraint)
     /*databinding, viewmodel and coroutines*/
     kapt(Libs.databinding)
     implementation(Libs.viewModelExt)
     implementation(Libs.coroutines)
-
     /*retrofit*/
-    implementation(Libs.retrofit)
-    implementation(Libs.converter_moshi)
-    implementation(Libs.retrofit2_kotlin_coroutines)
-    implementation(Libs.retrofit2_converter_gson)
-
+    implementation(Libs.Retrofit.retrofit)
+    implementation(Libs.Retrofit.converter_moshi)
+    implementation(Libs.Retrofit.retrofit2_kotlin_coroutines)
+    implementation(Libs.Retrofit.retrofit2_converter_gson)
+    implementation(Libs.Retrofit.logging_interceptor)
     /*dagger*/
-    implementation(Libs.dagger)
-    kapt(LibsDagger.compiler)//kapt
-
-
-    /*Okhttp3*/
-    implementation(Libs.logging_interceptor)
-
+    implementation(Libs.Dagger.core)
+    kapt(Libs.Dagger.compiler)
     /*Picasso*/
     implementation(Libs.picasso)
     /*circleImageview*/
@@ -105,17 +95,12 @@ dependencies {
     implementation(Libs.palette)
     /*caligraphy*/
     implementation(Libs.caligraphy)
-
     /*materialEditext*/
     implementation(Libs.materialEditext)
-
-
     /*sdp*/
     implementation(Libs.sdp)
-
     /*loading_button*/
     implementation(Libs.loading_button)
-
     /*runtimePermissions*/
     implementation(Libs.runtimePermissions)
 

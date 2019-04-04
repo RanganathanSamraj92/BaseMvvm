@@ -1,3 +1,22 @@
+
+object AppConfig {
+    val buildToolsVersion = "28.0.0"
+    val minSdkVersion = 21
+    val targetSdkVersion = 28
+    val compileSdkVersion = 28
+    val applicationId = "development.app.checking"
+    val versionCode = 1
+    val versionName = "0.2"
+    val baseUrl="http://shamlatech.net/android_portal/"
+    val api_path="kotlinApps/api/"
+    val applicaionName = "BaseApps"
+    val BaseAppTitle = "Names"
+}
+
+
+
+
+
 object Versions{
     val kotlin_version = "1.3.21"
     val gradle_version = "3.2.0"
@@ -43,42 +62,47 @@ object Versions{
 
 
 object Libs {
-    val appcompat = "androidx.appcompat:appcompat:${Versions.appcompat}"
-    val constraint = "androidx.constraintlayout:constraintlayout:${Versions.constraint_layout}"
-    val design = "com.android.support:design:${Versions.support_lib}"
-    val recyclerview = "androidx.recyclerview:recyclerview:${Versions.recyclerview_version}"
-    val cardview = "com.android.support:cardview-v7:${Versions.support_lib}"
-    val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
-    val kotlin_std = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin_version}"
 
+    object Dagger {
+        val core = "com.google.dagger:dagger:${Versions.dagger2_version}"
+        val compiler = "com.google.dagger:dagger-compiler:${Versions.dagger2_version}"
+        val android = "com.google.dagger:dagger-android:${Versions.dagger2_version}"
+        val androidSupport = "com.google.dagger:dagger-DataBindingUtil-support:${Versions.dagger2_version}"
+        val androidProcessor = "com.google.dagger:dagger-android-processor:${Versions.dagger2_version}"
+    }
 
+    object Support{
+        val appcompat = "androidx.appcompat:appcompat:${Versions.appcompat}"
+        val constraint = "androidx.constraintlayout:constraintlayout:${Versions.constraint_layout}"
+        val design = "com.android.support:design:${Versions.support_lib}"
+        val recyclerview = "androidx.recyclerview:recyclerview:${Versions.recyclerview_version}"
+        val cardview = "com.android.support:cardview-v7:${Versions.support_lib}"
 
+    }
+    object Retrofit{
+        val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
+        val converter_moshi = "com.squareup.retrofit2:converter-moshi:${Versions.retrofit_version}"
+        val retrofit2_kotlin_coroutines = "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:${Versions.retrofit_adapter_version}"
+        val retrofit2_converter_gson = "com.squareup.retrofit2:converter-gson:${Versions.retrofit_gson_version}"
+        val logging_interceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.retrofit_interceptor_version}"
+    }
 
+   object Kotlin{
+       val kotlin_std = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin_version}"
+   }
 
-    val runner = "androidx.test:runner:${Versions.runner_version}"
-    val espresso_core = "androidx.test.espresso:espresso-core:${Versions.espresso_core_version}"
-
-
-    //implementation 'androidx.legacy:legacy-support-v4:1.0.0-beta01'
-    //implementation 'com.google.android.material:material:1.0.0-beta01'
-    //implementation 'androidx.appcompat:appcompat:1.0.0-beta01'
-    // implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+   object Test{
+       val runner = "androidx.test:runner:${Versions.runner_version}"
+       val espresso_core = "androidx.test.espresso:espresso-core:${Versions.espresso_core_version}"
+   }
 
     val material = "com.google.android.material:material:${Versions.material_version}"
-
-    val databinding = "androidx.databinding:databinding-compiler:${Versions.databinding_version}"
 
     val viewModelExt = "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycle_extensions_version}"
 
     val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines_version}"
 
-    val converter_moshi = "com.squareup.retrofit2:converter-moshi:${Versions.retrofit_version}"
-
-    val retrofit2_kotlin_coroutines = "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:${Versions.retrofit_adapter_version}"
-
-    val retrofit2_converter_gson = "com.squareup.retrofit2:converter-gson:${Versions.retrofit_gson_version}"
-
-    val logging_interceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.retrofit_interceptor_version}"
+    val databinding = "androidx.databinding:databinding-compiler:${Versions.databinding_version}"
 
     val picasso = "com.squareup.picasso:picasso:${Versions.picasso_version}"
 
@@ -86,18 +110,11 @@ object Libs {
 
     val palette = "androidx.palette:palette:${Versions.palette_version}"
 
-    val dagger = "com.google.dagger:dagger:${Versions.dagger2_version}"
-
-    val dagger_compiler = "com.google.dagger:dagger-compiler:${Versions.dagger2_version}"
-
-    /*caligraphy*/
-
     val caligraphy = "uk.co.chrisjenx:calligraphy:${Versions.caligraphy_version}"
 
     val materialEditext = "com.rengwuxian.materialedittext:library:${Versions.material_edittext_version}"
 
     val sdp = "com.intuit.sdp:sdp-android:${Versions.sdp_version}"
-
 
     val loading_button = "br.com.simplepass:loading-button-android:2.1.0"
 
@@ -105,26 +122,7 @@ object Libs {
 
 }
 
-object Android {
-    val buildToolsVersion = "28.0.0"
-    val minSdkVersion = 21
-    val targetSdkVersion = 28
-    val compileSdkVersion = 28
-    val applicationId = "development.app.checking"
-    val versionCode = 1
-    val versionName = "0.2"
-
-    val baseUrl="http://shamlatech.net/android_portal/"
-    val api_path="kotlinApps/api/"
-}
 
 
 
-object LibsDagger {
-    val core = "com.google.dagger:dagger:${Versions.dagger2_version}"
-    val compiler = "com.google.dagger:dagger-compiler:${Versions.dagger2_version}"
-    val android = "com.google.dagger:dagger-android:${Versions.dagger2_version}"
-    val androidSupport = "com.google.dagger:dagger-DataBindingUtil-support:${Versions.dagger2_version}"
-    val androidProcessor = "com.google.dagger:dagger-android-processor:${Versions.dagger2_version}"
-}
 
