@@ -1,12 +1,15 @@
 import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
+import org.jetbrains.kotlin.resolve.calls.model.ResolvedCallArgument.DefaultArgument.arguments
 
 plugins{
     id("com.android.application")
     id("kotlin-android")
     id("kotlin-android-extensions")
+    id("kotlin-kapt")
+    kotlin("kapt")
 }
 android{
-    compileSdkVersion(Android.compileSdkVersion)
+    compileSdkVersion(Android.targetSdkVersion)
     flavorDimensions("default")
     defaultConfig {
         applicationId = Android.applicationId
@@ -15,6 +18,9 @@ android{
         versionCode = Android.versionCode
         versionName = Android.versionName
         testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
+    }
+    dataBinding {
+        isEnabled = true
     }
     productFlavors {
         create("demo") {
@@ -72,9 +78,8 @@ dependencies {
     implementation(Libs.material)
     implementation(Libs.constraint)
 
-    //kapt(Libs.databinding)
-
-    /*viewmodel and coroutines*/
+    /*databinding, viewmodel and coroutines*/
+    kapt(Libs.databinding)
     implementation(Libs.viewModelExt)
     implementation(Libs.coroutines)
 
@@ -86,7 +91,7 @@ dependencies {
 
     /*dagger*/
     implementation(Libs.dagger)
-    implementation(Libs.Dagger_compiler)//kapt
+    kapt(LibsDagger.compiler)//kapt
 
 
     /*Okhttp3*/
@@ -126,3 +131,4 @@ dependencies {
 repositories {
     mavenCentral()
 }
+

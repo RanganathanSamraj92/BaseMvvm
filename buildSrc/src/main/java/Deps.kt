@@ -65,14 +65,11 @@ object Libs {
     // implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 
     val material = "com.google.android.material:material:${Versions.material_version}"
-    /*databinding*/
-    val databinding = "androidx.databinding:databinding-compiler:${Versions.lifecycle_extensions_version}"
 
-    /*viewModel*/
+    val databinding = "androidx.databinding:databinding-compiler:${Versions.databinding_version}"
+
     val viewModelExt = "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycle_extensions_version}"
 
-
-    /*coroutines*/
     val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines_version}"
 
     val converter_moshi = "com.squareup.retrofit2:converter-moshi:${Versions.retrofit_version}"
@@ -81,49 +78,53 @@ object Libs {
 
     val retrofit2_converter_gson = "com.squareup.retrofit2:converter-gson:${Versions.retrofit_gson_version}"
 
-
     val logging_interceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.retrofit_interceptor_version}"
+
     val picasso = "com.squareup.picasso:picasso:${Versions.picasso_version}"
 
-    /*circleImageview*/
     val circleimageview = "de.hdodenhof:circleimageview:${Versions.circle_imageview_version}"
-    /*palette*/
+
     val palette = "androidx.palette:palette:${Versions.palette_version}"
 
-    /*Dagger*/
     val dagger = "com.google.dagger:dagger:${Versions.dagger2_version}"
 
-    /*kapt Dagger*/
-    val Dagger_compiler = "com.google.dagger:dagger-compiler:${Versions.dagger2_version}"
+    val dagger_compiler = "com.google.dagger:dagger-compiler:${Versions.dagger2_version}"
 
     /*caligraphy*/
+
     val caligraphy = "uk.co.chrisjenx:calligraphy:${Versions.caligraphy_version}"
 
-    /*materialEditext*/
     val materialEditext = "com.rengwuxian.materialedittext:library:${Versions.material_edittext_version}"
 
-    /*sdp*/
     val sdp = "com.intuit.sdp:sdp-android:${Versions.sdp_version}"
 
 
-    /*loading-button*/
     val loading_button = "br.com.simplepass:loading-button-android:2.1.0"
 
-    /*runtimePermissions*/
     val runtimePermissions = "com.github.florent37:runtime-permission-kotlin:${Versions.rtp_version}"
 
 }
 
 object Android {
     val buildToolsVersion = "28.0.0"
-    val minSdkVersion = 28
+    val minSdkVersion = 21
     val targetSdkVersion = 28
     val compileSdkVersion = 28
     val applicationId = "development.app.checking"
     val versionCode = 1
-    val versionName = "0.1"
+    val versionName = "0.2"
 
     val baseUrl="http://shamlatech.net/android_portal/"
     val api_path="kotlinApps/api/"
+}
+
+
+
+object LibsDagger {
+    val core = "com.google.dagger:dagger:${Versions.dagger2_version}"
+    val compiler = "com.google.dagger:dagger-compiler:${Versions.dagger2_version}"
+    val android = "com.google.dagger:dagger-android:${Versions.dagger2_version}"
+    val androidSupport = "com.google.dagger:dagger-DataBindingUtil-support:${Versions.dagger2_version}"
+    val androidProcessor = "com.google.dagger:dagger-android-processor:${Versions.dagger2_version}"
 }
 
