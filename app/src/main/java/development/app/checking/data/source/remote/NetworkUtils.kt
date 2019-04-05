@@ -10,5 +10,7 @@ open class NetworkUtils {
         const val me: String = "auth/me"
         const val uploadPhoto: String = "api/upload/photo"
         const val authenticate: String = "api/authenticate"
+        const val sendOTP: String = "api/sendOTP"
+        const val resetPassword: String = "api/resetPassword"
     }
 }

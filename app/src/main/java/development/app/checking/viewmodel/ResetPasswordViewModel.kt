@@ -10,7 +10,7 @@ import development.app.checking.viewmodel.BaseViewModel.BaseViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class ForgotPasswordViewModel : BaseViewModel() {
+class ResetPasswordViewModel : BaseViewModel() {
 
 
     @Inject
@@ -19,25 +19,20 @@ class ForgotPasswordViewModel : BaseViewModel() {
 
     private val repository = AuthRepository(authApiCall)
 
-    private val isLoading = false
 
     init {
 
     }
 
-    fun authenticate(emailOrMobile: String) {
+    fun resetPassword(password: String) {
         loadingStatus.value = true
         scope.launch {
 
-            val apiResponse = repository.authenticate(emailOrMobile)
+            val apiResponse = repository.resetPassword(password)
             val res = handleResponses(apiResponse!!)
 
         }
     }
-
-
-
-
     public override fun onCleared() {
         super.onCleared()
     }

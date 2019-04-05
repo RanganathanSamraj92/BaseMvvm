@@ -22,5 +22,11 @@ interface AuthApiCallInterface {
     @POST(NetworkUtils.authenticate)
     fun authenticateAsync(@Body emailOrMobile :String ): Deferred<Response<APIResponse>>
 
+    @POST(NetworkUtils.sendOTP)
+    fun sendOTPAsync(@Body emailOrMobile :String ): Deferred<Response<APIResponse>>
+
+    @POST(NetworkUtils.resetPassword)
+    fun resetPasswordAsync(@Body password :String ): Deferred<Response<APIResponse>>
+
 
 }

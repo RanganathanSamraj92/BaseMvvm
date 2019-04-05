@@ -47,6 +47,10 @@ open class BaseViewModel : ViewModel() {
             is ImageUploadViewModel  -> injector.inject(this)
 
             is ForgotPasswordViewModel  -> injector.inject(this)
+
+            is VerificationViewModel  -> injector.inject(this)
+
+            is ResetPasswordViewModel  -> injector.inject(this)
         }
 
     }
@@ -65,9 +69,12 @@ open class BaseViewModel : ViewModel() {
     val scope = CoroutineScope(coroutineContext)
 
 
-    open fun cancelAllRequests() = coroutineContext.cancel()
+    open fun cancelAllRequests() {
+        coroutineContext.cancel()
+        parentJob.cancel()
+    }
 
-    override fun onCleared() {
+   public override fun onCleared() {
         super.onCleared()
         Log.w("TAG", "OnCleared")
         cancelAllRequests()

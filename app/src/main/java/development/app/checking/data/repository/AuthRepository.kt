@@ -24,5 +24,13 @@ class AuthRepository(private val apiService: AuthApiCallInterface): BaseReposito
         return safeApiCall(call = { apiService.authenticateAsync(emailOrMobile).await() })
     }
 
+    suspend fun sendOTP(emailOrMobile:String): APIResponse? {
+        return safeApiCall(call = { apiService.sendOTPAsync(emailOrMobile).await() })
+    }
+
+    suspend fun resetPassword(password:String): APIResponse? {
+        return safeApiCall(call = { apiService.resetPasswordAsync(password).await() })
+    }
+
 
 }

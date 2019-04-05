@@ -1,6 +1,7 @@
 package development.app.checking.ui.base
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.util.Log
@@ -27,6 +28,7 @@ import kotlinx.android.synthetic.main.alert_ly.view.*
 import kotlinx.android.synthetic.main.app_bar.*
 import kotlinx.android.synthetic.main.app_bar_collapse.*
 import kotlinx.android.synthetic.main.container_ly.*
+import kotlinx.android.synthetic.main.content_forgot_password.*
 import kotlinx.android.synthetic.main.error_ly.*
 import kotlinx.android.synthetic.main.error_ly.view.*
 import kotlinx.android.synthetic.main.progress_ly.*
@@ -46,12 +48,15 @@ open class BaseActivity : AppCompatActivity(), BottomSheetEx.BottomSheetListener
     @Inject
     lateinit var prefs: Prefs
 
-    private val parentJob = Job()
+    public val parentJob = Job()
 
     private val coroutineContext: CoroutineContext
         get() = parentJob + Dispatchers.Default
 
     val scope = CoroutineScope(coroutineContext)
+
+    lateinit var errorStatusObserver : Observer<String>
+    lateinit var loadingStatusObserver :Observer<Boolean>
 
     override fun attachBaseContext(newBase: Context) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase))
@@ -76,10 +81,14 @@ open class BaseActivity : AppCompatActivity(), BottomSheetEx.BottomSheetListener
 
     public var showApiErrorMsg = true
     internal var showProgress = true
-    open fun viewModelSetup(activity: BaseActivity, viewModel: BaseViewModel) {
 
 
-        viewModel.loadingStatus.observe(activity, Observer {
+    private lateinit var baseviewModel: BaseViewModel
+
+    open fun viewModelSetup(activity: AppCompatActivity, viewModel: BaseViewModel) {
+
+        baseviewModel = viewModel
+        loadingStatusObserver =  Observer {
             if (showProgress) {
                 if (it) {
                     showProgress("")
@@ -87,15 +96,32 @@ open class BaseActivity : AppCompatActivity(), BottomSheetEx.BottomSheetListener
                     hideProgress()
                 }
             }
-        })
-        viewModel.errorStatus.observe(activity, Observer { error ->
+        }
+        baseviewModel.loadingStatus.observe(activity,loadingStatusObserver)
+
+        errorStatusObserver =  Observer { error ->
             if (showApiErrorMsg)
                 showException(error)
-        })
+        }
+        baseviewModel.errorStatus.observe(activity,errorStatusObserver)
     }
 
+
+    override fun onBackPressed() {
+        if (baseviewModel.loadingStatus.value==true){
+            showMsg(btnNext,"loading...please wait!!")
+        }else{
+            super.onBackPressed()
+        }
+    }
     override fun onOptionClick(text: String) {
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        baseviewModel.errorStatus.removeObserver(errorStatusObserver)
+        baseviewModel.loadingStatus.removeObserver(loadingStatusObserver)
     }
 
 
@@ -162,6 +188,10 @@ open class BaseActivity : AppCompatActivity(), BottomSheetEx.BottomSheetListener
                 .setAction("Action", null).show()
         }
 
+        open fun showMsgCantEmpty(msg: String) :String{
+            return "$msg cannot be empty"
+        }
+
         internal fun makeLog(msg: String) {
             Log.w("base", msg)
         }
@@ -185,18 +215,26 @@ open class BaseActivity : AppCompatActivity(), BottomSheetEx.BottomSheetListener
 
 
     fun setAppBar(title: String) {
-        toolbar.title = title
-        toolbar.navigationIcon = getDrawable(development.app.checking.R.drawable.ic_arrow_back_black_24dp)
-        setSupportActionBar(toolbar)
-        toolbar.setNavigationOnClickListener { onBackPressed() }
+        try {
+            toolbar.title = title
+            toolbar.navigationIcon = getDrawable(development.app.checking.R.drawable.ic_arrow_back_black_24dp)
+            setSupportActionBar(toolbar)
+            toolbar.setNavigationOnClickListener { onBackPressed() }
+        } catch (e: Exception) {
+            showError(e.localizedMessage)
+        }
     }
 
     fun setAppBarCollapse(title: String) {
-        app_bar_collapse.visibility = VISIBLE
-        toolbarCollapse.title = title
-        toolbarCollapse.navigationIcon = getDrawable(development.app.checking.R.drawable.ic_arrow_back_black_24dp)
-        setSupportActionBar(toolbarCollapse)
-        toolbarCollapse.setNavigationOnClickListener { onBackPressed() }
+        try {
+            app_bar_collapse.visibility = VISIBLE
+            toolbarCollapse.title = title
+            toolbarCollapse.navigationIcon = getDrawable(development.app.checking.R.drawable.ic_arrow_back_black_24dp)
+            setSupportActionBar(toolbarCollapse)
+            toolbarCollapse.setNavigationOnClickListener { onBackPressed() }
+        } catch (e: Exception) {
+            showError(e.localizedMessage)
+        }
     }
 
 
@@ -217,12 +255,18 @@ open class BaseActivity : AppCompatActivity(), BottomSheetEx.BottomSheetListener
 
     @SuppressLint("SetTextI18n")
     open fun showException(message: String) {
-        val view = layoutInflater.inflate(development.app.checking.R.layout.fragment_bottom_sheet_ex, null)
-        view.errorLy.txtErrorMessage.text = message
-        view.alertLy.visibility = GONE
-        val dialog = BottomSheetDialog(this)
-        dialog.setContentView(view)
-        dialog.show()
+        try {
+            val view = layoutInflater.inflate(development.app.checking.R.layout.fragment_bottom_sheet_ex, null)
+            view.errorLy.txtErrorMessage.text = message
+            view.alertLy.visibility = GONE
+            val dialog = BottomSheetDialog(this)
+            dialog.setContentView(view)
+            if (!isFinishing) {
+                dialog.show()
+            }
+        } catch (e: Exception) {
+            Log.w("App Error:",e.localizedMessage)
+        }
     }
 
     @SuppressLint("SetTextI18n")

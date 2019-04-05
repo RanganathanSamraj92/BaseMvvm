@@ -59,8 +59,8 @@ class SplashActivity : BaseActivity() {
             newIntent(this@SplashActivity, HomeActivity::class.java, "")
         }
 
-        if (!isFinishing) {
-            viewModelSetup(this, splashViewModel)
+       /* if (!isFinishing) {
+            //viewModelSetup(this, splashViewModel)
             splashViewModel.getAppVersion().observe(this@SplashActivity, Observer {
                 if (BuildConfig.VERSION_NAME.equals(it!!.appVersion.version)) {
                     newIntent(this@SplashActivity, AndroidVersionActivity::class.java, "")
@@ -90,7 +90,7 @@ class SplashActivity : BaseActivity() {
 
 
             })
-        }
+        }*/
     }
 
     public override fun onDestroy() {

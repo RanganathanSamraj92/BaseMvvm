@@ -23,4 +23,7 @@ open class ResponseData{
 
     @SerializedName("imageUploadResult")
     open lateinit var  imageResModel: UploadResModel
+
+    @SerializedName("otp_result")
+    open lateinit var  sendOTPModel: SendOTPModel
 }
