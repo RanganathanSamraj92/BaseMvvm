@@ -93,6 +93,10 @@ class SplashActivity : BaseActivity() {
         }*/
     }
 
+    override fun onBackPressed() {
+        parentJob.cancel()
+        super.onBackPressed()
+    }
     public override fun onDestroy() {
 
         if (mDelayHandler != null) {

@@ -61,12 +61,16 @@ open class BaseViewModel : ViewModel() {
     open var metaStatus: MutableLiveData<String> = MutableLiveData()
     open var errorStatus: MutableLiveData<String> = MutableLiveData()
 
-    private val parentJob = Job()
+    private val parentJob by lazy { Job() }
+    private val scopeJob by lazy { Job() }
+    val coroutineContext: CoroutineContext by lazy { Dispatchers.Main + parentJob }
 
-    private val coroutineContext: CoroutineContext
-        get() = parentJob + Dispatchers.Default
 
-    val scope = CoroutineScope(coroutineContext)
+
+    /*private val coroutineContext: CoroutineContext
+        get() = parentJob + Dispatchers.IO*/
+
+    val scope = GlobalScope
 
 
     open fun cancelAllRequests() {
@@ -75,9 +79,10 @@ open class BaseViewModel : ViewModel() {
     }
 
    public override fun onCleared() {
+       cancelAllRequests()
         super.onCleared()
         Log.w("TAG", "OnCleared")
-        cancelAllRequests()
+
 
     }
 

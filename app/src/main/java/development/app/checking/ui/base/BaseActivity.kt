@@ -108,9 +108,13 @@ open class BaseActivity : AppCompatActivity(), BottomSheetEx.BottomSheetListener
 
 
     override fun onBackPressed() {
-        if (baseviewModel.loadingStatus.value==true){
-            showMsg(btnNext,"loading...please wait!!")
-        }else{
+        try {
+            if (baseviewModel.loadingStatus.value==true){
+                showMsg(progressCircular,"loading...please wait!!")
+            }else{
+                super.onBackPressed()
+            }
+        } catch (e: Exception) {
             super.onBackPressed()
         }
     }
@@ -120,8 +124,6 @@ open class BaseActivity : AppCompatActivity(), BottomSheetEx.BottomSheetListener
 
     override fun onDestroy() {
         super.onDestroy()
-        baseviewModel.errorStatus.removeObserver(errorStatusObserver)
-        baseviewModel.loadingStatus.removeObserver(loadingStatusObserver)
     }
 
 

@@ -33,18 +33,12 @@ class VerificationActivity : BaseActivity() {
         })
 
         fab.setOnClickListener {
-            if (txtOTP.text.toString().isEmpty()){
-                showMsg(txtOTP,"Verification code cannot be empty!")
-                return@setOnClickListener
-            }
+           validate(txtOTP.text.toString())
+        }
 
-            if (code==txtOTP.text.toString()){
-                showMsg(txtOTP,"Verified successfully....")
-            }else{
-                showMsg(txtOTP,"Verification failed \nincorrect code....")
 
-                newIntent(context,ResetPasswordActivity::class.java,"")
-            }
+        txtOTP.setOtpCompletionListener {
+            otp ->  validate(otp)
         }
 
         txtResendOTP.setOnClickListener {
@@ -52,6 +46,23 @@ class VerificationActivity : BaseActivity() {
         }
 
 
+
+
+    }
+
+    private fun validate(otp:String) {
+        if (otp.isEmpty()){
+            showMsg(txtOTP,"Verification code cannot be empty!")
+            return
+        }
+
+        if (code==otp){
+            showMsg(txtOTP,"Verified successfully....")
+        }else{
+            showMsg(txtOTP,"Verification failed \nincorrect code....")
+
+            newIntent(context,ResetPasswordActivity::class.java,"")
+        }
     }
 
     private fun resendOTP() {

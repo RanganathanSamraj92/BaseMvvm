@@ -18,7 +18,7 @@ class ResetPasswordActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(development.app.checking.R.layout.content_reset_password)
-        setAppBar(resources.getString(R.string.title_activity_reset_password))
+        setAppBar("")
         resetPasswordViewModel = ViewModelProviders.of(this).get(ResetPasswordViewModel::class.java)
         viewModelSetup(this, resetPasswordViewModel)
 

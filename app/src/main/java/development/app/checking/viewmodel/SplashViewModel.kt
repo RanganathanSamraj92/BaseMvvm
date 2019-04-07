@@ -14,11 +14,9 @@ import development.app.checking.data.source.remote.RetrofitFactory
 import development.app.checking.model.AppVersion
 import development.app.checking.viewmodel.BaseViewModel.BaseViewModel
 import kotlinx.android.synthetic.main.activity_splash.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
 class SplashViewModel : BaseViewModel() {
 
@@ -42,9 +40,29 @@ class SplashViewModel : BaseViewModel() {
         return appVersion
     }
 
+
+    private lateinit var request: Job
+
     private fun loadAppVersion() {
 
-        scope.launch {
+       /* val request = scope.launch {
+            // it spawns two other jobs, one with GlobalScope
+            GlobalScope.launch {
+                println("job1: I run in GlobalScope and execute independently!")
+                delay(1000)
+                println("job1: I am not affected by cancellation of the request")
+            }
+            // and the other inherits the parent context
+            launch {
+                delay(100)
+                println("job2: I am a child of the request coroutine")
+                delay(1000)
+                println("job2: I will not execute this line if my parent request is cancelled")
+            }
+        }
+*/
+
+        request = GlobalScope.launch {
             val apiResponse = repository.getAppVersion()
             val res= handleResponses(apiResponse!!)
             try {
@@ -54,6 +72,12 @@ class SplashViewModel : BaseViewModel() {
             }
         }
 
+    }
+
+    override fun onCleared() {
+
+        request.cancel()
+        super.onCleared()
     }
 
     fun animateUI(view: View) {

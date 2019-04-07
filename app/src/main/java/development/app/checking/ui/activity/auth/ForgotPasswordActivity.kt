@@ -22,7 +22,6 @@ class ForgotPasswordActivity : BaseActivity() {
 
     private lateinit var kl: Observer<String>
     private lateinit var errorObs: Observer<String>
-    private lateinit var loadingObs: Observer<Boolean>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,21 +32,8 @@ class ForgotPasswordActivity : BaseActivity() {
         viewModelSetup(this, forgotPasswordViewModel)
 
 
-        loadingObs = Observer<Boolean> {
-            if (showProgress) {
-                if (it) {
-                    showProgress("")
-                } else {
-                    hideProgress()
-                }
-            }
-        }
-
-        forgotPasswordViewModel.loadingStatus.observe(this,loadingObs )
 
         kl = Observer { error ->
-            if (showApiErrorMsg)
-                showException(error)
             newIntent(context,VerificationActivity::class.java,"")
         }
 
