@@ -40,6 +40,8 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 import java.io.Serializable
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
+import android.app.ActivityOptions
+import androidx.core.content.ContextCompat.startActivity
 
 
 open class BaseActivity : AppCompatActivity(), BottomSheetEx.BottomSheetListener {
@@ -179,7 +181,9 @@ open class BaseActivity : AppCompatActivity(), BottomSheetEx.BottomSheetListener
             if (intentData != "") {
                 intent.putExtra("intent_data", intentData as Serializable)
             }
-            ContextCompat.startActivity(context, intent, null)
+            val options = ActivityOptions.makeSceneTransitionAnimation(context as Activity?)
+            ContextCompat.startActivity(context,intent, options.toBundle())
+            //ContextCompat.startActivity(context, intent, null)
             return intent
         }
 
