@@ -104,6 +104,7 @@ dependencies {
     /*runtimePermissions*/
     implementation(Libs.runtimePermissions)
     implementation ("com.github.mukeshsolanki:android-otpview-pinview:2.0.3")
+    implementation(Libs.lottie)
 
 
     /*implementation fileTree(dir: 'libs', include: ['*.jar'])

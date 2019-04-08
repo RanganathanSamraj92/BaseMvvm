@@ -48,6 +48,8 @@ class VerificationActivity : BaseActivity() {
 
 
 
+
+
     }
 
     private fun validate(otp:String) {

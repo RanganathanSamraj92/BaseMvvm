@@ -129,4 +129,7 @@
     <string name="resetpassword_hint">use atleast 6 characters and combine with numbers/special chars.</string>
     <string name="action_submit">Submit</string>
     <string name="title_activity_reset_password">Reset Password</string>
+    <string name="menu_app_info">App info</string>
+    <string name="menu_feedback">Feedback</string>
+    <string name="menu_help">Help</string>
 </resources>

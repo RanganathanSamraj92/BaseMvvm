@@ -40,6 +40,7 @@ object Versions{
     val material_edittext_version = "2.1.4"
     val sdp_version = "1.0.6"
     val rtp_version = "1.1.0"
+    val lottie_version = "3.0.0"
 
     val material_version = "1.0.0-beta01"
     val constraint_version = "1.1.3"
@@ -119,6 +120,8 @@ object Libs {
     val loading_button = "br.com.simplepass:loading-button-android:2.1.0"
 
     val runtimePermissions = "com.github.florent37:runtime-permission-kotlin:${Versions.rtp_version}"
+
+    val lottie = "com.airbnb.android:lottie:${Versions.lottie_version}"
 
 }
 

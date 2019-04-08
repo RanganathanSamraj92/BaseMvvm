@@ -46,7 +46,7 @@ class LoginActivity : BaseActivity() {
         setStub(development.app.checking.R.layout.content_login)
         setAppBarCollapse(resources.getString(R.string.app_name))
         loginViewModel = ViewModelProviders.of(this).get(LoginViewModel::class.java)
-        //viewModelSetup(this, loginViewModel)
+        viewModelSetup(this, loginViewModel)
 
         inject()
 

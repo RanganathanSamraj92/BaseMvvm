@@ -12,6 +12,7 @@ import android.view.MenuItem
 import development.app.checking.R
 import development.app.checking.pref.PrefMgr.Companion.KEY_TOKEN
 import development.app.checking.ui.activity.auth.LoginActivity
+import development.app.checking.ui.activity.misc.AppInfoActivity
 import development.app.checking.ui.activity.profile.ProfileActivity
 import development.app.checking.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_home.*
@@ -73,19 +74,15 @@ class HomeActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             R.id.nav_gallery -> {
                 makePermissionsRequest(Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE)
             }
-            R.id.nav_slideshow -> {
-
-            }
             R.id.nav_profile -> {
 
                 newIntent(this@HomeActivity, ProfileActivity::class.java, "")
             }
-            R.id.nav_share -> {
+            R.id.nav_app_info -> {
 
+                newIntent(this@HomeActivity,    AppInfoActivity::class.java, "")
             }
-            R.id.nav_send -> {
 
-            }
         }
 
         drawer_layout.closeDrawer(GravityCompat.START)
