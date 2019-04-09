@@ -106,6 +106,10 @@ dependencies {
     implementation ("com.github.mukeshsolanki:android-otpview-pinview:2.0.3")
     implementation(Libs.lottie)
 
+    implementation(project(":myapplication"))
+
+
+
 
     /*implementation fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation "junit:junit:$test_junit_version"

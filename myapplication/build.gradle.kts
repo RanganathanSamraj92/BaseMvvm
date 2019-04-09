@@ -1,5 +1,5 @@
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     id("kotlin-android")
     id("kotlin-android-extensions")
     id("kotlin-kapt")
@@ -10,7 +10,6 @@ android {
     compileSdkVersion(AppConfig.targetSdkVersion)
     flavorDimensions("default")
     defaultConfig {
-        applicationId = AppConfig.applicationIdTwo
         minSdkVersion(AppConfig.minSdkVersion)
         targetSdkVersion(AppConfig.targetSdkVersion)
         versionCode = AppConfig.versionCode
@@ -23,10 +22,8 @@ android {
     productFlavors {
         create("demo") {
 
-            applicationId = AppConfig.applicationIdTwo
         }
         create("production") {
-            applicationId = AppConfig.applicationIdTwo
         }
     }
     buildTypes {
@@ -37,10 +34,8 @@ android {
         }
 
         create("qa") {
-            isShrinkResources = true
             isMinifyEnabled = true
             isUseProguard = true
-            proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
             resValue("string", "app_type", "Debug")
             resValue("string", "app_name", AppConfig.BaseAppTitle)
         }
@@ -49,10 +44,8 @@ android {
 
             resValue("string", "app_name", AppConfig.BaseAppTitle)
 
-            isShrinkResources = true
             isMinifyEnabled = true
             isUseProguard = true
-            proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
         }
 
 

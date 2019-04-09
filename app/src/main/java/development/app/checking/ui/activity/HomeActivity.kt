@@ -15,6 +15,7 @@ import development.app.checking.ui.activity.auth.LoginActivity
 import development.app.checking.ui.activity.misc.AppInfoActivity
 import development.app.checking.ui.activity.profile.ProfileActivity
 import development.app.checking.ui.base.BaseActivity
+import development.app.myapplication.MainActivity
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.app_bar_home.*
 
@@ -76,7 +77,7 @@ class HomeActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             }
             R.id.nav_profile -> {
 
-                newIntent(this@HomeActivity, ProfileActivity::class.java, "")
+                newIntent(this@HomeActivity, MainActivity::class.java, "")
             }
             R.id.nav_app_info -> {
 
