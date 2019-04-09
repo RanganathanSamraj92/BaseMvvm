@@ -40,7 +40,7 @@ class ProfileActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(development.app.checking.R.layout.activity_base)
         setStub(development.app.checking.R.layout.content_profile)
-        setAppBar(resources.getString(R.string.app_name))
+        setAppBar(resources.getString(R.string.title_activity_profile))
         profileViewModel = ViewModelProviders.of(this).get(ProfileViewModel::class.java)
         viewModelSetup(this, profileViewModel)
 
