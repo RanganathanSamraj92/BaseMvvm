@@ -11,6 +11,7 @@ object AppConfig {
     val api_path="kotlinApps/api/"
     val applicaionName = "BaseApps"
     val BaseAppTitle = "Names"
+    val applicationIdTwo = "development.app.sample"
 }
 
 
@@ -18,6 +19,7 @@ object AppConfig {
 
 
 object Versions{
+
     val kotlin_version = "1.3.21"
     val gradle_version = "3.2.0"
     val android_plugin_version = "3.1.0"

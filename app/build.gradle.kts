@@ -103,7 +103,7 @@ dependencies {
     implementation(Libs.loading_button)
     /*runtimePermissions*/
     implementation(Libs.runtimePermissions)
-    implementation("com.github.mukeshsolanki:android-otpview-pinview:2.0.3")
+    implementation ("com.github.mukeshsolanki:android-otpview-pinview:2.0.3")
     implementation(Libs.lottie)
 
 
