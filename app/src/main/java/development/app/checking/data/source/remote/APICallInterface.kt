@@ -15,4 +15,7 @@ interface ApiCallInterface {
     @GET(NetworkUtils.versionDetails)
     fun getAppVersionDetailAsync():  Deferred<Response<APIResponse>>
 
+    @GET(NetworkUtils.demoformat)
+    fun getAppAsync():  Deferred<Response<APIResponse>>
+
 }

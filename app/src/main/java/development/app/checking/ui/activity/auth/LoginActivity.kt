@@ -54,7 +54,7 @@ class LoginActivity : BaseActivity() {
         loginViewModel.errorStatus.observe(this, Observer { error ->
 
             btnLogin.revertAnimation()
-            newIntent(context,HomeActivity::class.java,"")
+            //newIntent(context,HomeActivity::class.java,"")
            // btnLogin .doneLoadingAnimation(defaultColor(this@LoginActivity), defaultDoneImage(this@LoginActivity.resources))
         })
 

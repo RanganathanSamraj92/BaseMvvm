@@ -68,36 +68,6 @@ dependencies {
     implementation(Libs.material)
     implementation(Libs.Support.constraint)
     /*databinding, viewmodel and coroutines*/
-    kapt(Libs.databinding)
-    implementation(Libs.viewModelExt)
-    implementation(Libs.coroutines)
-    /*retrofit*/
-    implementation(Libs.Retrofit.retrofit)
-    implementation(Libs.Retrofit.converter_moshi)
-    implementation(Libs.Retrofit.retrofit2_kotlin_coroutines)
-    implementation(Libs.Retrofit.retrofit2_converter_gson)
-    implementation(Libs.Retrofit.logging_interceptor)
-    /*dagger*/
-    implementation(Libs.Dagger.core)
-    kapt(Libs.Dagger.compiler)
-    /*Picasso*/
-    implementation(Libs.picasso)
-    /*circleImageview*/
-    implementation(Libs.circleimageview)
-    /*palette*/
-    implementation(Libs.palette)
-    /*caligraphy*/
-    implementation(Libs.caligraphy)
-    /*materialEditext*/
-    implementation(Libs.materialEditext)
-    /*sdp*/
-    implementation(Libs.sdp)
-    /*loading_button*/
-    implementation(Libs.loading_button)
-    /*runtimePermissions*/
-    implementation(Libs.runtimePermissions)
-    implementation ("com.github.mukeshsolanki:android-otpview-pinview:2.0.3")
-    implementation(Libs.lottie)
 
 
     /*implementation fileTree(dir: 'libs', include: ['*.jar'])

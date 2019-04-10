@@ -63,7 +63,7 @@ class SplashViewModel : BaseViewModel() {
 */
 
         request = GlobalScope.launch {
-            val apiResponse = repository.getAppVersion()
+            val apiResponse = repository.getAppAsync()
             val res= handleResponses(apiResponse!!)
             try {
                 appVersion.postValue(res.data.appVersion)
@@ -71,6 +71,15 @@ class SplashViewModel : BaseViewModel() {
                 /*ignore the exception*/
             }
         }
+        /*request = GlobalScope.launch {
+            val apiResponse = repository.getAppVersion()
+            val res= handleResponses(apiResponse!!)
+            try {
+                appVersion.postValue(res.data.appVersion)
+            } catch (e: Exception) {
+                *//*ignore the exception*//*
+            }
+        }*/
 
     }
 

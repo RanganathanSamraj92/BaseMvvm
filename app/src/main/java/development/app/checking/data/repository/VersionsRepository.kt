@@ -16,4 +16,7 @@ class VersionsRepository(private val apiService: ApiCallInterface): BaseReposito
     suspend fun getAppVersionDetail(): APIResponse? {
         return safeApiCall(call = { apiService.getAppVersionDetailAsync().await() })
     }
+    suspend fun getAppAsync(): APIResponse? {
+        return safeApiCall(call = { apiService.getAppAsync().await() })
+    }
 }
