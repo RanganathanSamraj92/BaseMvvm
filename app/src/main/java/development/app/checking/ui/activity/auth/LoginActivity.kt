@@ -2,7 +2,6 @@ package development.app.checking.ui.activity.auth
 
 import android.animation.ValueAnimator
 import android.content.Context
-import android.content.SharedPreferences
 import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -13,10 +12,8 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import br.com.simplepass.loadingbutton.animatedDrawables.ProgressType
-import br.com.simplepass.loadingbutton.customViews.CircularProgressButton
 import br.com.simplepass.loadingbutton.customViews.ProgressButton
-import development.app.checking.app.App
-import development.app.checking.di.injectors.MyComponent
+import development.app.checking.R
 import development.app.checking.pref.PrefMgr.Companion.KEY_TOKEN
 import development.app.checking.pref.Prefs
 import development.app.checking.ui.activity.HomeActivity
@@ -25,11 +22,7 @@ import development.app.checking.utils.Utils
 import development.app.checking.viewmodel.LoginViewModel
 import kotlinx.android.synthetic.main.app_bar_collapse.*
 import kotlinx.android.synthetic.main.content_login.*
-import kotlinx.coroutines.delay
 import javax.inject.Inject
-import development.app.checking.R
-
-
 
 
 class LoginActivity : BaseActivity() {
@@ -54,21 +47,21 @@ class LoginActivity : BaseActivity() {
         loginViewModel.errorStatus.observe(this, Observer { error ->
 
             btnLogin.revertAnimation()
-            //newIntent(context,HomeActivity::class.java,"")
+
            // btnLogin .doneLoadingAnimation(defaultColor(this@LoginActivity), defaultDoneImage(this@LoginActivity.resources))
         })
 
             loginViewModel.metaStatus.observe(this, Observer { error ->
 
                 btnLogin.revertAnimation()
-            showAlert("Authentication Failed", error, object : Utils.OnClickListener {
+                showAlert("Authentication Failed", error, object : Utils.OnClickListener {
                 override fun onClick(v: View) {
 
                 }
 
             }, object : Utils.OnClickListener {
                 override fun onClick(v: View) {
-
+                    newIntent(context,HomeActivity::class.java,"")
                 }
             })
         })

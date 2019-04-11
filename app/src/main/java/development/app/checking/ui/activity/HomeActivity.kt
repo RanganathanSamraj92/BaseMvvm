@@ -75,9 +75,13 @@ class HomeActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             R.id.nav_gallery -> {
                 makePermissionsRequest(Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE)
             }
-            R.id.nav_profile -> {
+            R.id.nav_feedback-> {
 
                 newIntent(this@HomeActivity, MainActivity::class.java, "")
+            }
+            R.id.nav_profile -> {
+
+                newIntent(this@HomeActivity, ProfileActivity::class.java, "")
             }
             R.id.nav_app_info -> {
 

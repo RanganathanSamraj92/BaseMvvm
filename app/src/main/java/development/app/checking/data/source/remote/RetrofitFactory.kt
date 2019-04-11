@@ -1,6 +1,7 @@
 package development.app.checking.data.source.remote
 
 import android.util.Log
+import com.squareup.moshi.Json
 import retrofit2.Response
 import java.io.IOException
 import java.net.UnknownHostException
@@ -16,6 +17,7 @@ open class RetrofitFactory {
 
             try {
                 val response = call.invoke()
+                val k = response.body() as APIResponse
                 Log.w("API details :","\nstatuscode: ${response.code()}" +
                         ",\n" +
                         "success : ${response.isSuccessful} " +
@@ -23,7 +25,7 @@ open class RetrofitFactory {
                         "Body ${response.raw().networkResponse()}" +
 
                         ",\n" +
-                        "message ${response.message()}" +
+                        "content body - status : ${k.meta.status}  msg : ${k.meta.message}" +
                         ",\n" +
                         "errorBody ${response.errorBody()}" +
                         " \n" +
