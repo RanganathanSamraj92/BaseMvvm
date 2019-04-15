@@ -4,6 +4,7 @@ import development.app.checking.data.request.LoginRequest
 import development.app.checking.data.request.RegisterRequest
 import development.app.checking.data.source.remote.APIResponse
 import development.app.checking.data.source.remote.AuthApiCallInterface
+import development.app.checking.model.VerifyTokenModel
 import development.app.checking.viewmodel.LoginViewModel
 
 class AuthRepository(private val apiService: AuthApiCallInterface): BaseRepository() {
@@ -30,6 +31,9 @@ class AuthRepository(private val apiService: AuthApiCallInterface): BaseReposito
 
     suspend fun resetPassword(password:String): APIResponse? {
         return safeApiCall(call = { apiService.resetPasswordAsync(password).await() })
+    }
+    suspend fun verifyToken(verifyTokenModel: VerifyTokenModel): APIResponse? {
+        return safeApiCall(call = { apiService.verifyTokenAsync(verifyTokenModel).await() })
     }
 
 

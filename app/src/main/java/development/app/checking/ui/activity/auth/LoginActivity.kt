@@ -69,9 +69,10 @@ class LoginActivity : BaseActivity() {
         loginViewModel.loginResult.observe(this, Observer { login ->
             btnLogin.revertAnimation()
             toolbar_layout.title = login.message
-            myPref.putData(KEY_TOKEN,login.token)
+            makeLog( login.message)
+            //myPref.putData(KEY_TOKEN,login.token)
 
-            newIntent(this@LoginActivity,HomeActivity::class.java,"")
+            //newIntent(this@LoginActivity,HomeActivity::class.java,"")
 
 
         })

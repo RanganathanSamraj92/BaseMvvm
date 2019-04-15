@@ -10,7 +10,7 @@ open class RetrofitFactory {
 
 
     companion object {
-        val LOCAL_BASE_URL1 = "https://baseapis.herokuapp.com/"
+        val LOCAL_BASE_URL1 = "http://localhost:5000/baseapi-e2980/us-central1/"
 
 
         suspend fun <T : Any> safeApiResult(call: suspend () -> Response<T>): APIResponse {

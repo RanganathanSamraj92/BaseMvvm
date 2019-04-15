@@ -1,6 +1,7 @@
 package development.app.checking.app
 
 import android.app.Application
+import com.google.firebase.FirebaseApp
 import development.app.checking.di.injectors.DaggerMyComponent
 import development.app.checking.di.injectors.MyComponent
 import development.app.checking.di.modules.SharedPreferencesModule
@@ -14,6 +15,7 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        FirebaseApp.initializeApp(this)
 
         /*Dagger component initialization
         * here is initialization for MyComponent

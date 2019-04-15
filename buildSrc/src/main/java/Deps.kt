@@ -61,6 +61,9 @@ object Versions{
     val test_junit_version = "4.12"
     val runner_version = "1.1.0-alpha4"
     val espresso_core_version = "3.1.0-alpha4"
+    val firebase_auth = "16.2.1"
+    val firebase_messaging = "17.6.0"
+
 }
 
 
@@ -88,6 +91,10 @@ object Libs {
         val retrofit2_kotlin_coroutines = "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:${Versions.retrofit_adapter_version}"
         val retrofit2_converter_gson = "com.squareup.retrofit2:converter-gson:${Versions.retrofit_gson_version}"
         val logging_interceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.retrofit_interceptor_version}"
+    }
+    object Firebase{
+        val auth = "com.google.firebase:firebase-auth:${Versions.firebase_auth}"
+        val messaging = "com.google.firebase:firebase-messaging:${Versions.firebase_messaging}"
     }
 
    object Kotlin{

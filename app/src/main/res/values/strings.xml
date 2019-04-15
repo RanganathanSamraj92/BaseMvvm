@@ -133,4 +133,5 @@
     <string name="menu_feedback">Feedback</string>
     <string name="menu_help">Help</string>
     <string name="title_activity_profile">Profile</string>
+    <string name="default_notification_channel_id">1</string>
 </resources>

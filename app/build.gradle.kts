@@ -1,3 +1,13 @@
+import AppConfig.applicationId
+import AppConfig.compileSdkVersion
+import AppConfig.minSdkVersion
+import AppConfig.targetSdkVersion
+import AppConfig.versionCode
+import AppConfig.versionName
+import Libs.Dagger.android
+import com.android.build.gradle.ProguardFiles.getDefaultProguardFile
+import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
+
 plugins {
     id("com.android.application")
     id("kotlin-android")
@@ -84,6 +94,11 @@ dependencies {
     implementation(Libs.Retrofit.retrofit2_kotlin_coroutines)
     implementation(Libs.Retrofit.retrofit2_converter_gson)
     implementation(Libs.Retrofit.logging_interceptor)
+
+    /*firebase*/
+    implementation(Libs.Firebase.auth)
+    implementation(Libs.Firebase.messaging)
+
     /*dagger*/
     implementation(Libs.Dagger.core)
     kapt(Libs.Dagger.compiler)
@@ -122,4 +137,7 @@ dependencies {
 repositories {
     mavenCentral()
 }
+
+apply(mapOf("plugin" to "com.google.gms.google-services"))
+
 

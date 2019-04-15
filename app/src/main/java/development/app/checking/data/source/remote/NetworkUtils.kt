@@ -13,5 +13,6 @@ open class NetworkUtils {
         const val sendOTP: String = "api/sendOTP"
         const val resetPassword: String = "api/resetPassword"
         const val demoformat: String = "/demoformat"
+        const val verifyToken: String = "verifyMyToken"
     }
 }

@@ -2,6 +2,7 @@ package development.app.checking.data.source.remote
 
 import development.app.checking.data.request.LoginRequest
 import development.app.checking.data.request.RegisterRequest
+import development.app.checking.model.VerifyTokenModel
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
 import retrofit2.http.*
@@ -27,6 +28,10 @@ interface AuthApiCallInterface {
 
     @POST(NetworkUtils.resetPassword)
     fun resetPasswordAsync(@Body password :String ): Deferred<Response<APIResponse>>
+
+
+    @POST(NetworkUtils.verifyToken)
+    fun verifyTokenAsync(@Body verifyTokenModel: VerifyTokenModel): Deferred<Response<APIResponse>>
 
 
 }
