@@ -1,6 +1,7 @@
 package development.app.checking.model
 
-class VerifyTokenModel{
+class UpdateFCMModel{
+    var fcmToken: String = ""
     var idToken: String = ""
 
 }

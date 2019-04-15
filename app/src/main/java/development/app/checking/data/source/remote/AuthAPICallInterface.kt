@@ -2,6 +2,7 @@ package development.app.checking.data.source.remote
 
 import development.app.checking.data.request.LoginRequest
 import development.app.checking.data.request.RegisterRequest
+import development.app.checking.model.UpdateFCMModel
 import development.app.checking.model.VerifyTokenModel
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
@@ -32,6 +33,9 @@ interface AuthApiCallInterface {
 
     @POST(NetworkUtils.verifyToken)
     fun verifyTokenAsync(@Body verifyTokenModel: VerifyTokenModel): Deferred<Response<APIResponse>>
+
+    @POST(NetworkUtils.updateFCMToken)
+    fun updateFCMTokenAsync(@Body updateFCMModel: UpdateFCMModel): Deferred<Response<APIResponse>>
 
 
 }

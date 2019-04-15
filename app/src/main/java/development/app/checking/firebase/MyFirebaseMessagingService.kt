@@ -5,18 +5,26 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.media.RingtoneManager
 import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat.getSystemService
+import androidx.lifecycle.ViewModelProviders
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import development.app.checking.R
+import development.app.checking.model.VerifyTokenModel
+import development.app.checking.pref.PrefMgr
+import development.app.checking.pref.Prefs
+import development.app.checking.viewmodel.LoginViewModel
 import development.app.myapplication.MainActivity
+import kotlinx.coroutines.launch
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
 
+    lateinit var myPref: Prefs
     /**
      * Called when message is received.
      *
@@ -104,7 +112,9 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
      * @param token The new token.
      */
     private fun sendRegistrationToServer(token: String?) {
-        // TODO: Implement this method to send token to your app server.
+        myPref = Prefs(getSharedPreferences("appName", Context.MODE_PRIVATE))
+        myPref.putData(PrefMgr.KEY_ID_TOKEN,token!!)
+
     }
 
     /**

@@ -10,7 +10,7 @@ open class RetrofitFactory {
 
 
     companion object {
-        val LOCAL_BASE_URL1 = "http://localhost:5000/baseapi-e2980/us-central1/"
+        val LOCAL_BASE_URL1 = "https://us-central1-baseapi-e2980.cloudfunctions.net/"
 
 
         suspend fun <T : Any> safeApiResult(call: suspend () -> Response<T>): APIResponse {

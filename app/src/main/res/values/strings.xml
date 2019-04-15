@@ -134,4 +134,8 @@
     <string name="menu_help">Help</string>
     <string name="title_activity_profile">Profile</string>
     <string name="default_notification_channel_id">1</string>
+    <string name="dummy_name">Ranganthan Samraj</string>
+    <string name="dummy_email">ranganathan2@gmail.com</string>
+    <string name="dummy_password">123456</string>
+    <string name="dummy_mobile">+919876543211</string>
 </resources>

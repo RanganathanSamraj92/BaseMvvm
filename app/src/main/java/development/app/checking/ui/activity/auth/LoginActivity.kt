@@ -70,9 +70,27 @@ class LoginActivity : BaseActivity() {
             btnLogin.revertAnimation()
             toolbar_layout.title = login.message
             makeLog( login.message)
-            //myPref.putData(KEY_TOKEN,login.token)
+            myPref.putData(KEY_TOKEN,login.token)
 
+            loginViewModel.updateFCMTokenOnDB()
             //newIntent(this@LoginActivity,HomeActivity::class.java,"")
+
+
+        })
+        loginViewModel.updateFCMResult.observe(this, Observer { login ->
+            toolbar_layout.title = login.message
+            makeLog( login.message)
+
+            showAlert("FCM token Success", login.message, object : Utils.OnClickListener {
+                override fun onClick(v: View) {
+
+                }
+
+            }, object : Utils.OnClickListener {
+                override fun onClick(v: View) {
+                    newIntent(context,HomeActivity::class.java,"")
+                }
+            })
 
 
         })

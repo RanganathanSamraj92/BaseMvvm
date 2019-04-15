@@ -62,7 +62,7 @@
                         android:inputType="textCapWords"
                         android:layout_marginStart="8dp"
                         android:hint="@string/name"
-                        android:text=""/>
+                        android:text="@string/dummy_name"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -85,7 +85,7 @@
                         android:inputType="textEmailAddress"
                         android:layout_marginStart="8dp"
                         android:hint="@string/email"
-                        android:text=""/>
+                        android:text="@string/dummy_email"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -108,7 +108,7 @@
                         android:inputType="textPassword"
                         android:layout_marginStart="8dp"
                         android:hint="@string/password"
-                        android:text=""/>
+                        android:text="@string/dummy_password"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -128,11 +128,11 @@
                         android:id="@+id/mTxtMobile"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/edittext_height"
-                        android:maxLength="12"
+                        android:maxLength="13"
                         android:inputType="number"
                         android:layout_marginStart="8dp"
                         android:hint="@string/mobile"
-                        android:text=""/>
+                        android:text="@string/dummy_mobile"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 

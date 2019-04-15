@@ -32,8 +32,8 @@ class RegisterViewModel : BaseViewModel() {
             registerRequest.name = name
             registerRequest.email = email
             registerRequest.password = password
-            registerRequest.image = image
-            registerRequest.mobile = mobile
+            registerRequest.photoURL = "https://seeklogo.net/wp-content/uploads/2015/09/Google_2015_logo1.svg"
+            registerRequest.phoneNumber = mobile
             val apiResponse = repository.register(registerRequest)
             val res = handleResponses(apiResponse!!)
             try {
