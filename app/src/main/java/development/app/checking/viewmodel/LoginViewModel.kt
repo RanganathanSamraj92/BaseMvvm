@@ -36,6 +36,7 @@ class LoginViewModel : BaseViewModel() {
 
         // Initialize Firebase Auth
         auth = FirebaseAuth.getInstance()
+        auth.signOut()
 
 
         FirebaseInstanceId.getInstance().instanceId
@@ -64,7 +65,8 @@ class LoginViewModel : BaseViewModel() {
                 val vm = LoginModel()
                 user.getIdToken(true).addOnSuccessListener { tokenResult ->
                     idToken = tokenResult.token.toString()
-                    verifyIdTokenOnServer(idToken)
+                    Log.w("idToken",idToken)
+                    verifyIdTokenOnServer(idToken,fcmToken!!)
                 }
 
             } else {
@@ -75,11 +77,12 @@ class LoginViewModel : BaseViewModel() {
                         Log.e("user", user.toString())
                         user!!.getIdToken(true).addOnSuccessListener { tokenResult ->
                             idToken = tokenResult.token.toString()
-                            verifyIdTokenOnServer(idToken)
+                            Log.w("idToken",idToken)
+                            verifyIdTokenOnServer(idToken,fcmToken!!)
 
                         }
                     } else {
-                        Log.e("user", it.exception!!.localizedMessage)
+                        Log.w("user", it.exception!!.localizedMessage)
                         errorStatus.value = it.exception!!.localizedMessage
                     }
 
@@ -90,9 +93,10 @@ class LoginViewModel : BaseViewModel() {
         }
     }
 
-    private fun verifyIdTokenOnServer(token: String) {
+    private fun verifyIdTokenOnServer(token: String,fcmToken:String) {
         var verifyTokenModel = VerifyTokenModel()
         verifyTokenModel.idToken = token
+        verifyTokenModel.fcmToken = fcmToken
         scope.launch {
 
 
