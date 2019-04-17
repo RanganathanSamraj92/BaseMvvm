@@ -1,6 +1,8 @@
 package development.app.checking.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.google.firebase.database.*
 import development.app.checking.data.repository.AuthRepository
 import development.app.checking.data.source.remote.AuthApiCallInterface
 import development.app.checking.model.LoginModel
@@ -11,7 +13,7 @@ import javax.inject.Inject
 
 class ProfileViewModel : BaseViewModel() {
 
-   // private lateinit var database: DatabaseReference
+    private lateinit var database: DatabaseReference
 
     @Inject
     lateinit var authApiCall: AuthApiCallInterface
@@ -22,23 +24,34 @@ class ProfileViewModel : BaseViewModel() {
     val userInfo = MutableLiveData<ProfileModel>()
 
 
-    init {
+    private var msgRef: DatabaseReference
 
+    init {
+        // Write a message to the database
+        val database = FirebaseDatabase.getInstance()
+        msgRef = database.getReference("users/1PHEzIK5HrfRLkW3WlgPMAYozTd2")
+
+        //msgRef.setValue("Hello, World!")
     }
 
     fun getProfile(token: String) {
-        loadingStatus.value = true
-        scope.launch {
-            val apiResponse = repository.me(token)
-            val res = handleResponses(apiResponse!!)
-            try {
-                if (res.meta.status) {
-                    userInfo.postValue(res.data.userInfo)
-                }
-            } catch (e: Throwable) {
 
+        loadingStatus.value = true
+        msgRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                val profile = dataSnapshot.getValue(ProfileModel::class.java)
+                Log.w("profile", "Value is: ${profile!!.name}  ${profile!!.email} ")
+                userInfo.postValue(profile)
+                loadingStatus.value = false
             }
 
-        }
+            override fun onCancelled(error: DatabaseError) {
+                loadingStatus.value = false
+                // Failed to read value
+                Log.w("profile", "Failed to read value.", error.toException())
+            }
+        })
     }
 }

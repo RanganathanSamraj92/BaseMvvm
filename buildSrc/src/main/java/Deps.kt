@@ -63,6 +63,7 @@ object Versions{
     val espresso_core_version = "3.1.0-alpha4"
     val firebase_auth = "16.2.1"
     val firebase_messaging = "17.6.0"
+    val firebase_database = "16.1.0"
 
 }
 
@@ -95,6 +96,7 @@ object Libs {
     object Firebase{
         val auth = "com.google.firebase:firebase-auth:${Versions.firebase_auth}"
         val messaging = "com.google.firebase:firebase-messaging:${Versions.firebase_messaging}"
+        val database = "com.google.firebase:firebase-database:${Versions.firebase_database}"
     }
 
    object Kotlin{
