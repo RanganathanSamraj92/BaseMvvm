@@ -3,6 +3,7 @@ package development.app.checking.viewmodel
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.database.*
+import com.google.firebase.storage.FirebaseStorage
 import development.app.checking.data.repository.AuthRepository
 import development.app.checking.data.source.remote.AuthApiCallInterface
 import development.app.checking.model.LoginModel
@@ -13,7 +14,9 @@ import javax.inject.Inject
 
 class ProfileViewModel : BaseViewModel() {
 
-    private lateinit var database: DatabaseReference
+    private var msgRef: DatabaseReference
+
+
 
     @Inject
     lateinit var authApiCall: AuthApiCallInterface
@@ -24,7 +27,7 @@ class ProfileViewModel : BaseViewModel() {
     val userInfo = MutableLiveData<ProfileModel>()
 
 
-    private var msgRef: DatabaseReference
+
 
     init {
         // Write a message to the database
@@ -32,6 +35,7 @@ class ProfileViewModel : BaseViewModel() {
         msgRef = database.getReference("users/1PHEzIK5HrfRLkW3WlgPMAYozTd2")
 
         //msgRef.setValue("Hello, World!")
+        val storage = FirebaseStorage.getInstance()
     }
 
     fun getProfile(token: String) {

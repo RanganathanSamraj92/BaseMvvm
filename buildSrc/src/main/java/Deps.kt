@@ -64,6 +64,7 @@ object Versions{
     val firebase_auth = "16.2.1"
     val firebase_messaging = "17.6.0"
     val firebase_database = "16.1.0"
+    val firebase_storage = "16.1.0"
 
 }
 
@@ -97,6 +98,8 @@ object Libs {
         val auth = "com.google.firebase:firebase-auth:${Versions.firebase_auth}"
         val messaging = "com.google.firebase:firebase-messaging:${Versions.firebase_messaging}"
         val database = "com.google.firebase:firebase-database:${Versions.firebase_database}"
+        val storage = "com.google.firebase:firebase-storage:${Versions.firebase_storage}"
+
     }
 
    object Kotlin{

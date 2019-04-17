@@ -99,6 +99,7 @@ dependencies {
     implementation(Libs.Firebase.auth)
     implementation(Libs.Firebase.messaging)
     implementation(Libs.Firebase.database)
+    implementation(Libs.Firebase.storage)
 
     /*dagger*/
     implementation(Libs.Dagger.core)
