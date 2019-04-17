@@ -5,6 +5,7 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import development.app.checking.R
+import development.app.checking.data.source.remote.NetworkUtils.Companion.login
 import development.app.checking.pref.PrefMgr.Companion.KEY_TOKEN
 import development.app.checking.ui.activity.HomeActivity
 import development.app.checking.ui.activity.SplashActivity
@@ -32,6 +33,19 @@ class RegisterActivity : BaseActivity() {
 
         inject()
 
+        registerViewModel.metaStatus.observe(this, Observer { error ->
+
+            showAlert("Registration Failed", error, object : Utils.OnClickListener {
+                override fun onClick(v: View) {
+
+                }
+
+            }, object : Utils.OnClickListener {
+                override fun onClick(v: View) {
+
+                }
+            })
+        })
 
         registerViewModel.loginResult.observe(this, Observer { login ->
             showMsg(btnSignUp, login.message)
