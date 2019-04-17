@@ -7,6 +7,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.iid.FirebaseInstanceId
 import development.app.checking.data.repository.AuthRepository
 import development.app.checking.data.source.remote.AuthApiCallInterface
+import development.app.checking.data.source.remote.NetworkUtils.Companion.login
 import development.app.checking.model.LoginModel
 import development.app.checking.model.UpdateFCMModel
 import development.app.checking.model.VerifyTokenModel
@@ -17,7 +18,7 @@ import javax.inject.Inject
 class LoginViewModel : BaseViewModel() {
 
 
-    private lateinit var auth: FirebaseAuth
+
 
     @Inject
     lateinit var authApiCall: AuthApiCallInterface
@@ -30,43 +31,24 @@ class LoginViewModel : BaseViewModel() {
     val updateFCMResult = MutableLiveData<LoginModel>()
 
 
-    private var fcmToken: String? = null
+
 
     init {
 
-        // Initialize Firebase Auth
-        auth = FirebaseAuth.getInstance()
-        auth.signOut()
 
-
-        FirebaseInstanceId.getInstance().instanceId
-            .addOnCompleteListener(OnCompleteListener { task ->
-                if (!task.isSuccessful) {
-                    Log.w("messaging", "getInstanceId failed", task.exception)
-                    return@OnCompleteListener
-                }
-
-                // Get new Instance ID token
-                fcmToken = task.result?.token
-
-                // Log and toast
-                val msg = fcmToken
-                Log.w("messaging Token", msg)
-            })
     }
 
     private lateinit var idToken: String
 
-    fun login(email: String, password: String) {
+    fun signIn(email: String, password: String) {
         loadingStatus.value = true
         scope.launch {
             var user = auth.currentUser
             if (user != null) {
-                val vm = LoginModel()
                 user.getIdToken(true).addOnSuccessListener { tokenResult ->
                     idToken = tokenResult.token.toString()
                     Log.w("idToken",idToken)
-                    verifyIdTokenOnServer(idToken,fcmToken!!)
+                    login(idToken)
                 }
 
             } else {
@@ -78,7 +60,7 @@ class LoginViewModel : BaseViewModel() {
                         user!!.getIdToken(true).addOnSuccessListener { tokenResult ->
                             idToken = tokenResult.token.toString()
                             Log.w("idToken",idToken)
-                            verifyIdTokenOnServer(idToken,fcmToken!!)
+                            login(idToken)
 
                         }
                     } else {
@@ -93,10 +75,9 @@ class LoginViewModel : BaseViewModel() {
         }
     }
 
-    private fun verifyIdTokenOnServer(token: String,fcmToken:String) {
+    private fun login(token: String) {
         var verifyTokenModel = VerifyTokenModel()
         verifyTokenModel.idToken = token
-        verifyTokenModel.fcmToken = fcmToken
         scope.launch {
 
 

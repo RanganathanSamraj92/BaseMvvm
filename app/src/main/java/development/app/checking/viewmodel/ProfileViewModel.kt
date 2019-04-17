@@ -11,6 +11,7 @@ import javax.inject.Inject
 
 class ProfileViewModel : BaseViewModel() {
 
+   // private lateinit var database: DatabaseReference
 
     @Inject
     lateinit var authApiCall: AuthApiCallInterface

@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModelProviders
 import br.com.simplepass.loadingbutton.animatedDrawables.ProgressType
 import br.com.simplepass.loadingbutton.customViews.ProgressButton
 import development.app.checking.R
-import development.app.checking.pref.PrefMgr.Companion.KEY_TOKEN
+import development.app.checking.pref.PrefMgr
 import development.app.checking.pref.Prefs
 import development.app.checking.ui.activity.HomeActivity
 import development.app.checking.ui.base.BaseActivity
@@ -48,47 +48,32 @@ class LoginActivity : BaseActivity() {
 
             btnLogin.revertAnimation()
 
-           // btnLogin .doneLoadingAnimation(defaultColor(this@LoginActivity), defaultDoneImage(this@LoginActivity.resources))
+            // btnLogin .doneLoadingAnimation(defaultColor(this@LoginActivity), defaultDoneImage(this@LoginActivity.resources))
         })
 
-            loginViewModel.metaStatus.observe(this, Observer { error ->
-
-                btnLogin.revertAnimation()
-                showAlert("Authentication Failed", error, object : Utils.OnClickListener {
-                override fun onClick(v: View) {
-
-                }
-
-            }, object : Utils.OnClickListener {
-                override fun onClick(v: View) {
-                    newIntent(context,HomeActivity::class.java,"")
-                }
-            })
-        })
 
         loginViewModel.loginResult.observe(this, Observer { login ->
             btnLogin.revertAnimation()
             toolbar_layout.title = login.message
-            makeLog( login.message)
-            myPref.putData(KEY_TOKEN,login.token)
+            makeLog(login.message)
+            myPref.putData(PrefMgr.KEY_ACCESS_TOKEN, login.token)
 
             loginViewModel.updateFCMTokenOnDB()
-            //newIntent(this@LoginActivity,HomeActivity::class.java,"")
 
 
         })
         loginViewModel.updateFCMResult.observe(this, Observer { login ->
             toolbar_layout.title = login.message
-            makeLog( login.message)
+            makeLog(login.message)
 
-            showAlert("FCM token Success", login.message, object : Utils.OnClickListener {
+            showAlert("login Success", login.message, object : Utils.OnClickListener {
                 override fun onClick(v: View) {
-
+                    newIntent(this@LoginActivity, HomeActivity::class.java, "")
                 }
 
             }, object : Utils.OnClickListener {
                 override fun onClick(v: View) {
-                    newIntent(context,HomeActivity::class.java,"")
+
                 }
             })
 
@@ -96,7 +81,7 @@ class LoginActivity : BaseActivity() {
         })
 
         btnLogin.setOnClickListener {
-            loginViewModel.login(txtEmail.text.toString(), txtPassword.text.toString())
+            loginViewModel.signIn(txtEmail.text.toString(), txtPassword.text.toString())
             btnLogin.progressType = ProgressType.INDETERMINATE
             btnLogin.startAnimation()
             // progressAnimator(buttonTest6).start()
@@ -112,13 +97,13 @@ class LoginActivity : BaseActivity() {
         }
 
 
-
     }
 
     override fun onDestroy() {
         super.onDestroy()
         btnLogin.dispose()
     }
+
     private fun ProgressButton.morphDoneAndRevert(
         context: Context,
         fillColor: Int = defaultColor(context),

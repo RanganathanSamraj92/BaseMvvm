@@ -12,7 +12,7 @@ import development.app.checking.BR
 import development.app.checking.BuildConfig
 import development.app.checking.R
 import development.app.checking.databinding.ActivitySplashBinding
-import development.app.checking.pref.PrefMgr.Companion.KEY_TOKEN
+import development.app.checking.pref.PrefMgr
 import development.app.checking.pref.Prefs
 import development.app.checking.ui.activity.android_verisons.AndroidVersionActivity
 import development.app.checking.ui.activity.auth.LoginActivity
@@ -53,11 +53,17 @@ class SplashActivity : BaseActivity() {
 
 
     val mRunnable: Runnable = Runnable {
-        if (prefs.getData(KEY_TOKEN).equals("")) {
-            newIntent(this@SplashActivity, LoginActivity::class.java, "")
+        if (splashViewModel.auth.currentUser!=null){
+            if (prefs.getData(PrefMgr.KEY_ACCESS_TOKEN).equals("")) {
+                splashViewModel.auth.signOut()
+                newIntent(this@SplashActivity, LoginActivity::class.java, "")
+            }else{
+                newIntent(this@SplashActivity, HomeActivity::class.java, "")
+            }
         }else{
-            newIntent(this@SplashActivity, HomeActivity::class.java, "")
+            newIntent(this@SplashActivity, LoginActivity::class.java, "")
         }
+
 
        /* if (!isFinishing) {
             //viewModelSetup(this, splashViewModel)

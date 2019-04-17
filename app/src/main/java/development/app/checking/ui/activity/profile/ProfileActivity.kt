@@ -6,6 +6,7 @@ import android.media.MediaScannerConnection
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.support.v4.media.session.MediaSessionCompat.KEY_TOKEN
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -13,7 +14,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.squareup.picasso.Picasso
 import development.app.checking.R
-import development.app.checking.pref.PrefMgr.Companion.KEY_TOKEN
+import development.app.checking.pref.PrefMgr
 import development.app.checking.pref.Prefs
 import development.app.checking.ui.base.BaseActivity
 import development.app.checking.utils.Utils
@@ -102,7 +103,7 @@ class ProfileActivity : BaseActivity() {
 
         })
 
-        profileViewModel.getProfile(prefs.getData(KEY_TOKEN))
+        profileViewModel.getProfile(prefs.getData(PrefMgr.KEY_ACCESS_TOKEN))
 
 
     }
@@ -129,7 +130,7 @@ class ProfileActivity : BaseActivity() {
                     val name = RequestBody.create(MediaType.parse("text/plain"), "profile_image_name")
 
                     //al part = MultipartBody.Part.createFormData("file", file.getName(), requestFile)
-                    imageUploadViewModel.uploadImage(prefs.getData(KEY_TOKEN),body, name)
+                    imageUploadViewModel.uploadImage(prefs.getData(PrefMgr.KEY_ACCESS_TOKEN),body, name)
 
                 } catch (e: IOException) {
                     e.printStackTrace()

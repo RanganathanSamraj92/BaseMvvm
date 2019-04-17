@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import development.app.checking.R
-import development.app.checking.pref.PrefMgr.Companion.KEY_TOKEN
+import development.app.checking.pref.PrefMgr
 import development.app.checking.ui.activity.auth.LoginActivity
 import development.app.checking.ui.activity.misc.AppInfoActivity
 import development.app.checking.ui.activity.profile.ProfileActivity
@@ -69,7 +69,7 @@ class HomeActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_logout -> {
-               prefs.putData(KEY_TOKEN,"")
+               prefs.putData(PrefMgr.KEY_ACCESS_TOKEN,"")
                 newIntent(this@HomeActivity, LoginActivity::class.java, "")
             }
             R.id.nav_gallery -> {

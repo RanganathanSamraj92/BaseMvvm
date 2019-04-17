@@ -6,4 +6,5 @@ class RegisterRequest{
     lateinit var password:String
     lateinit var photoURL:String
     lateinit var phoneNumber:String
+    lateinit var fcmToken:String
 }

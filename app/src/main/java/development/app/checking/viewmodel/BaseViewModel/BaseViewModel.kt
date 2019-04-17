@@ -5,6 +5,9 @@ import android.content.ContextWrapper
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.iid.FirebaseInstanceId
 import development.app.checking.app.App
 import development.app.checking.data.source.remote.*
 import development.app.checking.di.injectors.DaggerViewModelInjector
@@ -18,6 +21,8 @@ import kotlin.coroutines.CoroutineContext
 
 open class BaseViewModel : ViewModel() {
 
+    internal lateinit var auth: FirebaseAuth
+    internal var fcmToken: String? = null
 
     private val injector : ViewModelInjector = DaggerViewModelInjector.builder()
     .networkModule(networkModule = NetworkModule)
@@ -27,6 +32,25 @@ open class BaseViewModel : ViewModel() {
     init {
 
         inject()
+
+        // Initialize Firebase Auth
+        auth = FirebaseAuth.getInstance()
+
+
+        FirebaseInstanceId.getInstance().instanceId
+            .addOnCompleteListener(OnCompleteListener { task ->
+                if (!task.isSuccessful) {
+                    Log.w("messaging", "getInstanceId failed", task.exception)
+                    return@OnCompleteListener
+                }
+
+                // Get new Instance ID token
+                fcmToken = task.result?.token
+
+                // Log and toast
+                val msg = fcmToken
+                Log.w("messaging Token", msg)
+            })
     }
 
 
