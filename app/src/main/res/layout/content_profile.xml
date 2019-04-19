@@ -21,7 +21,7 @@
             android:id="@+id/nestedScrollView">
 
         <ImageView
-                android:background="@drawable/gettyimages"
+                android:background="@drawable/profile_gradient"
                 android:layout_alignParentTop="true"
                 android:id="@+id/linearLy"
                 android:scaleType="fitXY"

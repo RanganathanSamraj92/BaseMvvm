@@ -99,8 +99,6 @@ class ProfileActivity : BaseActivity() {
             if (me.image.isNotEmpty()) {
                 Picasso.get().load(me.image).into(imgProfile)
             }
-
-
         })
 
         profileViewModel.getProfile(prefs.getData(PrefMgr.KEY_ACCESS_TOKEN))
@@ -123,7 +121,7 @@ class ProfileActivity : BaseActivity() {
                 try {
                     val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, contentURI)
                     val file = saveImage(bitmap)
-                    imgProfile!!.setImageBitmap(bitmap)
+                    //imgProfile!!.setImageBitmap(bitmap)
                     val requestFile = RequestBody.create(MediaType.parse("image/jpeg"), file)
 
                     val body = MultipartBody.Part.createFormData("file", "image.jpg", requestFile)
@@ -131,6 +129,7 @@ class ProfileActivity : BaseActivity() {
 
                     //al part = MultipartBody.Part.createFormData("file", file.getName(), requestFile)
                     imageUploadViewModel.uploadImage(prefs.getData(PrefMgr.KEY_ACCESS_TOKEN),body, name)
+                    imageUploadViewModel.upload(contentURI!!)
 
                 } catch (e: IOException) {
                     e.printStackTrace()

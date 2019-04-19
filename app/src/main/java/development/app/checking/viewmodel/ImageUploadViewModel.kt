@@ -1,6 +1,12 @@
 package development.app.checking.viewmodel
 
+import android.net.Uri
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.UploadTask
 import development.app.checking.data.repository.ImageUploadRepository
 import development.app.checking.data.request.ImageUploadRequest
 import development.app.checking.data.source.remote.ImageUploadAPICallInterface
@@ -10,10 +16,15 @@ import development.app.checking.viewmodel.BaseViewModel.BaseViewModel
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import java.util.*
 import javax.inject.Inject
 
-class ImageUploadViewModel : BaseViewModel() {
+open class ImageUploadViewModel : BaseViewModel() {
 
+
+    internal lateinit var msgRef: DatabaseReference
+
+    val storage = FirebaseStorage.getInstance()
 
     @Inject
     lateinit var imageUploadAPICallInterface: ImageUploadAPICallInterface
@@ -25,7 +36,11 @@ class ImageUploadViewModel : BaseViewModel() {
 
 
     init {
+        // Write a message to the database
+        val database = FirebaseDatabase.getInstance()
+        msgRef = database.getReference("users/${auth.currentUser!!.uid}")
 
+        //msgRef.setValue("Hello, World!")
     }
 
     fun uploadImage(token:String,file: MultipartBody.Part, name: RequestBody) {
@@ -47,5 +62,23 @@ class ImageUploadViewModel : BaseViewModel() {
             }
 
         }
+    }
+
+    internal fun upload(uri: Uri) {
+
+        val storageRef = storage.reference
+        var mReference = storageRef.child("images/${Calendar.getInstance().timeInMillis.toString() }.jpg")
+        try {
+            mReference.putFile(uri).addOnSuccessListener {taskSnapshot: UploadTask.TaskSnapshot? ->
+                val url = taskSnapshot!!.storage.downloadUrl
+                url.addOnSuccessListener {
+                    uri -> Log.w("uri : ",uri.toString())
+                    msgRef.child("photoUrl").setValue(uri.toString())
+                }
+            }
+        }catch (e: Exception) {
+
+        }
+
     }
 }
