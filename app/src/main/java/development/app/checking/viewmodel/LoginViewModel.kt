@@ -106,7 +106,7 @@ class LoginViewModel : BaseViewModel() {
                     updateFCMResult.postValue(res.data.loginModel)
                 }
             } catch (e: Throwable) {
-                Log.e("verifyIdToken Error", e.localizedMessage)
+                Log.e("updateFCM Error", e.localizedMessage)
             }
         }
     }
