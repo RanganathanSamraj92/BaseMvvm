@@ -52,7 +52,7 @@ class RegisterViewModel : BaseViewModel() {
                             user!!.getIdToken(true).addOnSuccessListener { tokenResult ->
                                 idToken = tokenResult.token.toString()
                                 Log.w("idToken",idToken)
-                                login(idToken)
+                                updateIdToken(idToken)
 
                             }
                         } else {
@@ -61,6 +61,8 @@ class RegisterViewModel : BaseViewModel() {
                         }
 
                     }
+                }else{
+                    errorStatus.postValue(res.meta.message)
                 }
             } catch (e: Throwable) {
 
@@ -69,11 +71,11 @@ class RegisterViewModel : BaseViewModel() {
         }
     }
 
-    private fun login(token: String) {
+    private fun updateIdToken(token: String) {
         var verifyTokenModel = VerifyTokenModel()
         verifyTokenModel.idToken = token
         scope.launch {
-            val apiResponse = repository.verifyToken(verifyTokenModel)
+            val apiResponse = repository.updateIdToken(verifyTokenModel)
             val res = handleResponses(apiResponse!!)
             try {
                 if (res.meta.status) {

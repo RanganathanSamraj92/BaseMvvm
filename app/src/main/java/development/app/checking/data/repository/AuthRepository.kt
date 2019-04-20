@@ -15,9 +15,7 @@ class AuthRepository(private val apiService: AuthApiCallInterface): BaseReposito
         return safeApiCall(call = { apiService.registerAsync(registerRequest).await() })
     }
 
-    suspend fun login(loginRequest: LoginRequest): APIResponse? {
-        return safeApiCall(call = { apiService.loginAsync(loginRequest).await() })
-    }
+
     suspend fun me(token: String): APIResponse? {
         return safeApiCall(call = { apiService.profileAsync(token).await() })
     }
@@ -33,11 +31,15 @@ class AuthRepository(private val apiService: AuthApiCallInterface): BaseReposito
     suspend fun resetPassword(password:String): APIResponse? {
         return safeApiCall(call = { apiService.resetPasswordAsync(password).await() })
     }
-    suspend fun verifyToken(verifyTokenModel: VerifyTokenModel): APIResponse? {
-        return safeApiCall(call = { apiService.verifyTokenAsync(verifyTokenModel).await() })
+    suspend fun login(verifyTokenModel: VerifyTokenModel): APIResponse? {
+        return safeApiCall(call = { apiService.loginAsync(verifyTokenModel).await() })
     }
     suspend fun updateFCMToken(updateFCMModel:UpdateFCMModel): APIResponse? {
         return safeApiCall(call = { apiService.updateFCMTokenAsync(updateFCMModel).await() })
+    }
+
+    suspend fun updateIdToken(verifyTokenModel: VerifyTokenModel): APIResponse? {
+        return safeApiCall(call = { apiService.updateIdTokenAsync(verifyTokenModel).await() })
     }
 
 

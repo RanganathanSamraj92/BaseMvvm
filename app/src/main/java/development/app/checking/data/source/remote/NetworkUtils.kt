@@ -5,7 +5,6 @@ open class NetworkUtils {
         const val checkVersion: String = "versions.json"
         const val versionDetails: String = "version_details.json"
         const val getAndroidVersions: String = "android_versions.json"
-        const val login: String = "auth/login"
         const val register: String = "signUp"
         const val me: String = "auth/me"
         const val uploadPhoto: String = "api/upload/photo"
@@ -13,7 +12,8 @@ open class NetworkUtils {
         const val sendOTP: String = "api/sendOTP"
         const val resetPassword: String = "api/resetPassword"
         const val demoformat: String = "/demoformat"
-        const val verifyToken: String = "login"
+        const val login: String = "login"
+        const val updateIdToken: String = "updateIdToken"
         const val updateFCMToken: String = "updateFCMToken"
     }
 }

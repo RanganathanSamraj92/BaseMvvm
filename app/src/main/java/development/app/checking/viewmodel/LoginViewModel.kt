@@ -81,7 +81,7 @@ class LoginViewModel : BaseViewModel() {
         scope.launch {
 
 
-            val apiResponse = repository.verifyToken(verifyTokenModel)
+            val apiResponse = repository.login(verifyTokenModel)
             val res = handleResponses(apiResponse!!)
             try {
                 if (res.meta.status) {

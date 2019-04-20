@@ -31,11 +31,14 @@ interface AuthApiCallInterface {
     fun resetPasswordAsync(@Body password :String ): Deferred<Response<APIResponse>>
 
 
-    @POST(NetworkUtils.verifyToken)
-    fun verifyTokenAsync(@Body verifyTokenModel: VerifyTokenModel): Deferred<Response<APIResponse>>
+    @POST(NetworkUtils.login)
+    fun loginAsync(@Body verifyTokenModel: VerifyTokenModel): Deferred<Response<APIResponse>>
 
     @POST(NetworkUtils.updateFCMToken)
     fun updateFCMTokenAsync(@Body updateFCMModel: UpdateFCMModel): Deferred<Response<APIResponse>>
+
+    @POST(NetworkUtils.updateIdToken)
+    fun updateIdTokenAsync(@Body verifyTokenModel: VerifyTokenModel): Deferred<Response<APIResponse>>
 
 
 }

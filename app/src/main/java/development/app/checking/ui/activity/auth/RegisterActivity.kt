@@ -5,6 +5,7 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import development.app.checking.R
+import development.app.checking.data.source.remote.NetworkUtils.Companion.login
 import development.app.checking.pref.PrefMgr
 import development.app.checking.ui.activity.HomeActivity
 import development.app.checking.ui.base.BaseActivity
@@ -28,7 +29,10 @@ class RegisterActivity : BaseActivity() {
 
         inject()
 
-
+        showApiErrorMsg = false;
+        registerViewModel.errorStatus.observe(this, Observer { error ->
+            showMsg(btnSignUp, error)
+        })
 
         registerViewModel.loginResult.observe(this, Observer { login ->
             showMsg(btnSignUp, login.message)
