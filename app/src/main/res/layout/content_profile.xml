@@ -58,10 +58,18 @@
                             android:scaleType="centerCrop"
                             android:src="@drawable/default_user_placeholder"/>
 
+                    <ProgressBar
+                            android:id="@+id/progressUploadProfileImage"
+                            style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+                            android:indeterminate="true"
+                            android:layout_width="match_parent"
+                                 android:layout_height="wrap_content"/>
 
                     <View android:layout_width="match_parent"
                           android:layout_height="match_parent"
                           android:background="@color/colorOverLay">
+
+
                     </View>
 
                     <com.google.android.material.floatingactionbutton.FloatingActionButton

@@ -9,6 +9,8 @@ import android.provider.MediaStore
 import android.support.v4.media.session.MediaSessionCompat.KEY_TOKEN
 import android.util.Log
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -77,6 +79,17 @@ class ProfileActivity : BaseActivity() {
                 }
             })
         })
+
+        loadingStatusObserver =  Observer {
+            if (it) {
+                progressUploadProfileImage.visibility = VISIBLE
+            } else {
+                progressUploadProfileImage.visibility = GONE
+            }
+        }
+        imageUploadViewModel.uploadingStatus.observe(this,loadingStatusObserver)
+
+
         profileViewModel.metaStatus.observe(this, Observer { error ->
 
             showAlert("Authentication Failed", error, object : Utils.OnClickListener {
@@ -98,6 +111,7 @@ class ProfileActivity : BaseActivity() {
             txtMobile.text = me.mobile
             if (me.image.isNotEmpty()) {
                 Picasso.get().load(me.image).into(imgProfile)
+                progressUploadProfileImage.visibility = GONE
             }
         })
 

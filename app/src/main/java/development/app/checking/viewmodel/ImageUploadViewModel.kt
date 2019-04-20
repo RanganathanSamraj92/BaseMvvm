@@ -22,6 +22,8 @@ import javax.inject.Inject
 open class ImageUploadViewModel : BaseViewModel() {
 
 
+    var uploadingStatus: MutableLiveData<Boolean> = MutableLiveData()
+
     internal lateinit var msgRef: DatabaseReference
 
     val storage = FirebaseStorage.getInstance()
@@ -66,6 +68,8 @@ open class ImageUploadViewModel : BaseViewModel() {
 
     internal fun upload(uri: Uri) {
 
+        uploadingStatus.value = true
+
         val storageRef = storage.reference
         var mReference = storageRef.child("images/${Calendar.getInstance().timeInMillis.toString() }.jpg")
         try {
@@ -74,10 +78,12 @@ open class ImageUploadViewModel : BaseViewModel() {
                 url.addOnSuccessListener {
                     uri -> Log.w("uri : ",uri.toString())
                     msgRef.child("photoUrl").setValue(uri.toString())
+                    uploadingStatus.value = false
                 }
             }
         }catch (e: Exception) {
-
+            uploadingStatus.value = false
+            Log.w("upload Exception : ",e.localizedMessage)
         }
 
     }
