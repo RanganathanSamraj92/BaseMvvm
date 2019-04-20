@@ -13,7 +13,7 @@ open class NetworkUtils {
         const val resetPassword: String = "api/resetPassword"
         const val demoformat: String = "/demoformat"
         const val login: String = "login"
-        const val updateIdToken: String = "updateIdToken"
+        const val updateIdToken: String = "login"
         const val updateFCMToken: String = "updateFCMToken"
     }
 }

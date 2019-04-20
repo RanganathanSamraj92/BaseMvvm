@@ -128,7 +128,7 @@ class ProfileActivity : BaseActivity() {
                     val name = RequestBody.create(MediaType.parse("text/plain"), "profile_image_name")
 
                     //al part = MultipartBody.Part.createFormData("file", file.getName(), requestFile)
-                    imageUploadViewModel.uploadImage(prefs.getData(PrefMgr.KEY_ACCESS_TOKEN),body, name)
+                    //imageUploadViewModel.uploadImage(prefs.getData(PrefMgr.KEY_ACCESS_TOKEN),body, name)
                     imageUploadViewModel.upload(contentURI!!)
 
                 } catch (e: IOException) {

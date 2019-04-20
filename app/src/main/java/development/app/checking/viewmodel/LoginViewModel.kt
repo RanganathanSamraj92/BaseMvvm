@@ -34,6 +34,7 @@ class LoginViewModel : BaseViewModel() {
 
 
     init {
+        auth.signOut()
 
 
     }
