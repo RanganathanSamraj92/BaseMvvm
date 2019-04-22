@@ -66,17 +66,7 @@ class LoginActivity : BaseActivity() {
             toolbar_layout.title = login.message
             makeLog(login.message)
 
-            showAlert("login Success", login.message, object : Utils.OnClickListener {
-                override fun onClick(v: View) {
-                    newIntent(this@LoginActivity, HomeActivity::class.java, "")
-                }
-
-            }, object : Utils.OnClickListener {
-                override fun onClick(v: View) {
-
-                }
-            })
-
+            newIntent(this@LoginActivity, HomeActivity::class.java, "")
 
         })
 

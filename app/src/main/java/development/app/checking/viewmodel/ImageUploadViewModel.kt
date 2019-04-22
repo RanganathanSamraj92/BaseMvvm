@@ -68,7 +68,7 @@ open class ImageUploadViewModel : BaseViewModel() {
 
     internal fun upload(uri: Uri) {
 
-        uploadingStatus.value = true
+        uploadingStatus.postValue(true)
 
         val storageRef = storage.reference
         var mReference = storageRef.child("images/${Calendar.getInstance().timeInMillis.toString() }.jpg")
@@ -78,11 +78,11 @@ open class ImageUploadViewModel : BaseViewModel() {
                 url.addOnSuccessListener {
                     uri -> Log.w("uri : ",uri.toString())
                     msgRef.child("photoUrl").setValue(uri.toString())
-                    uploadingStatus.value = false
+                    uploadingStatus.postValue(false)
                 }
             }
         }catch (e: Exception) {
-            uploadingStatus.value = false
+            uploadingStatus.postValue(false)
             Log.w("upload Exception : ",e.localizedMessage)
         }
 
