@@ -40,6 +40,7 @@ class RegisterViewModel : BaseViewModel() {
             val registerRequest = RegisterRequest()
             registerRequest.name = name
             registerRequest.email = email
+
             registerRequest.password = password
             registerRequest.photoURL = "https://www.gstatic.com/mobilesdk/160503_mobilesdk/logo/2x/firebase_28dp.png"
             registerRequest.phoneNumber = mobile
