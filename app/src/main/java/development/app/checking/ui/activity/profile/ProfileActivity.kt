@@ -14,6 +14,7 @@ import android.view.View.VISIBLE
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import development.app.checking.R
 import development.app.checking.pref.PrefMgr
@@ -31,6 +32,7 @@ import java.util.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.MediaType
+import java.lang.Exception
 
 
 class ProfileActivity : BaseActivity() {
@@ -110,8 +112,18 @@ class ProfileActivity : BaseActivity() {
             txtEmail.text = me.email
             txtMobile.text = me.mobile
             if (me.image.isNotEmpty()) {
-                Picasso.get().load(me.image).into(imgProfile)
-                progressUploadProfileImage.visibility = GONE
+                progressUploadProfileImage.visibility = VISIBLE
+                Picasso.get().load(me.image).into(imgProfile,object:Callback{
+                    override fun onSuccess() {
+                        progressUploadProfileImage.visibility = GONE
+                    }
+
+                    override fun onError(e: Exception?) {
+                        progressUploadProfileImage.visibility = GONE
+                    }
+
+                })
+
             }
         })
 
