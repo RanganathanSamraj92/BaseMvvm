@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.iid.FirebaseInstanceId
 import development.app.checking.app.App
 import development.app.checking.data.source.remote.*
@@ -22,6 +23,7 @@ import kotlin.coroutines.CoroutineContext
 open class BaseViewModel : ViewModel() {
 
     internal lateinit var auth: FirebaseAuth
+    internal lateinit var database: FirebaseDatabase
     internal var fcmToken: String? = null
 
     private val injector : ViewModelInjector = DaggerViewModelInjector.builder()
@@ -35,6 +37,7 @@ open class BaseViewModel : ViewModel() {
 
         // Initialize Firebase Auth
         auth = FirebaseAuth.getInstance()
+        database = FirebaseDatabase.getInstance()
 
 
         FirebaseInstanceId.getInstance().instanceId

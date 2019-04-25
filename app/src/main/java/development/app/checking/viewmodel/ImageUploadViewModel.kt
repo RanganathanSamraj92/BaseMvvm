@@ -39,7 +39,7 @@ open class ImageUploadViewModel : BaseViewModel() {
 
     init {
         // Write a message to the database
-        val database = FirebaseDatabase.getInstance()
+
         msgRef = database.getReference("users/${auth.currentUser!!.uid}")
 
         //msgRef.setValue("Hello, World!")

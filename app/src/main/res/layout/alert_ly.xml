@@ -11,10 +11,10 @@
                                                    android:layout_margin="@dimen/fab_margin"
                                                    android:gravity="center">
 
-    <ImageView android:layout_width="36sp"
-               android:layout_height="36sp"
+    <ImageView android:layout_width="26sp"
+               android:layout_height="26sp"
                android:src="@drawable/ic_error_black_24dp"
-               android:tint="@color/colorPrimary"
+               android:tint="@color/colorGrey"
                app:layout_constraintLeft_toRightOf="parent"
                app:layout_constraintEnd_toEndOf="parent"
                app:layout_constraintTop_toTopOf="parent"/>

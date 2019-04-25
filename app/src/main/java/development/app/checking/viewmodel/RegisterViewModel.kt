@@ -2,11 +2,14 @@ package development.app.checking.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.google.firebase.database.DatabaseReference
 import development.app.checking.data.repository.AuthRepository
 import development.app.checking.data.request.RegisterRequest
 import development.app.checking.data.source.remote.AuthApiCallInterface
+import development.app.checking.data.source.remote.NetworkUtils.Companion.login
 import development.app.checking.model.LoginModel
 import development.app.checking.model.VerifyTokenModel
+import development.app.checking.pref.PrefMgr
 import development.app.checking.viewmodel.BaseViewModel.BaseViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -17,11 +20,12 @@ class RegisterViewModel : BaseViewModel() {
     @Inject
     lateinit var authApiCall: AuthApiCallInterface
 
+    internal lateinit var msgRef: DatabaseReference
+
 
     private val repository = AuthRepository(authApiCall)
 
     val loginResult = MutableLiveData<LoginModel>()
-
 
 
     init {
@@ -37,7 +41,7 @@ class RegisterViewModel : BaseViewModel() {
             registerRequest.name = name
             registerRequest.email = email
             registerRequest.password = password
-            registerRequest.photoURL = "https://seeklogo.net/wp-content/uploads/2015/09/Google_2015_logo1.svg"
+            registerRequest.photoURL = "https://www.gstatic.com/mobilesdk/160503_mobilesdk/logo/2x/firebase_28dp.png"
             registerRequest.phoneNumber = mobile
             registerRequest.fcmToken = fcmToken!!
             val apiResponse = repository.register(registerRequest)
@@ -52,8 +56,10 @@ class RegisterViewModel : BaseViewModel() {
                             user!!.getIdToken(true).addOnSuccessListener { tokenResult ->
                                 idToken = tokenResult.token.toString()
                                 Log.w("idToken",idToken)
-                                updateIdToken(idToken)
-
+                                res.data.loginModel.token =idToken
+                                loginResult.postValue(res.data.loginModel)
+                                msgRef = database.getReference("users/${auth.currentUser!!.uid}")
+                                msgRef.child("idToken").setValue(idToken)
                             }
                         } else {
                             Log.w("user", it.exception!!.localizedMessage)
