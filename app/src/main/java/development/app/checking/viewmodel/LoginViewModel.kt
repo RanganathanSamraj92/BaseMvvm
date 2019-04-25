@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.iid.FirebaseInstanceId
 import development.app.checking.data.repository.AuthRepository
 import development.app.checking.data.source.remote.AuthApiCallInterface
@@ -28,18 +29,21 @@ class LoginViewModel : BaseViewModel() {
 
     val loginResult = MutableLiveData<LoginModel>()
 
-    val updateFCMResult = MutableLiveData<LoginModel>()
+    val updateFCMResult = MutableLiveData<Boolean>()
 
 
 
 
     init {
+        signOut()
+    }
+
+    internal fun signOut() {
         auth.signOut()
-
-
     }
 
     private lateinit var idToken: String
+
 
     fun signIn(email: String, password: String) {
         loadingStatus.value = true
@@ -49,7 +53,7 @@ class LoginViewModel : BaseViewModel() {
                 user.getIdToken(true).addOnSuccessListener { tokenResult ->
                     idToken = tokenResult.token.toString()
                     Log.w("idToken",idToken)
-                    login(idToken)
+                    saveToken(idToken,user.uid)
                 }
 
             } else {
@@ -61,7 +65,7 @@ class LoginViewModel : BaseViewModel() {
                         user!!.getIdToken(true).addOnSuccessListener { tokenResult ->
                             idToken = tokenResult.token.toString()
                             Log.w("idToken",idToken)
-                            login(idToken)
+                            saveToken(idToken,user.uid)
 
                         }
                     } else {
@@ -76,39 +80,47 @@ class LoginViewModel : BaseViewModel() {
         }
     }
 
-    private fun login(token: String) {
-        var verifyTokenModel = VerifyTokenModel()
-        verifyTokenModel.idToken = token
+    private fun saveToken(idToken: String,uid:String) {
+        val loginModel = LoginModel()
+        loginModel.message = "login successful!"
+        loginModel.token = idToken
+        loginModel.uid = uid
+        loginResult.postValue(loginModel)
+        updateLoginIdToken(idToken,uid)
+
+    }
+
+
+
+    internal fun updateLoginIdToken(token: String,userId:String) {
         scope.launch {
-
-
-            val apiResponse = repository.login(verifyTokenModel)
-            val res = handleResponses(apiResponse!!)
+            //uploadingStatus.postValue(true)
+            val datebaseRef = database.reference
             try {
-                if (res.meta.status) {
-                    loginResult.postValue(res.data.loginModel)
-
+                var authIdTokenReference = datebaseRef.child("users/$userId/authIdToken").setValue(token).addOnSuccessListener {
+                    updateFCMToken(fcmToken!!,userId)
                 }
-            } catch (e: Throwable) {
-                Log.e("verifyIdToken Error", e.localizedMessage)
+            } catch (e: Exception) {
+                //uploadingStatus.postValue(false)
+                Log.w("upload Exception : ", e.localizedMessage)
             }
         }
     }
 
-    internal fun updateFCMTokenOnDB() {
+    internal fun updateFCMToken(token: String,userId:String) {
         scope.launch {
-           val updateFCMModel = UpdateFCMModel()
-            updateFCMModel.fcmToken =fcmToken!!
-            updateFCMModel.idToken =idToken
-            val apiResponse = repository.updateFCMToken(updateFCMModel)
-            val res = handleResponses(apiResponse!!)
+            //uploadingStatus.postValue(true)
+            val datebaseRef = database.reference
             try {
-                if (res.meta.status) {
-                    updateFCMResult.postValue(res.data.loginModel)
+                var fcmTokenReference = datebaseRef.child("users/$userId/fcmToken").setValue(token).addOnSuccessListener {
+                    updateFCMResult.postValue(true)
                 }
-            } catch (e: Throwable) {
-                Log.e("updateFCM Error", e.localizedMessage)
+            } catch (e: Exception) {
+                //uploadingStatus.postValue(false)
+                updateFCMResult.postValue(false)
+                Log.w("upload Exception : ", e.localizedMessage)
             }
         }
+
     }
 }

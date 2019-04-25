@@ -26,10 +26,14 @@ class RegisterViewModel : BaseViewModel() {
     private val repository = AuthRepository(authApiCall)
 
     val loginResult = MutableLiveData<LoginModel>()
-
+    val updateIdTokenResult = MutableLiveData<Boolean>()
 
     init {
+        signOut()
+    }
 
+    internal fun signOut() {
+      auth.signOut()
     }
 
     private lateinit var idToken: String
@@ -58,9 +62,9 @@ class RegisterViewModel : BaseViewModel() {
                                 idToken = tokenResult.token.toString()
                                 Log.w("idToken",idToken)
                                 res.data.loginModel.token =idToken
+                                res.data.loginModel.uid =user.uid
                                 loginResult.postValue(res.data.loginModel)
-                                msgRef = database.getReference("users/${auth.currentUser!!.uid}")
-                                msgRef.child("idToken").setValue(idToken)
+
                             }
                         } else {
                             Log.w("user", it.exception!!.localizedMessage)
@@ -78,21 +82,21 @@ class RegisterViewModel : BaseViewModel() {
         }
     }
 
-    private fun updateIdToken(token: String) {
-        var verifyTokenModel = VerifyTokenModel()
-        verifyTokenModel.idToken = token
+    internal fun updateLoginIdToken(token: String,userId:String) {
         scope.launch {
-            val apiResponse = repository.updateIdToken(verifyTokenModel)
-            val res = handleResponses(apiResponse!!)
+            //uploadingStatus.postValue(true)
+            val datebaseRef = database.reference
             try {
-                if (res.meta.status) {
-                    loginResult.postValue(res.data.loginModel)
-
+                var authIdTokenReference = datebaseRef.child("users/$userId/authIdToken").setValue(token).addOnSuccessListener {
+                    updateIdTokenResult.postValue(true)
                 }
-            } catch (e: Throwable) {
-                Log.e("verifyIdToken Error", e.localizedMessage)
+            } catch (e: Exception) {
+                //uploadingStatus.postValue(false)
+                updateIdTokenResult.postValue(false)
+                Log.w("upload Exception : ", e.localizedMessage)
             }
         }
     }
+
 
 }

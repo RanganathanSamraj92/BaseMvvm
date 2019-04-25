@@ -41,8 +41,19 @@ class RegisterActivity : BaseActivity() {
         registerViewModel.loginResult.observe(this, Observer { login ->
             btnSignUp.revertAnimation()
             showMsg(btnSignUp, login.message)
-            prefs.putData(PrefMgr.KEY_ACCESS_TOKEN, login.token)
-            newIntent(this@RegisterActivity, HomeActivity::class.java, "")
+
+            registerViewModel.updateIdTokenResult.observe(this@RegisterActivity, Observer {
+                if(it){
+                    prefs.putData(PrefMgr.KEY_ACCESS_TOKEN, login.token)
+                    newIntent(this@RegisterActivity, HomeActivity::class.java, "")
+                    finish()
+                }else{
+                    registerViewModel.signOut()
+                    showMsg(btnSignUp, "Retry!")
+                }
+            })
+            registerViewModel.updateLoginIdToken(login.token,login.uid)
+
         })
 
         btnSignUp.setOnClickListener {

@@ -92,9 +92,9 @@ class ProfileActivity : BaseActivity() {
         imageUploadViewModel.uploadingStatus.observe(this,loadingStatusObserver)
 
 
-        profileViewModel.metaStatus.observe(this, Observer { error ->
+        profileViewModel.metaStatus.observe(this, Observer { meta ->
 
-            showAlert("Authentication Failed", error, object : Utils.OnClickListener {
+            showAlert("Authentication Failed", meta.message, object : Utils.OnClickListener {
                 override fun onClick(v: View) {
 
                 }

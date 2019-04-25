@@ -28,8 +28,8 @@ class ResetPasswordActivity : BaseActivity() {
             finish()
         })
 
-        resetPasswordViewModel.metaStatus.observe(this, Observer { msg ->
-            toolbar.title = msg
+        resetPasswordViewModel.metaStatus.observe(this, Observer { meta ->
+            toolbar.title = meta.message
         })
 
         btnResetPassword.setOnClickListener {

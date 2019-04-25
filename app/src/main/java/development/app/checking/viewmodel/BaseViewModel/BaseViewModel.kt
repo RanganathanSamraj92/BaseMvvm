@@ -10,6 +10,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.iid.FirebaseInstanceId
 import development.app.checking.app.App
+import development.app.checking.data.response.base.Meta
 import development.app.checking.data.source.remote.*
 import development.app.checking.di.injectors.DaggerViewModelInjector
 import development.app.checking.di.injectors.ViewModelInjector
@@ -85,7 +86,7 @@ open class BaseViewModel : ViewModel() {
     open var baseApiResponse: MutableLiveData<APIResponse> = MutableLiveData()
 
     open var loadingStatus: MutableLiveData<Boolean> = MutableLiveData()
-    open var metaStatus: MutableLiveData<String> = MutableLiveData()
+    open var metaStatus: MutableLiveData<Meta> = MutableLiveData()
     open var errorStatus: MutableLiveData<String> = MutableLiveData()
 
     private val parentJob by lazy { Job() }
@@ -121,10 +122,10 @@ open class BaseViewModel : ViewModel() {
                 loadingStatus.postValue(false)
                 apiResponse.successResult as APIResponse?
                 return if (apiResponse.successResult.meta.status) {
-                    metaStatus.postValue(apiResponse.successResult.meta.message)
+                    metaStatus.postValue(apiResponse.successResult.meta)
                     apiResponse.successResult
                 } else {
-                    metaStatus.postValue(apiResponse.successResult.meta.message)
+                    metaStatus.postValue(apiResponse.successResult.meta)
                     apiResponse.successResult
                 }
             }
