@@ -16,6 +16,7 @@ import development.app.checking.pref.PrefMgr
 import development.app.checking.pref.Prefs
 import development.app.checking.ui.activity.android_verisons.AndroidVersionActivity
 import development.app.checking.ui.activity.auth.LoginActivity
+import development.app.checking.ui.activity.auth.VerificationActivity
 import development.app.checking.ui.base.BaseActivity
 import development.app.checking.utils.Utils
 import development.app.checking.viewmodel.SplashViewModel
