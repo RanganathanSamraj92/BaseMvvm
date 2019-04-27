@@ -36,14 +36,24 @@ class VerificationActivity : BaseActivity() {
         })
         verificationViewModel.userAvailability.observe(this, Observer { otpResult ->
             if (otpResult.availableStatus) {
-                newIntent(this@VerificationActivity, HomeActivity::class.java, "")
-                finish()
+                verificationViewModel.updateIdToken(otpResult.registerRequest.idToken,otpResult.registerRequest.uid)
             } else {
                 newIntent(this@VerificationActivity, OTPRegisterActivity::class.java, otpResult.registerRequest)
                 finish()
             }
 
         })
+
+        verificationViewModel.updateIdTokenResult.observe(this, Observer { isUpdated ->
+            if (isUpdated.status) {
+                newIntent(this@VerificationActivity, HomeActivity::class.java, "")
+                finish()
+            } else {
+                showMsg(txtResendOTP,"Token not updated try again!..")
+            }
+
+        })
+
 
         verificationViewModel.phoneSignInResult.observe(this, Observer { signInResult ->
             if (signInResult.status) {
@@ -59,9 +69,9 @@ class VerificationActivity : BaseActivity() {
         }
 
 
-//        txtOTP.setOtpCompletionListener {
-//            otp ->  validate(otp)
-//        }
+        txtOTP.setOtpCompletionListener {
+            otp ->  validate(otp)
+        }
 
         txtResendOTP.setOnClickListener {
             verificationViewModel.sendCode(this@VerificationActivity, "9080515605")
@@ -76,13 +86,6 @@ class VerificationActivity : BaseActivity() {
             return
         }
         verificationViewModel.verifyVerificationCode(this@VerificationActivity, otp)
-
-//        if (code==otp){
-//            showMsg(txtOTP,"Verified successfully....")
-//        }else{
-//            showMsg(txtOTP,"Verification failed \nincorrect code....")
-//            newIntent(context,ResetPasswordActivity::class.java,"")
-//        }
     }
 
     private fun resendOTP() {

@@ -41,6 +41,7 @@ import java.io.Serializable
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 import android.app.ActivityOptions
+import android.net.Uri
 import androidx.core.content.ContextCompat.startActivity
 
 
@@ -298,6 +299,12 @@ open class BaseActivity : AppCompatActivity(), BottomSheetEx.BottomSheetListener
 
         dialog.setContentView(view)
         dialog.show()
+    }
+
+    public fun redirectStore(updateUrl:String){
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(updateUrl));
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
     }
 
 

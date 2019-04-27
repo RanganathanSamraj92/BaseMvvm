@@ -138,4 +138,8 @@
     <string name="dummy_email">ranganathan2@gmail.com</string>
     <string name="dummy_password">123456</string>
     <string name="dummy_mobile">+919876543211</string>
+    <string name="app_info_hint">Base apps gives you the best business solutions for your domin business login
+        implementations
+    </string>
+    <string name="action_check_update">Check for update</string>
 </resources>

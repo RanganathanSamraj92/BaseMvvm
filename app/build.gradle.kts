@@ -1,12 +1,3 @@
-import AppConfig.applicationId
-import AppConfig.compileSdkVersion
-import AppConfig.minSdkVersion
-import AppConfig.targetSdkVersion
-import AppConfig.versionCode
-import AppConfig.versionName
-import Libs.Dagger.android
-import com.android.build.gradle.ProguardFiles.getDefaultProguardFile
-import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
 
 plugins {
     id("com.android.application")
@@ -100,6 +91,8 @@ dependencies {
     implementation(Libs.Firebase.messaging)
     implementation(Libs.Firebase.database)
     implementation(Libs.Firebase.storage)
+    implementation(Libs.Firebase.remote_config)
+    implementation(Libs.Firebase.firebase_core)
 
     /*dagger*/
     implementation(Libs.Dagger.core)

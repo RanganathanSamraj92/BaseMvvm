@@ -1,8 +1,10 @@
 package development.app.checking.ui.activity.profile
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Bitmap
 import android.media.MediaScannerConnection
+import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
@@ -12,6 +14,9 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat.startActivityForResult
+import androidx.databinding.DataBindingUtil.setContentView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.squareup.picasso.Callback
@@ -20,6 +25,8 @@ import development.app.checking.R
 import development.app.checking.pref.PrefMgr
 import development.app.checking.pref.Prefs
 import development.app.checking.ui.base.BaseActivity
+import development.app.checking.ui.base.BaseActivity.Companion.makeLog
+import development.app.checking.utils.ForceUpdateChecker
 import development.app.checking.utils.Utils
 import development.app.checking.viewmodel.ImageUploadViewModel
 import development.app.checking.viewmodel.ProfileViewModel
@@ -36,6 +43,7 @@ import java.lang.Exception
 
 
 class ProfileActivity : BaseActivity() {
+
 
     private lateinit var profileViewModel: ProfileViewModel
     private lateinit var imageUploadViewModel: ImageUploadViewModel
@@ -55,6 +63,7 @@ class ProfileActivity : BaseActivity() {
         /*Prefs is @Injected in BaseActivity*/
         /*dagger injecting Prefs in MyComponent*/
         inject()
+
 
 
         if (prefs.getData("imageProfile").isNotEmpty())

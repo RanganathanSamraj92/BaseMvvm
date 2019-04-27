@@ -6,7 +6,7 @@ object AppConfig {
     val compileSdkVersion = 28
     val applicationId = "development.app.checking"
     val versionCode = 1
-    val versionName = "0.2"
+    val versionName = "1.0.0"
     val baseUrl="http://shamlatech.net/android_portal/"
     val api_path="kotlinApps/api/"
     val applicaionName = "BaseApps"
@@ -65,6 +65,8 @@ object Versions{
     val firebase_messaging = "17.6.0"
     val firebase_database = "16.1.0"
     val firebase_storage = "16.1.0"
+    val firebase_remote_config = "16.5.0"
+    val firebase_core = "16.0.8"
 
 }
 
@@ -99,6 +101,8 @@ object Libs {
         val messaging = "com.google.firebase:firebase-messaging:${Versions.firebase_messaging}"
         val database = "com.google.firebase:firebase-database:${Versions.firebase_database}"
         val storage = "com.google.firebase:firebase-storage:${Versions.firebase_storage}"
+        val remote_config = "com.google.firebase:firebase-config:${Versions.firebase_remote_config}"
+        val firebase_core = "com.google.firebase:firebase-core:${Versions.firebase_core}"
 
     }
 

@@ -14,9 +14,11 @@ import com.google.firebase.database.ValueEventListener
 import development.app.checking.data.repository.AuthRepository
 import development.app.checking.data.request.RegisterRequest
 import development.app.checking.data.source.remote.AuthApiCallInterface
+import development.app.checking.data.source.remote.NetworkUtils.Companion.updateIdToken
 import development.app.checking.model.OTPVerifyResult
 import development.app.checking.model.PhoneSignInResult
 import development.app.checking.model.SendOTPModel
+import development.app.checking.model.UpdateIDToken
 import development.app.checking.viewmodel.BaseViewModel.BaseViewModel
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -28,9 +30,8 @@ class VerificationViewModel : BaseViewModel() {
     lateinit var authApiCall: AuthApiCallInterface
 
 
-    private val repository = AuthRepository(authApiCall)
 
-    val sendOTPResult = MutableLiveData<SendOTPModel>()
+    val updateIdTokenResult = MutableLiveData<UpdateIDToken>()
 
     val userAvailability = MutableLiveData<OTPVerifyResult>()
 
@@ -163,6 +164,10 @@ class VerificationViewModel : BaseViewModel() {
                     val otpVerifyResult = OTPVerifyResult()
                     otpVerifyResult.availableStatus = true
                     /*updated latest IdToken to DB*/
+                    val registerRequest = RegisterRequest()
+                    registerRequest.fcmToken = fcmToken!!
+                    registerRequest.idToken = idToken
+                    otpVerifyResult.registerRequest = registerRequest
                     userAvailability.postValue(otpVerifyResult)
                 } else {
                     Log.w("Verify SignIn", "Not exists")
@@ -184,6 +189,42 @@ class VerificationViewModel : BaseViewModel() {
 
         })
 
+    }
+
+    internal fun updateIdToken(idToken:String,uid:String){
+        val updateIdToken = UpdateIDToken()
+        try {
+            databaseRef.child("users/$uid")
+                .child("authIdToken")
+                .setValue(idToken).addOnSuccessListener {
+                    databaseRef.child("users/$uid")
+                        .child("fcmToken")
+                        .setValue(fcmToken)
+                    loadingStatus.value = false
+                    updateIdToken.status =true
+                    updateIdTokenResult.postValue(updateIdToken)
+                }
+        } catch (e: Exception) {
+            loadingStatus.value = false
+            Log.w("upload Exception : ", e.localizedMessage)
+
+            updateIdToken.status =false
+            updateIdTokenResult.postValue(updateIdToken)
+        }
+    }
+
+    internal fun checkQuery(){
+        val updateIdToken = UpdateIDToken()
+        try {
+           val userdRef= databaseRef.child("users")
+
+        } catch (e: Exception) {
+            loadingStatus.value = false
+            Log.w("upload Exception : ", e.localizedMessage)
+
+            updateIdToken.status =false
+            updateIdTokenResult.postValue(updateIdToken)
+        }
     }
 
 

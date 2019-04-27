@@ -1,10 +1,14 @@
 package development.app.checking.ui.activity
 
 import android.content.Context
+import android.content.DialogInterface
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import android.view.WindowManager
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -18,6 +22,7 @@ import development.app.checking.ui.activity.android_verisons.AndroidVersionActiv
 import development.app.checking.ui.activity.auth.LoginActivity
 import development.app.checking.ui.activity.auth.VerificationActivity
 import development.app.checking.ui.base.BaseActivity
+import development.app.checking.utils.ForceUpdateChecker
 import development.app.checking.utils.Utils
 import development.app.checking.viewmodel.SplashViewModel
 import kotlinx.android.synthetic.main.activity_splash.*
@@ -25,6 +30,8 @@ import javax.inject.Inject
 
 
 class SplashActivity : BaseActivity() {
+
+
 
     lateinit var mDelayHandler: Handler
     private lateinit var splashViewModel: SplashViewModel
@@ -36,7 +43,12 @@ class SplashActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
         val binding: ActivitySplashBinding = DataBindingUtil.setContentView(this, R.layout.activity_splash)
+
+
+
         inject()
+
+
 
         splashViewModel = ViewModelProviders.of(this).get(SplashViewModel::class.java)
         binding.setVariable(BR.splashViewModel, splashViewModel)
@@ -45,6 +57,8 @@ class SplashActivity : BaseActivity() {
         splashViewModel.animateUI(imageSettings)
         //Initialize the Handler
         mDelayHandler = Handler()
+
+
 
         //Navigate with delay
         mDelayHandler.postDelayed(mRunnable, 3500)
@@ -60,6 +74,7 @@ class SplashActivity : BaseActivity() {
                 newIntent(this@SplashActivity, LoginActivity::class.java, "")
             }else{
                 newIntent(this@SplashActivity, HomeActivity::class.java, "")
+                finish()
             }
         }else{
             newIntent(this@SplashActivity, LoginActivity::class.java, "")
