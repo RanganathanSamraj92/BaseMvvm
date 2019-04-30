@@ -142,4 +142,6 @@
         implementations
     </string>
     <string name="action_check_update">Check for update</string>
+    <string name="search">Search</string>
+    <string name="action_show_users">Show users</string>
 </resources>

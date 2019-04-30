@@ -11,29 +11,44 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProviders
 import development.app.checking.R
 import development.app.checking.pref.PrefMgr
 import development.app.checking.ui.activity.auth.LoginActivity
 import development.app.checking.ui.activity.misc.AppInfoActivity
 import development.app.checking.ui.activity.profile.ProfileActivity
 import development.app.checking.ui.base.BaseActivity
+import development.app.checking.viewmodel.HomeViewModel
+import development.app.checking.viewmodel.SplashViewModel
 import development.app.myapplication.MainActivity
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.app_bar_home.*
+import kotlinx.android.synthetic.main.content_home.*
 
 class HomeActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 
+
+    private lateinit var homeVieModel: HomeViewModel
     private var doubleBackToExitPressedOnce = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+        homeVieModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
+
         setSupportActionBar(toolbar)
 
         inject()
         fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+            val user = HashMap<String, Any>()
+            user["name"] = "Utlimate "
+            user["last"] = "Ran"
+            user["location"] = "Coimbatore"
+            homeVieModel.saveUser(user)
+        }
+
+        btnShowUsers.setOnClickListener {
+            homeVieModel.getUsers(txtUsersField.text.toString(),txtUsersFieldValue.text.toString())
         }
 
         val toggle = ActionBarDrawerToggle(
@@ -43,6 +58,9 @@ class HomeActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+
+
+
     }
 
     override fun onBackPressed() {

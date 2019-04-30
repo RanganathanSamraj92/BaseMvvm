@@ -93,6 +93,7 @@ dependencies {
     implementation(Libs.Firebase.storage)
     implementation(Libs.Firebase.remote_config)
     implementation(Libs.Firebase.firebase_core)
+    implementation(Libs.Firebase.firestore)
 
     /*dagger*/
     implementation(Libs.Dagger.core)

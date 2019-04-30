@@ -67,6 +67,7 @@ object Versions{
     val firebase_storage = "16.1.0"
     val firebase_remote_config = "16.5.0"
     val firebase_core = "16.0.8"
+    val firebase_firestore = "18.2.0"
 
 }
 
@@ -103,6 +104,7 @@ object Libs {
         val storage = "com.google.firebase:firebase-storage:${Versions.firebase_storage}"
         val remote_config = "com.google.firebase:firebase-config:${Versions.firebase_remote_config}"
         val firebase_core = "com.google.firebase:firebase-core:${Versions.firebase_core}"
+        val firestore = "com.google.firebase:firebase-firestore:${Versions.firebase_firestore}"
 
     }
 
