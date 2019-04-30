@@ -1,6 +1,7 @@
 
 plugins {
     id("com.android.application")
+    id("io.fabric")
     id("kotlin-android")
     id("kotlin-android-extensions")
     id("kotlin-kapt")
@@ -94,6 +95,8 @@ dependencies {
     implementation(Libs.Firebase.remote_config)
     implementation(Libs.Firebase.firebase_core)
     implementation(Libs.Firebase.firestore)
+    /*crashlytics*/
+    implementation(Libs.Firebase.crashlytics)
 
     /*dagger*/
     implementation(Libs.Dagger.core)

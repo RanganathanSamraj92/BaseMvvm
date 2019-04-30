@@ -68,6 +68,7 @@ object Versions{
     val firebase_remote_config = "16.5.0"
     val firebase_core = "16.0.8"
     val firebase_firestore = "18.2.0"
+    val crashlytics_version = "2.9.9"
 
 }
 
@@ -105,6 +106,7 @@ object Libs {
         val remote_config = "com.google.firebase:firebase-config:${Versions.firebase_remote_config}"
         val firebase_core = "com.google.firebase:firebase-core:${Versions.firebase_core}"
         val firestore = "com.google.firebase:firebase-firestore:${Versions.firebase_firestore}"
+        val crashlytics = "com.crashlytics.sdk.android:crashlytics:${Versions.crashlytics_version}"
 
     }
 

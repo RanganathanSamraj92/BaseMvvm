@@ -144,4 +144,11 @@
     <string name="action_check_update">Check for update</string>
     <string name="search">Search</string>
     <string name="action_show_users">Show users</string>
+    <string name="add">Add</string>
+    <string name="key">Key</string>
+    <string name="value">Value</string>
+    <string name="location">Location</string>
+    <string name="age">Age</string>
+    <string name="action_save_users">Save</string>
+    <string name="please_enter_search_values">Please enter search values</string>
 </resources>

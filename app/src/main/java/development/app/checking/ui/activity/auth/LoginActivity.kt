@@ -46,7 +46,7 @@ class LoginActivity : BaseActivity() {
         inject()
 
         showProgress = false
-        loginViewModel.errorStatus.observe(this, Observer { error ->
+        loginViewModel.errorStatus.observe(this, Observer {
 
             btnLogin.revertAnimation()
 

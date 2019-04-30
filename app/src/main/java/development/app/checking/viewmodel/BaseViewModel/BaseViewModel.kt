@@ -28,10 +28,10 @@ open class BaseViewModel : ViewModel() {
 
     internal  var TAG_FIRESTORE: String = "firestore"
 
-    internal lateinit var auth: FirebaseAuth
-    internal lateinit var database: FirebaseDatabase
-    internal lateinit var databaseRef: DatabaseReference
-    internal lateinit var firestoreDB: FirebaseFirestore
+    internal  var auth: FirebaseAuth
+    internal  var database: FirebaseDatabase
+    internal  var databaseRef: DatabaseReference
+    internal  var firestoreDB: FirebaseFirestore
 
     internal var fcmToken: String? = null
 

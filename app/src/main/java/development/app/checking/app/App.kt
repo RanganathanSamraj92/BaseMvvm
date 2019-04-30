@@ -2,12 +2,14 @@ package development.app.checking.app
 
 import android.app.Application
 import android.util.Log
+import com.crashlytics.android.Crashlytics
 import com.google.firebase.FirebaseApp
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import development.app.checking.di.injectors.DaggerMyComponent
 import development.app.checking.di.injectors.MyComponent
 import development.app.checking.di.modules.SharedPreferencesModule
 import development.app.checking.utils.ForceUpdateChecker
+import io.fabric.sdk.android.Fabric
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig
 import java.util.*
 
@@ -20,6 +22,7 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         FirebaseApp.initializeApp(this)
+        Fabric.with(this,Crashlytics())
         val firebaseRemoteConfig = FirebaseRemoteConfig.getInstance()
         // set in-app defaults
         val remoteConfigDefaults = HashMap<String,Any>()

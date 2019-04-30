@@ -36,19 +36,26 @@ class HomeActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         setContentView(R.layout.activity_home)
         homeVieModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
 
+
         setSupportActionBar(toolbar)
 
         inject()
-        fab.setOnClickListener { view ->
+        fab.setOnClickListener {
             val user = HashMap<String, Any>()
-            user["name"] = "Utlimate "
-            user["last"] = "Ran"
-            user["location"] = "Coimbatore"
+            user["name"] = txtAddName.text.toString()
+            user["age"] = txtAddAge.text.toString()
+            user["location"] = txtAddLocation.text.toString()
             homeVieModel.saveUser(user)
+            //var a = 8/0
         }
 
         btnShowUsers.setOnClickListener {
-            homeVieModel.getUsers(txtUsersField.text.toString(),txtUsersFieldValue.text.toString())
+            val key = txtUsersField.text.toString()
+            val value = txtUsersFieldValue.text.toString()
+            if (key.isNotEmpty() && value.isNotEmpty())
+                homeVieModel.getUsers(key, value)
+            else
+                showMsg(fab,resources.getString(R.string.please_enter_search_values))
         }
 
         val toggle = ActionBarDrawerToggle(
@@ -60,14 +67,13 @@ class HomeActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         nav_view.setNavigationItemSelectedListener(this)
 
 
-
     }
 
     override fun onBackPressed() {
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
         } else {
-           doubleTapExit()
+            doubleTapExit()
         }
     }
 
@@ -103,13 +109,16 @@ class HomeActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_logout -> {
-               prefs.putData(PrefMgr.KEY_ACCESS_TOKEN,"")
+                prefs.putData(PrefMgr.KEY_ACCESS_TOKEN, "")
                 newIntent(this@HomeActivity, LoginActivity::class.java, "")
             }
             R.id.nav_gallery -> {
-                makePermissionsRequest(Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                makePermissionsRequest(
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                )
             }
-            R.id.nav_feedback-> {
+            R.id.nav_feedback -> {
 
                 newIntent(this@HomeActivity, MainActivity::class.java, "")
             }
@@ -119,7 +128,7 @@ class HomeActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             }
             R.id.nav_app_info -> {
 
-                newIntent(this@HomeActivity,    AppInfoActivity::class.java, "")
+                newIntent(this@HomeActivity, AppInfoActivity::class.java, "")
             }
 
         }
