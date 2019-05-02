@@ -69,9 +69,9 @@ dependencies {
     /*databinding, viewmodel and coroutines*/
 
 //    /*firebase MLKit*/
-//    implementation(Libs.Firebase.firebase_core)
-//    implementation(Libs.MLKit.ml_vision)
-//    implementation(Libs.MLKit.image_label)
+    implementation(Libs.Firebase.firebase_core)
+    implementation(Libs.MLKit.ml_vision)
+    implementation(Libs.MLKit.image_label)
 //    implementation("com.google.firebase:firebase-iid:17.1.2")
 
 

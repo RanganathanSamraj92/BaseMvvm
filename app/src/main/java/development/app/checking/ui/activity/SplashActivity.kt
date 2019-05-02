@@ -44,21 +44,14 @@ class SplashActivity : BaseActivity() {
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
         val binding: ActivitySplashBinding = DataBindingUtil.setContentView(this, R.layout.activity_splash)
 
-
-
         inject()
-
-
 
         splashViewModel = ViewModelProviders.of(this).get(SplashViewModel::class.java)
         binding.setVariable(BR.splashViewModel, splashViewModel)
 
-
         splashViewModel.animateUI(imageSettings)
         //Initialize the Handler
         mDelayHandler = Handler()
-
-
 
         //Navigate with delay
         mDelayHandler.postDelayed(mRunnable, 3500)
