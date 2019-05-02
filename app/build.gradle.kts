@@ -78,6 +78,7 @@ dependencies {
     implementation(Libs.Support.constraint)
     /*databinding, viewmodel and coroutines*/
     kapt(Libs.databinding)
+
     implementation(Libs.viewModelExt)
     implementation(Libs.coroutines)
     /*retrofit*/

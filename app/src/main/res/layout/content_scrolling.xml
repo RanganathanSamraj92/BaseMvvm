@@ -16,6 +16,6 @@
             android:layout_margin="@dimen/text_margin"
             android:textColor="@color/colorBlack"
             android:textSize="@dimen/fab_margin"
-            android:text="@string/large_text"/>
+            android:text="@string/android_versions"/>
 
 </androidx.core.widget.NestedScrollView>

@@ -64,21 +64,22 @@ dependencies {
     implementation(Libs.Kotlin.kotlin_std)
     /*androidx*/
     implementation(Libs.Support.appcompat)
-    implementation(Libs.Support.recyclerview)
     implementation(Libs.material)
     implementation(Libs.Support.constraint)
     /*databinding, viewmodel and coroutines*/
 
+//    /*firebase MLKit*/
+//    implementation(Libs.Firebase.firebase_core)
+//    implementation(Libs.MLKit.ml_vision)
+//    implementation(Libs.MLKit.image_label)
+//    implementation("com.google.firebase:firebase-iid:17.1.2")
 
-    /*implementation fileTree(dir: 'libs', include: ['*.jar'])
-    testImplementation "junit:junit:$test_junit_version"
-    androidTestImplementation "androidx.test:runner:$runner_version"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_core_version"
-    */
+
 
 }
 
 repositories {
     mavenCentral()
 }
+
 

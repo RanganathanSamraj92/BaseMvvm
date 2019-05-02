@@ -24,7 +24,7 @@ object Versions{
     val gradle_version = "3.2.0"
     val android_plugin_version = "3.1.0"
     val support_lib = "27.1.0"
-    val appcompat = "1.0.0-beta01"
+    val appcompat = "1.0.0"
     val retrofit = "2.4.0"
     val rxjava = "2.1.9"
     val constraint_layout = "1.1.3"
@@ -32,7 +32,6 @@ object Versions{
     val junit_runner = "1.0.1"
     val espresso_core = "3.0.1"
 
-    val appcompat_version = "1.0.0-beta01"
     val recyclerview_version = "1.0.0"
     val lifecycle_extensions_version = "2.0.0-beta01"
     val databinding_version = "3.2.0"
@@ -69,6 +68,8 @@ object Versions{
     val firebase_core = "16.0.8"
     val firebase_firestore = "18.2.0"
     val crashlytics_version = "2.9.9"
+    val firebase_ml_vision = "19.0.2"
+    val firebase_image_label = "17.0.2"
 
 }
 
@@ -108,7 +109,15 @@ object Libs {
         val firestore = "com.google.firebase:firebase-firestore:${Versions.firebase_firestore}"
         val crashlytics = "com.crashlytics.sdk.android:crashlytics:${Versions.crashlytics_version}"
 
+
     }
+
+    object MLKit{
+        val ml_vision = "com.google.firebase:firebase-ml-vision:${Versions.firebase_ml_vision}"
+        val image_label = "com.google.firebase:firebase-ml-vision-image-label-model:${Versions.firebase_image_label}"
+    }
+
+
 
    object Kotlin{
        val kotlin_std = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin_version}"
