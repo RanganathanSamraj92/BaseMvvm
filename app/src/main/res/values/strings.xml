@@ -64,4 +64,5 @@
     <string name="please_enter_search_values">Please enter search values</string>
     <string name="menu_ml_kit">MLkit</string>
     <string name="title_activity_ml_lit_image_label">Image labeling</string>
+    <string name="hint_ml_image_label">Take Snaps and find Image labels</string>
 </resources>

@@ -8,7 +8,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorTransparent"
-        android:gravity="center">
+        android:gravity="center"
+        android:visibility="gone">
 
     <androidx.core.widget.ContentLoadingProgressBar
             android:indeterminate="true"
