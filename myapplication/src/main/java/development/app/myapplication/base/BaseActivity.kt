@@ -7,7 +7,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 
-import kotlinx.android.synthetic.main.activity_mlkit.*
+import kotlinx.android.synthetic.main.activity_mlkit_lib.*
 
 open class BaseActivity : AppCompatActivity() {
 

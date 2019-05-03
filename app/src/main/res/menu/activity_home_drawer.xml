@@ -11,18 +11,18 @@
         <item
                 android:id="@+id/nav_gallery"
                 android:icon="@drawable/ic_menu_gallery"
-                android:title="Gallery"/>
+                android:title="Permissions"/>
         <item
                 android:id="@+id/nav_slideshow"
                 android:icon="@drawable/ic_menu_slideshow"
-                android:title="Slideshow"/>
+                android:title="Posts"/>
         <item
                 android:id="@+id/nav_logout"
-                android:icon="@drawable/ic_menu_manage"
+                android:icon="@drawable/ic_power_settings_new_black_24dp"
                 android:title="Logout"/>
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="Info and AI">
         <menu>
             <item
                     android:id="@+id/nav_help"
@@ -30,8 +30,8 @@
                     android:title="@string/menu_help"/>
             <item
                     android:id="@+id/nav_feedback"
-                    android:icon="@drawable/ic_menu_share"
-                    android:title="@string/menu_feedback"/>
+                    android:icon="@drawable/mlkit"
+                    android:title="@string/menu_ml_kit"/>
             <item
                     android:id="@+id/nav_app_info"
                     android:icon="@drawable/ic_info_outline_black_24dp"

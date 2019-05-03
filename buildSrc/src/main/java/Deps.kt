@@ -68,6 +68,7 @@ object Versions{
     val firebase_core = "16.0.8"
     val firebase_firestore = "18.2.0"
     val crashlytics_version = "2.9.9"
+
     val firebase_ml_vision = "19.0.3"
     val firebase_image_label = "17.0.2"
 

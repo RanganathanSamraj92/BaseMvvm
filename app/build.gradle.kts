@@ -98,6 +98,10 @@ dependencies {
     implementation(Libs.Firebase.firestore)
     /*crashlytics*/
     implementation(Libs.Firebase.crashlytics)
+    implementation(Libs.MLKit.ml_vision)
+    implementation(Libs.MLKit.image_label)
+
+
 
     /*dagger*/
     implementation(Libs.Dagger.core)

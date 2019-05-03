@@ -62,4 +62,6 @@
     <string name="age">Age</string>
     <string name="action_save_users">Save</string>
     <string name="please_enter_search_values">Please enter search values</string>
+    <string name="menu_ml_kit">MLkit</string>
+    <string name="title_activity_ml_lit_image_label">Image labeling</string>
 </resources>

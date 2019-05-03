@@ -1,6 +1,5 @@
-package development.app.myapplication
+package development.app.checking.ui.activity.ml
 
-import development.app.myapplication.base.BaseActivity.Companion.showMsg
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -18,10 +17,10 @@ import androidx.appcompat.app.AlertDialog
 import com.github.florent37.runtimepermission.kotlin.askPermission
 import com.google.firebase.ml.vision.FirebaseVision
 import com.google.firebase.ml.vision.common.FirebaseVisionImage
-import development.app.myapplication.base.BaseActivity
+import development.app.checking.R
+import development.app.checking.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_mlkit.*
-import kotlinx.android.synthetic.main.content_main.*
-import kotlinx.android.synthetic.main.ly_progressbar.*
+import kotlinx.android.synthetic.main.progress_ly.*
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -36,10 +35,10 @@ class MLKitActivity : BaseActivity() {
         setContentView(R.layout.activity_mlkit)
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        setTitle(R.string.title_activity_ml_lit_image_label)
         toolbar.setNavigationOnClickListener {
             onBackPressed()
         }
-        lyProgressBarCircle.visibility = View.GONE
 
         fab.setOnClickListener { view ->
             getPermission()
@@ -49,7 +48,7 @@ class MLKitActivity : BaseActivity() {
     private fun getPermission() {
         askPermission(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE) {
             if (it.isAccepted) {
-                showMsg(context, toolbar, "Granted")
+                showMsg( toolbar, "Granted")
                 showPictureDialog()
             }
 
@@ -57,10 +56,10 @@ class MLKitActivity : BaseActivity() {
         }.onDeclined { e ->
             //at least one permission have been declined by the user
             if (e.hasDenied()) {
-                showMsg(context, toolbar, "Denied")
+                showMsg( toolbar, "Denied")
                 //the list of denied permissions
                 e.denied.forEach {
-                    showMsg(context, toolbar, "Denied")
+                    showMsg( toolbar, "Denied")
 
                 }
 
@@ -76,10 +75,10 @@ class MLKitActivity : BaseActivity() {
             }
 
             if (e.hasForeverDenied()) {
-                showMsg(context, toolbar, "ForeverDenied")
+                showMsg( toolbar, "ForeverDenied")
                 //the list of forever denied permissions, user has check 'never ask again'
                 e.foreverDenied.forEach {
-                    showMsg(context, toolbar, it)
+                    showMsg( toolbar, it)
                 }
                 // you need to open setting manually if you really need it
                 e.goToSettings();
@@ -121,7 +120,7 @@ class MLKitActivity : BaseActivity() {
     companion object {
         private val REQUEST_TAKE_PHOTO = 0
         private val REQUEST_SELECT_IMAGE_IN_ALBUM = 1
-        private val IMAGE_DIRECTORY = "/demonuts"
+        private val IMAGE_DIRECTORY = "/baseApp/Images"
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -206,13 +205,13 @@ class MLKitActivity : BaseActivity() {
     @SuppressLint("SetTextI18n")
     private fun detectImage(bitmap: Bitmap) {
 
-        lyProgressBarCircle.visibility = View.VISIBLE
+        progressLy!!.visibility = View.VISIBLE
         val image = FirebaseVisionImage.fromBitmap(bitmap)
         val labeler = FirebaseVision.getInstance().onDeviceImageLabeler
 
         //1
         labeler.processImage(image).addOnSuccessListener { labels ->
-            lyProgressBarCircle.visibility = View.GONE
+            progressLy!!.visibility = View.GONE
             var stringBuilder = StringBuilder()
 
             for (label in labels) {

@@ -18,8 +18,8 @@ import development.app.checking.R
 import development.app.checking.model.VerifyTokenModel
 import development.app.checking.pref.PrefMgr
 import development.app.checking.pref.Prefs
+import development.app.checking.ui.activity.HomeActivity
 import development.app.checking.viewmodel.LoginViewModel
-import development.app.myapplication.MainActivity
 import kotlinx.coroutines.launch
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
@@ -123,7 +123,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
      * @param messageBody FCM message body received.
      */
     private fun sendNotification(messageTitle: String,messageBody: String) {
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, HomeActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
             PendingIntent.FLAG_ONE_SHOT)

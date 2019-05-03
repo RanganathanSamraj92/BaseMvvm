@@ -3,28 +3,30 @@ package development.app.checking.ui.activity
 import android.Manifest
 import android.os.Bundle
 import android.os.Handler
-import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.navigation.NavigationView
-import androidx.core.view.GravityCompat
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.view.GravityCompat
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.google.android.material.navigation.NavigationView
+import com.squareup.picasso.Callback
+import com.squareup.picasso.Picasso
 import development.app.checking.R
 import development.app.checking.pref.PrefMgr
 import development.app.checking.ui.activity.auth.LoginActivity
 import development.app.checking.ui.activity.misc.AppInfoActivity
+import development.app.checking.ui.activity.ml.MLKitActivity
 import development.app.checking.ui.activity.profile.ProfileActivity
 import development.app.checking.ui.base.BaseActivity
 import development.app.checking.viewmodel.HomeViewModel
-import development.app.checking.viewmodel.SplashViewModel
-import development.app.myapplication.MLKitActivity
-import development.app.myapplication.MainActivity
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.app_bar_home.*
 import kotlinx.android.synthetic.main.content_home.*
+import kotlinx.android.synthetic.main.nav_header_home.*
+import java.lang.Exception
 
 class HomeActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -66,6 +68,26 @@ class HomeActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+
+        homeVieModel.userInfo.observe(this, Observer { me ->
+            txtNavName.text = me.name
+            txtNavEmail.text = me.mobile
+            if (me.image.isNotEmpty()) {
+                Picasso.get().load(me.image).into(imgNavProfile,object: Callback {
+                    override fun onSuccess() {
+                        //progressUploadProfileImage.visibility = View.GONE
+                    }
+
+                    override fun onError(e: Exception?) {
+                        //progressUploadProfileImage.visibility = View.GONE
+                    }
+
+                })
+
+            }
+        })
+
+        homeVieModel.getProfile(prefs.getData(PrefMgr.KEY_ACCESS_TOKEN))
 
 
     }
