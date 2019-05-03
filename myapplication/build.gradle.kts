@@ -70,8 +70,13 @@ dependencies {
 
 //    /*firebase MLKit*/
     implementation(Libs.Firebase.firebase_core)
-    implementation(Libs.MLKit.ml_vision)
+    implementation(Libs.MLKit.ml_vision){
+        exclude(group = "androidx.constraintlayout")
+        exclude(group = "com.google.firebase")
+    }
     implementation(Libs.MLKit.image_label)
+    /*runtimePermissions*/
+    implementation(Libs.runtimePermissions)
 //    implementation("com.google.firebase:firebase-iid:17.1.2")
 
 
@@ -81,5 +86,5 @@ dependencies {
 repositories {
     mavenCentral()
 }
-
+apply(mapOf("plugin" to "com.google.gms.google-services"))
 

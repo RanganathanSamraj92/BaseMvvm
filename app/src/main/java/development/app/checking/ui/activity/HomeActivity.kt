@@ -20,6 +20,7 @@ import development.app.checking.ui.activity.profile.ProfileActivity
 import development.app.checking.ui.base.BaseActivity
 import development.app.checking.viewmodel.HomeViewModel
 import development.app.checking.viewmodel.SplashViewModel
+import development.app.myapplication.MLKitActivity
 import development.app.myapplication.MainActivity
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.app_bar_home.*
@@ -120,7 +121,7 @@ class HomeActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             }
             R.id.nav_feedback -> {
 
-                newIntent(this@HomeActivity, MainActivity::class.java, "")
+                newIntent(this@HomeActivity, MLKitActivity::class.java, "")
             }
             R.id.nav_profile -> {
 
