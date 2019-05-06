@@ -26,19 +26,19 @@ import kotlin.coroutines.CoroutineContext
 open class BaseViewModel : ViewModel() {
 
 
-    internal  var TAG_FIRESTORE: String = "firestore"
+    internal var TAG_FIRESTORE: String = "firestore"
 
-    internal  var auth: FirebaseAuth
-    internal  var database: FirebaseDatabase
-    internal  var databaseRef: DatabaseReference
-    internal  var firestoreDB: FirebaseFirestore
+    internal var auth: FirebaseAuth
+    internal var database: FirebaseDatabase
+    internal var databaseRef: DatabaseReference
+    internal var firestoreDB: FirebaseFirestore
 
     internal var fcmToken: String? = null
 
-    private val injector : ViewModelInjector = DaggerViewModelInjector.builder()
-    .networkModule(networkModule = NetworkModule)
-    .localNetworkModule(localNetworkModule = LocalNetworkModule)
-    .build()
+    private val injector: ViewModelInjector = DaggerViewModelInjector.builder()
+        .networkModule(networkModule = NetworkModule)
+        .localNetworkModule(localNetworkModule = LocalNetworkModule)
+        .build()
 
     init {
 
@@ -81,15 +81,15 @@ open class BaseViewModel : ViewModel() {
 
             is ProfileViewModel -> injector.inject(this)
 
-            is RegisterViewModel  -> injector.inject(this)
+            is RegisterViewModel -> injector.inject(this)
 
-            is ImageUploadViewModel  -> injector.inject(this)
+            is ImageUploadViewModel -> injector.inject(this)
 
-            is ForgotPasswordViewModel  -> injector.inject(this)
+            is ForgotPasswordViewModel -> injector.inject(this)
 
-            is VerificationViewModel  -> injector.inject(this)
+            is VerificationViewModel -> injector.inject(this)
 
-            is ResetPasswordViewModel  -> injector.inject(this)
+            is ResetPasswordViewModel -> injector.inject(this)
         }
 
     }
@@ -105,7 +105,6 @@ open class BaseViewModel : ViewModel() {
     val coroutineContext: CoroutineContext by lazy { Dispatchers.Main + parentJob }
 
 
-
     /*private val coroutineContext: CoroutineContext
         get() = parentJob + Dispatchers.IO*/
 
@@ -117,8 +116,8 @@ open class BaseViewModel : ViewModel() {
         parentJob.cancel()
     }
 
-   public override fun onCleared() {
-       cancelAllRequests()
+    public override fun onCleared() {
+        cancelAllRequests()
         super.onCleared()
         Log.w("TAG", "OnCleared")
 

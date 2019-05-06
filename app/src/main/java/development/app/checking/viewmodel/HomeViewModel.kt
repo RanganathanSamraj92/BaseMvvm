@@ -13,7 +13,6 @@ import kotlinx.coroutines.Job
 class HomeViewModel : BaseViewModel() {
 
 
-
     val userInfo = MutableLiveData<ProfileModel>()
 
     init {
@@ -23,7 +22,7 @@ class HomeViewModel : BaseViewModel() {
 
     private lateinit var request: Job
 
-    internal fun saveUser(user:HashMap<String, Any>) {
+    internal fun saveUser(user: HashMap<String, Any>) {
         // Add a new document with a generated ID
         firestoreDB.collection("users")
             .add(user)
@@ -35,9 +34,9 @@ class HomeViewModel : BaseViewModel() {
             }
     }
 
-    internal fun getUsers(key:String,value:String) {
+    internal fun getUsers(key: String, value: String) {
         firestoreDB.collection("users")
-            .whereEqualTo(key,value)
+            .whereEqualTo(key, value)
             .get()
             .addOnSuccessListener { result ->
                 for (document in result) {

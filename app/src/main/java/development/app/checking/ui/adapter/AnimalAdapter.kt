@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import development.app.checking.R
 import kotlinx.android.synthetic.main.list_item_android_version.view.*
 
-class AnimalAdapter(val items : ArrayList<String>, val context: Context) : RecyclerView.Adapter<ViewHolder>() {
+class AnimalAdapter(val items: ArrayList<String>, val context: Context) : RecyclerView.Adapter<ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(context).inflate(R.layout.list_item_android_version, parent, false))
@@ -24,11 +24,9 @@ class AnimalAdapter(val items : ArrayList<String>, val context: Context) : Recyc
     }
 
 
-
-
 }
 
-class ViewHolder (view: View) : RecyclerView.ViewHolder(view) {
+class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     // Holds the TextView that will add each animal to
     val tvAnimalType = view.txtVersionName
 }

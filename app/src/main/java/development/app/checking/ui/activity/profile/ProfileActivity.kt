@@ -1,45 +1,34 @@
 package development.app.checking.ui.activity.profile
 
-import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Bitmap
 import android.media.MediaScannerConnection
-import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
-import android.support.v4.media.session.MediaSessionCompat.KEY_TOKEN
-import android.util.Log
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
-import androidx.core.app.ActivityCompat.startActivityForResult
-import androidx.databinding.DataBindingUtil.setContentView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import development.app.checking.R
 import development.app.checking.pref.PrefMgr
-import development.app.checking.pref.Prefs
 import development.app.checking.ui.base.BaseActivity
-import development.app.checking.ui.base.BaseActivity.Companion.makeLog
-import development.app.checking.utils.ForceUpdateChecker
 import development.app.checking.utils.Utils
 import development.app.checking.viewmodel.ImageUploadViewModel
 import development.app.checking.viewmodel.ProfileViewModel
 import kotlinx.android.synthetic.main.content_profile.*
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.util.*
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
-import okhttp3.MediaType
-import java.lang.Exception
 
 
 class ProfileActivity : BaseActivity() {
@@ -91,14 +80,14 @@ class ProfileActivity : BaseActivity() {
             })
         })
 
-        loadingStatusObserver =  Observer {
+        loadingStatusObserver = Observer {
             if (it) {
                 progressUploadProfileImage.visibility = VISIBLE
             } else {
                 progressUploadProfileImage.visibility = GONE
             }
         }
-        imageUploadViewModel.uploadingStatus.observe(this,loadingStatusObserver)
+        imageUploadViewModel.uploadingStatus.observe(this, loadingStatusObserver)
 
 
         profileViewModel.metaStatus.observe(this, Observer { meta ->
@@ -122,7 +111,7 @@ class ProfileActivity : BaseActivity() {
             txtMobile.text = me.mobile
             if (me.image.isNotEmpty()) {
                 progressUploadProfileImage.visibility = VISIBLE
-                Picasso.get().load(me.image).into(imgProfile,object:Callback{
+                Picasso.get().load(me.image).into(imgProfile, object : Callback {
                     override fun onSuccess() {
                         progressUploadProfileImage.visibility = GONE
                     }

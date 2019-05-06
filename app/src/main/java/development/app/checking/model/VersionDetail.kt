@@ -1,10 +1,10 @@
 package development.app.checking.model
 
-class VersionDetail{
+class VersionDetail {
     val name: String = ""
     val version_code: String = ""
     val description: String = ""
-    lateinit var  images: List<Image>
+    lateinit var images: List<Image>
 
 }
 

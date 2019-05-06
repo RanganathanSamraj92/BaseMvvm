@@ -8,10 +8,14 @@ class ImageUploadRepository(private val apiService: ImageUploadAPICallInterface)
 
 
     suspend fun uploadImage(imageUploadRequest: ImageUploadRequest): APIResponse? {
-        return safeApiCall(call = { apiService.uploadImageAsync(imageUploadRequest.token,imageUploadRequest.file,imageUploadRequest.name).await() })
+        return safeApiCall(call = {
+            apiService.uploadImageAsync(
+                imageUploadRequest.token,
+                imageUploadRequest.file,
+                imageUploadRequest.name
+            ).await()
+        })
     }
-
-
 
 
 }

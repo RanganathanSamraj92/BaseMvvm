@@ -94,9 +94,6 @@
                     app:layout_constraintTop_toBottomOf="@+id/txtAddAge" android:layout_marginTop="32dp"/>
 
 
-
-
-
             <com.rengwuxian.materialedittext.MaterialEditText
                     android:id="@+id/txtUsersField"
                     android:layout_width="match_parent"
@@ -161,7 +158,6 @@
 
 
     </androidx.core.widget.NestedScrollView>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

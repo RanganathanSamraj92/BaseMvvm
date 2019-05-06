@@ -7,15 +7,15 @@ import retrofit2.http.GET
 interface ApiCallInterface {
 
     @GET(NetworkUtils.getAndroidVersions)
-    fun getVersionsAsync():  Deferred<Response<APIResponse>>
+    fun getVersionsAsync(): Deferred<Response<APIResponse>>
 
     @GET(NetworkUtils.checkVersion)
-    fun getAppVersionAsync():  Deferred<Response<APIResponse>>
+    fun getAppVersionAsync(): Deferred<Response<APIResponse>>
 
     @GET(NetworkUtils.versionDetails)
-    fun getAppVersionDetailAsync():  Deferred<Response<APIResponse>>
+    fun getAppVersionDetailAsync(): Deferred<Response<APIResponse>>
 
     @GET(NetworkUtils.demoformat)
-    fun getAppAsync():  Deferred<Response<APIResponse>>
+    fun getAppAsync(): Deferred<Response<APIResponse>>
 
 }

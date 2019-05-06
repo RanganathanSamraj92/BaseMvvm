@@ -30,7 +30,6 @@ class VerificationViewModel : BaseViewModel() {
     lateinit var authApiCall: AuthApiCallInterface
 
 
-
     val updateIdTokenResult = MutableLiveData<UpdateIDToken>()
 
     val userAvailability = MutableLiveData<OTPVerifyResult>()
@@ -191,7 +190,7 @@ class VerificationViewModel : BaseViewModel() {
 
     }
 
-    internal fun updateIdToken(idToken:String,uid:String){
+    internal fun updateIdToken(idToken: String, uid: String) {
         val updateIdToken = UpdateIDToken()
         try {
             databaseRef.child("users/$uid")
@@ -201,28 +200,28 @@ class VerificationViewModel : BaseViewModel() {
                         .child("fcmToken")
                         .setValue(fcmToken)
                     loadingStatus.value = false
-                    updateIdToken.status =true
+                    updateIdToken.status = true
                     updateIdTokenResult.postValue(updateIdToken)
                 }
         } catch (e: Exception) {
             loadingStatus.value = false
             Log.w("upload Exception : ", e.localizedMessage)
 
-            updateIdToken.status =false
+            updateIdToken.status = false
             updateIdTokenResult.postValue(updateIdToken)
         }
     }
 
-    internal fun checkQuery(){
+    internal fun checkQuery() {
         val updateIdToken = UpdateIDToken()
         try {
-           val userdRef= databaseRef.child("users")
+            val userdRef = databaseRef.child("users")
 
         } catch (e: Exception) {
             loadingStatus.value = false
             Log.w("upload Exception : ", e.localizedMessage)
 
-            updateIdToken.status =false
+            updateIdToken.status = false
             updateIdTokenResult.postValue(updateIdToken)
         }
     }

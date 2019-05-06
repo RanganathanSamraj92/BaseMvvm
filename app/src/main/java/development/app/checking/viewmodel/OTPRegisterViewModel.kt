@@ -25,26 +25,25 @@ class OTPRegisterViewModel : BaseViewModel() {
         loadingStatus.value = true
         scope.launch {
             try {
-                var authIdTokenReference = databaseRef.child("users/${request.uid}").setValue(request).addOnSuccessListener {
-                    val updateIdToken = UpdateIDToken()
-                    updateIdToken.status =true
-                    updateIdToken.token =request.idToken
-                    updateIdTokenResult.postValue(updateIdToken)
-                    loadingStatus.value = false
-                }
+                var authIdTokenReference =
+                    databaseRef.child("users/${request.uid}").setValue(request).addOnSuccessListener {
+                        val updateIdToken = UpdateIDToken()
+                        updateIdToken.status = true
+                        updateIdToken.token = request.idToken
+                        updateIdTokenResult.postValue(updateIdToken)
+                        loadingStatus.value = false
+                    }
             } catch (e: Exception) {
                 loadingStatus.value = false
                 Log.w("upload Exception : ", e.localizedMessage)
                 val updateIdToken = UpdateIDToken()
-                updateIdToken.status =false
+                updateIdToken.status = false
                 updateIdTokenResult.postValue(updateIdToken)
 
             }
 
         }
     }
-
-
 
 
 }

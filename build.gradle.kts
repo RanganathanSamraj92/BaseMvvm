@@ -9,7 +9,7 @@ buildscript {
         google()
         jcenter()
         // Add repository
-        maven ( url = "https://maven.fabric.io/public")
+        maven(url = "https://maven.fabric.io/public")
 
     }
     dependencies {
@@ -26,8 +26,8 @@ buildscript {
             mavenLocal()
             google()
             jcenter()
-            maven (url = "https://jitpack.io")
-            maven (url ="https://maven.google.com" )
+            maven(url = "https://jitpack.io")
+            maven(url = "https://maven.google.com")
         }
     }
 

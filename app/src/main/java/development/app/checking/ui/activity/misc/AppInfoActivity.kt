@@ -15,13 +15,12 @@ import development.app.checking.viewmodel.AppInfoViewModel
 import kotlinx.android.synthetic.main.content_app_info.*
 
 
-class AppInfoActivity : BaseActivity() , ForceUpdateChecker.OnUpdateNeededListener, View.OnClickListener {
+class AppInfoActivity : BaseActivity(), ForceUpdateChecker.OnUpdateNeededListener, View.OnClickListener {
 
     override fun onClick(v: View?) {
-        when(v!!.id){
+        when (v!!.id) {
             R.id.btnCheckForUpdate -> {
-                ForceUpdateChecker.with(this).
-                    onUpdateNeeded(this).check()
+                ForceUpdateChecker.with(this).onUpdateNeeded(this).check()
             }
         }
     }
@@ -32,8 +31,7 @@ class AppInfoActivity : BaseActivity() , ForceUpdateChecker.OnUpdateNeededListen
         val dialog = AlertDialog.Builder(this)
             .setTitle("App is up to date!")
             .setMessage("You are currently using a latest one!")
-            .setPositiveButton("Ok", DialogInterface.OnClickListener {
-                    dialog, which ->
+            .setPositiveButton("Ok", DialogInterface.OnClickListener { dialog, which ->
             }).create()
 
         dialog.show()
@@ -44,10 +42,9 @@ class AppInfoActivity : BaseActivity() , ForceUpdateChecker.OnUpdateNeededListen
         val dialog = AlertDialog.Builder(this)
             .setTitle("New version available")
             .setMessage("Please, update app to new version to continue reposting.")
-            .setPositiveButton("Update", DialogInterface.OnClickListener {
-                    dialog, which ->
+            .setPositiveButton("Update", DialogInterface.OnClickListener { dialog, which ->
                 redirectStore(updateUrl)
-            }).setNegativeButton("cancel",null).create()
+            }).setNegativeButton("cancel", null).create()
 
         dialog.show()
 

@@ -36,8 +36,10 @@ class AndroidVersionActivity : BaseActivity() {
                 override fun onClick(v: View, item: Any) {
                     item as AndroidVersion
                     showMsg(v, "${item.name} v : ${item.version_code}")
-                    newIntent(this@AndroidVersionActivity,
-                        ScrollingActivity::class.java,item)
+                    newIntent(
+                        this@AndroidVersionActivity,
+                        ScrollingActivity::class.java, item
+                    )
                 }
             }, versions.toCollection(ArrayList<AndroidVersion>()))
             recyclerAndroidVersions.adapter = adapter
@@ -59,7 +61,6 @@ class AndroidVersionActivity : BaseActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
-
 
 
     private fun initListeners() {

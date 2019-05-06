@@ -43,16 +43,16 @@ class RegisterActivity : BaseActivity() {
             showMsg(btnSignUp, login.message)
 
             registerViewModel.updateIdTokenResult.observe(this@RegisterActivity, Observer {
-                if(it){
+                if (it) {
                     prefs.putData(PrefMgr.KEY_ACCESS_TOKEN, login.token)
                     newIntent(this@RegisterActivity, HomeActivity::class.java, "")
                     finish()
-                }else{
+                } else {
                     registerViewModel.signOut()
                     showMsg(btnSignUp, "Retry!")
                 }
             })
-            registerViewModel.updateLoginIdToken(login.token,login.uid)
+            registerViewModel.updateLoginIdToken(login.token, login.uid)
 
         })
 

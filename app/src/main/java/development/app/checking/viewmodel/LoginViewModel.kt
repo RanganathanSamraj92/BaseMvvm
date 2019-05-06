@@ -19,8 +19,6 @@ import javax.inject.Inject
 class LoginViewModel : BaseViewModel() {
 
 
-
-
     @Inject
     lateinit var authApiCall: AuthApiCallInterface
 
@@ -30,8 +28,6 @@ class LoginViewModel : BaseViewModel() {
     val loginResult = MutableLiveData<LoginModel>()
 
     val updateFCMResult = MutableLiveData<Boolean>()
-
-
 
 
     init {
@@ -52,8 +48,8 @@ class LoginViewModel : BaseViewModel() {
             if (user != null) {
                 user.getIdToken(true).addOnSuccessListener { tokenResult ->
                     idToken = tokenResult.token.toString()
-                    Log.w("idToken",idToken)
-                    saveToken(idToken,user.uid)
+                    Log.w("idToken", idToken)
+                    saveToken(idToken, user.uid)
                 }
 
             } else {
@@ -64,8 +60,8 @@ class LoginViewModel : BaseViewModel() {
                         Log.e("user", user.toString())
                         user!!.getIdToken(true).addOnSuccessListener { tokenResult ->
                             idToken = tokenResult.token.toString()
-                            Log.w("idToken",idToken)
-                            saveToken(idToken,user.uid)
+                            Log.w("idToken", idToken)
+                            saveToken(idToken, user.uid)
 
                         }
                     } else {
@@ -80,26 +76,26 @@ class LoginViewModel : BaseViewModel() {
         }
     }
 
-    private fun saveToken(idToken: String,uid:String) {
+    private fun saveToken(idToken: String, uid: String) {
         val loginModel = LoginModel()
         loginModel.message = "login successful!"
         loginModel.token = idToken
         loginModel.uid = uid
         loginResult.postValue(loginModel)
-        updateLoginIdToken(idToken,uid)
+        updateLoginIdToken(idToken, uid)
 
     }
 
 
-
-    internal fun updateLoginIdToken(token: String,userId:String) {
+    internal fun updateLoginIdToken(token: String, userId: String) {
         scope.launch {
             //uploadingStatus.postValue(true)
             val datebaseRef = database.reference
             try {
-                var authIdTokenReference = datebaseRef.child("users/$userId/authIdToken").setValue(token).addOnSuccessListener {
-                    updateFCMToken(fcmToken!!,userId)
-                }
+                var authIdTokenReference =
+                    datebaseRef.child("users/$userId/authIdToken").setValue(token).addOnSuccessListener {
+                        updateFCMToken(fcmToken!!, userId)
+                    }
             } catch (e: Exception) {
                 //uploadingStatus.postValue(false)
                 Log.w("upload Exception : ", e.localizedMessage)
@@ -107,14 +103,15 @@ class LoginViewModel : BaseViewModel() {
         }
     }
 
-    internal fun updateFCMToken(token: String,userId:String) {
+    internal fun updateFCMToken(token: String, userId: String) {
         scope.launch {
             //uploadingStatus.postValue(true)
             val datebaseRef = database.reference
             try {
-                var fcmTokenReference = datebaseRef.child("users/$userId/fcmToken").setValue(token).addOnSuccessListener {
-                    updateFCMResult.postValue(true)
-                }
+                var fcmTokenReference =
+                    datebaseRef.child("users/$userId/fcmToken").setValue(token).addOnSuccessListener {
+                        updateFCMResult.postValue(true)
+                    }
             } catch (e: Exception) {
                 //uploadingStatus.postValue(false)
                 updateFCMResult.postValue(false)

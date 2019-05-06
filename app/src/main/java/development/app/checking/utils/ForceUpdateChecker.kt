@@ -8,8 +8,10 @@ import androidx.annotation.NonNull
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 
 
-class ForceUpdateChecker(@param:NonNull private val context: Context,
-    private val onUpdateNeededListener: OnUpdateNeededListener?) {
+class ForceUpdateChecker(
+    @param:NonNull private val context: Context,
+    private val onUpdateNeededListener: OnUpdateNeededListener?
+) {
 
     interface OnUpdateNeededListener {
         fun onUpdateNeeded(updateUrl: String)
@@ -24,11 +26,11 @@ class ForceUpdateChecker(@param:NonNull private val context: Context,
             val appVersion = getAppVersion(context)
             val updateUrl = remoteConfig.getString(KEY_UPDATE_URL)
 
-            Log.w("remote : ","currentVersion $currentVersion appVersion $appVersion updateUrl $updateUrl")
+            Log.w("remote : ", "currentVersion $currentVersion appVersion $appVersion updateUrl $updateUrl")
 
             if (!TextUtils.equals(currentVersion, appVersion) && onUpdateNeededListener != null) {
                 onUpdateNeededListener.onUpdateNeeded(updateUrl)
-            }else{
+            } else {
                 onUpdateNeededListener!!.onUpToDate()
             }
         }

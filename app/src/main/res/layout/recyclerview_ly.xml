@@ -10,7 +10,7 @@
             android:clipToPadding="false"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:context="com.google.samples.apps.sunflower.GardenActivity"
-            tools:listitem="@layout/list_item_android_version" />
+            tools:listitem="@layout/list_item_android_version"/>
 
 </layout>
 

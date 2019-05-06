@@ -28,15 +28,13 @@ interface MyComponent {
     fun inject(baseActivity: BaseActivity)
 
 
-
     @Component.Builder
-    interface builder{
-        fun build():MyComponent
+    interface builder {
+        fun build(): MyComponent
 
         /*Prefs'module declarations*/
         fun prefModule(sharedPreferencesModule: SharedPreferencesModule): builder
     }
-
 
 
 }

@@ -34,7 +34,7 @@ class ScrollingActivity : BaseActivity() {
         viewModel.versionDetail.observe(this, Observer { details ->
             txtScroll.text = details.description
             toolbar_layout.title = version!!.name
-            Picasso.get().load(version!!.images[0].image).into(object: com.squareup.picasso.Target {
+            Picasso.get().load(version!!.images[0].image).into(object : com.squareup.picasso.Target {
                 override fun onBitmapFailed(e: java.lang.Exception?, errorDrawable: Drawable?) {
                 }
 
@@ -56,12 +56,10 @@ class ScrollingActivity : BaseActivity() {
     }
 
 
-
-
-
     private fun dynamicColor(bitmap: Bitmap?) {
         Palette.from(bitmap!!).generate { palette ->
-            window.statusBarColor = palette!!.getMutedColor(resources.getColor(development.app.checking.R.color.colorPrimaryDark))
+            window.statusBarColor =
+                palette!!.getMutedColor(resources.getColor(development.app.checking.R.color.colorPrimaryDark))
             toolbar_layout!!.setContentScrimColor(palette!!.getMutedColor(resources.getColor(development.app.checking.R.color.colorPrimary)))
             toolbar_layout!!.setStatusBarScrimColor(palette.getMutedColor(resources.getColor(development.app.checking.R.color.colorPrimaryDark)))
         }

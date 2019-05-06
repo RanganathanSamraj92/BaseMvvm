@@ -1,4 +1,3 @@
-
 plugins {
     id("com.android.application")
     id("io.fabric")
@@ -102,7 +101,6 @@ dependencies {
     implementation(Libs.MLKit.image_label)
 
 
-
     /*dagger*/
     implementation(Libs.Dagger.core)
     kapt(Libs.Dagger.compiler)
@@ -122,14 +120,12 @@ dependencies {
     implementation(Libs.loading_button)
     /*runtimePermissions*/
     implementation(Libs.runtimePermissions)
-    implementation ("com.github.mukeshsolanki:android-otpview-pinview:2.0.3")
+    implementation("com.github.mukeshsolanki:android-otpview-pinview:2.0.3")
     implementation(Libs.lottie)
 
-    implementation(project(":myapplication")){
+    implementation(project(":myapplication")) {
         exclude(group = "com.google.firebase")
     }
-
-
 
 
     /*implementation fileTree(dir: 'libs', include: ['*.jar'])

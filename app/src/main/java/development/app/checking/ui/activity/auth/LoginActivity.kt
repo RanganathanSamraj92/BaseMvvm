@@ -59,19 +59,19 @@ class LoginActivity : BaseActivity() {
             toolbar_layout.title = login.message
             makeLog(login.message)
             token = login.token;
-            loginViewModel.updateLoginIdToken( login.token,login.uid)
+            loginViewModel.updateLoginIdToken(login.token, login.uid)
 
 
         })
         loginViewModel.updateFCMResult.observe(this, Observer { isUpdated ->
-           if (isUpdated){
-               myPref.putData(PrefMgr.KEY_ACCESS_TOKEN, token)
-               newIntent(this@LoginActivity, HomeActivity::class.java, "")
-               finish()
-           }else{
-               loginViewModel.signOut()
-               makeLog("Retry!")
-           }
+            if (isUpdated) {
+                myPref.putData(PrefMgr.KEY_ACCESS_TOKEN, token)
+                newIntent(this@LoginActivity, HomeActivity::class.java, "")
+                finish()
+            } else {
+                loginViewModel.signOut()
+                makeLog("Retry!")
+            }
         })
 
         btnLogin.setOnClickListener {

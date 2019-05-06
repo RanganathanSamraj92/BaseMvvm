@@ -34,14 +34,14 @@ class ForgotPasswordActivity : BaseActivity() {
 
 
         kl = Observer { error ->
-            newIntent(context,VerificationActivity::class.java,"")
+            newIntent(context, VerificationActivity::class.java, "")
         }
 
         errorObs = Observer { msg ->
             toolbar.title = msg
         }
 
-        forgotPasswordViewModel.errorStatus.observe(this,kl )
+        forgotPasswordViewModel.errorStatus.observe(this, kl)
 
         //forgotPasswordViewModel.metaStatus.observe(this, errorObs)
 
@@ -60,8 +60,6 @@ class ForgotPasswordActivity : BaseActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
-
-
 
 
     }

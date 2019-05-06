@@ -24,5 +24,4 @@
     <include layout="@layout/support_simple_spinner_dropdown_item"/>
 
 
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

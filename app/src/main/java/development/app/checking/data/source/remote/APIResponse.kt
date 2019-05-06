@@ -6,12 +6,12 @@ import development.app.checking.data.response.base.ResponseData
 
 open class APIResponse {
 
-     @SerializedName("meta")
-     lateinit var  meta: Meta
+    @SerializedName("meta")
+    lateinit var meta: Meta
 
-     @SerializedName("data")
-     var  data: ResponseData =
-         ResponseData()
+    @SerializedName("data")
+    var data: ResponseData =
+        ResponseData()
 
 
     open class Success(val successResult: Any) : APIResponse()

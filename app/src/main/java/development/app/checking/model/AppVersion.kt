@@ -2,7 +2,7 @@ package development.app.checking.model
 
 import com.google.gson.annotations.SerializedName
 
-class AppVersion{
+class AppVersion {
     @SerializedName("android")
-    lateinit var appVersion:AndroidAppVersion
+    lateinit var appVersion: AndroidAppVersion
 }

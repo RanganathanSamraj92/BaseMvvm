@@ -18,18 +18,20 @@ open class RetrofitFactory {
             try {
                 val response = call.invoke()
                 val k = response.body() as APIResponse
-                Log.w("API details :","\nstatuscode: ${response.code()}" +
-                        ",\n" +
-                        "success : ${response.isSuccessful} " +
-                        ",\n" +
-                        "Body ${response.raw().networkResponse()}" +
+                Log.w(
+                    "API details :", "\nstatuscode: ${response.code()}" +
+                            ",\n" +
+                            "success : ${response.isSuccessful} " +
+                            ",\n" +
+                            "Body ${response.raw().networkResponse()}" +
 
-                        ",\n" +
-                        "content body - status : ${k.meta.status}  msg : ${k.meta.message}" +
-                        ",\n" +
-                        "errorBody ${response.errorBody()}" +
-                        " \n" +
-                        "Headers ${response.headers()} ")
+                            ",\n" +
+                            "content body - status : ${k.meta.status}  msg : ${k.meta.message}" +
+                            ",\n" +
+                            "errorBody ${response.errorBody()}" +
+                            " \n" +
+                            "Headers ${response.headers()} "
+                )
 
                 if (response.isSuccessful)
                     return APIResponse.Success(response.body()!!)

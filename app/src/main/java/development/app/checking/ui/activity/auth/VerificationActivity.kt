@@ -26,17 +26,17 @@ class VerificationActivity : BaseActivity() {
         viewModelSetup(this, verificationViewModel)
 
         verificationViewModel.storedVerificationId.observe(this, Observer { otpId ->
-           showMsg(txtResendOTP,"OTP sent!")
+            showMsg(txtResendOTP, "OTP sent!")
 
         })
         verificationViewModel.onVerify.observe(this, Observer { credential ->
-            showMsg(txtResendOTP,"verifying..")
+            showMsg(txtResendOTP, "verifying..")
             verificationViewModel.signInWithPhoneAuthCredential(this@VerificationActivity, credential)
 
         })
         verificationViewModel.userAvailability.observe(this, Observer { otpResult ->
             if (otpResult.availableStatus) {
-                verificationViewModel.updateIdToken(otpResult.registerRequest.idToken,otpResult.registerRequest.uid)
+                verificationViewModel.updateIdToken(otpResult.registerRequest.idToken, otpResult.registerRequest.uid)
             } else {
                 newIntent(this@VerificationActivity, OTPRegisterActivity::class.java, otpResult.registerRequest)
                 finish()
@@ -49,7 +49,7 @@ class VerificationActivity : BaseActivity() {
                 newIntent(this@VerificationActivity, HomeActivity::class.java, "")
                 finish()
             } else {
-                showMsg(txtResendOTP,"Token not updated try again!..")
+                showMsg(txtResendOTP, "Token not updated try again!..")
             }
 
         })
@@ -57,9 +57,9 @@ class VerificationActivity : BaseActivity() {
 
         verificationViewModel.phoneSignInResult.observe(this, Observer { signInResult ->
             if (signInResult.status) {
-                verificationViewModel.saveToken(signInResult.token,signInResult.uid)
+                verificationViewModel.saveToken(signInResult.token, signInResult.uid)
             } else {
-                showMsg(txtResendOTP,signInResult.msg)
+                showMsg(txtResendOTP, signInResult.msg)
             }
 
         })
@@ -69,8 +69,8 @@ class VerificationActivity : BaseActivity() {
         }
 
 
-        txtOTP.setOtpCompletionListener {
-            otp ->  validate(otp)
+        txtOTP.setOtpCompletionListener { otp ->
+            validate(otp)
         }
 
         txtResendOTP.setOnClickListener {

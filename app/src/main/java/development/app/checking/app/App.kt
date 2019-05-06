@@ -22,14 +22,16 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         FirebaseApp.initializeApp(this)
-        Fabric.with(this,Crashlytics())
+        Fabric.with(this, Crashlytics())
         val firebaseRemoteConfig = FirebaseRemoteConfig.getInstance()
         // set in-app defaults
-        val remoteConfigDefaults = HashMap<String,Any>()
+        val remoteConfigDefaults = HashMap<String, Any>()
         remoteConfigDefaults.put(ForceUpdateChecker.KEY_UPDATE_REQUIRED, false)
         remoteConfigDefaults.put(ForceUpdateChecker.KEY_CURRENT_VERSION, "1.0.1")
-        remoteConfigDefaults.put(ForceUpdateChecker.KEY_UPDATE_URL,
-            "https://play.google.com/store/apps/details?id=com.google.android.apps.translate" )
+        remoteConfigDefaults.put(
+            ForceUpdateChecker.KEY_UPDATE_URL,
+            "https://play.google.com/store/apps/details?id=com.google.android.apps.translate"
+        )
 
         firebaseRemoteConfig.setDefaults(remoteConfigDefaults)
         firebaseRemoteConfig
@@ -39,7 +41,7 @@ class App : Application() {
                     Log.w("remote", "remote config is fetched.")
                     firebaseRemoteConfig.fetchAndActivate()
                 }
-        }
+            }
 
         /*Dagger component initialization
         * here is initialization for MyComponent

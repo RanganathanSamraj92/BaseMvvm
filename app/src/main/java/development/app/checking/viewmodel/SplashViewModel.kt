@@ -30,6 +30,7 @@ class SplashViewModel : BaseViewModel() {
     private val appVersion: MutableLiveData<AppVersion> = MutableLiveData()
 
     val version = MutableLiveData<String>()
+
     init {
         loadAppVersion()
         version.value = "version : ${BuildConfig.VERSION_NAME}"
@@ -47,10 +48,9 @@ class SplashViewModel : BaseViewModel() {
     private fun loadAppVersion() {
 
 
-
         request = GlobalScope.launch {
             val apiResponse = repository.getAppAsync()
-            val res= handleResponses(apiResponse!!)
+            val res = handleResponses(apiResponse!!)
             try {
                 appVersion.postValue(res.data.appVersion)
             } catch (e: Exception) {

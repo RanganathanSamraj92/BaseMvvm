@@ -14,11 +14,11 @@ open class Utils {
     }
 
     interface OnItemClickListener {
-        fun onClick(v: View,item: Any)
+        fun onClick(v: View, item: Any)
     }
 
     companion object {
-        public fun vibrate(context:Context){
+        public fun vibrate(context: Context) {
             val vibratorService = context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 vibratorService.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE))

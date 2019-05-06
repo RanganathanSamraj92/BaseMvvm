@@ -29,9 +29,6 @@ object NetworkModule {
     }
 
 
-
-
-
     /**
      * Provides the Retrofit object.
      * @return the Retrofit object

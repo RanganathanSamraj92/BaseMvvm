@@ -45,7 +45,7 @@ open class ImageUploadViewModel : BaseViewModel() {
         //msgRef.setValue("Hello, World!")
     }
 
-    fun uploadImage(token:String,file: MultipartBody.Part, name: RequestBody) {
+    fun uploadImage(token: String, file: MultipartBody.Part, name: RequestBody) {
         loadingStatus.value = true
         scope.launch {
             var imageUploadRequest = ImageUploadRequest()
@@ -71,19 +71,19 @@ open class ImageUploadViewModel : BaseViewModel() {
         uploadingStatus.postValue(true)
 
         val storageRef = storage.reference
-        var mReference = storageRef.child("images/${Calendar.getInstance().timeInMillis.toString() }.jpg")
+        var mReference = storageRef.child("images/${Calendar.getInstance().timeInMillis.toString()}.jpg")
         try {
-            mReference.putFile(uri).addOnSuccessListener {taskSnapshot: UploadTask.TaskSnapshot? ->
+            mReference.putFile(uri).addOnSuccessListener { taskSnapshot: UploadTask.TaskSnapshot? ->
                 val url = taskSnapshot!!.storage.downloadUrl
-                url.addOnSuccessListener {
-                    uri -> Log.w("uri : ",uri.toString())
+                url.addOnSuccessListener { uri ->
+                    Log.w("uri : ", uri.toString())
                     msgRef.child("photoUrl").setValue(uri.toString())
                     uploadingStatus.postValue(false)
                 }
             }
-        }catch (e: Exception) {
+        } catch (e: Exception) {
             uploadingStatus.postValue(false)
-            Log.w("upload Exception : ",e.localizedMessage)
+            Log.w("upload Exception : ", e.localizedMessage)
         }
 
     }

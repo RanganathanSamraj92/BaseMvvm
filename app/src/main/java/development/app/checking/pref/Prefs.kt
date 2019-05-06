@@ -14,7 +14,7 @@ class Prefs(private val sharedPreferences: SharedPreferences) {
     }
 
     /*retrieve*/
-    fun getData(key: String) : String{
-        return sharedPreferences.getString(key,"")
+    fun getData(key: String): String {
+        return sharedPreferences.getString(key, "")
     }
 }

@@ -16,9 +16,6 @@ class MyViewModel : ViewModel() {
     }
 
 
-
-
-
     fun loadUsers() {
         val user = UserModel()
         user.id = "abcd@gmail.com"

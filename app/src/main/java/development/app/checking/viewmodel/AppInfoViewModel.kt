@@ -9,10 +9,10 @@ import development.app.checking.viewmodel.BaseViewModel.BaseViewModel
 class AppInfoViewModel : BaseViewModel() {
 
 
-
     private val appVersion: MutableLiveData<AppVersion> = MutableLiveData()
 
     val version = MutableLiveData<String>()
+
     init {
         version.value = "version : ${BuildConfig.VERSION_NAME}"
 
@@ -22,9 +22,6 @@ class AppInfoViewModel : BaseViewModel() {
     fun getAppVersion(): LiveData<AppVersion> {
         return appVersion
     }
-
-
-
 
 
 }

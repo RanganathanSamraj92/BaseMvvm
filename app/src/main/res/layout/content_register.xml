@@ -2,7 +2,7 @@
 <androidx.core.widget.NestedScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools" app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_width="match_parent"
         android:layout_height="match_parent" android:id="@+id/nestedScrollView">
 
@@ -225,7 +225,6 @@
                     app:layout_constraintTop_toBottomOf="@+id/txtForgotPassword" android:layout_marginTop="32dp"/>
 
 
-
             <TextView
                     android:text="@string/terms_conditions"
                     android:layout_width="wrap_content"
@@ -270,8 +269,6 @@
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

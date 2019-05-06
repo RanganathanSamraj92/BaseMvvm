@@ -47,7 +47,7 @@ import androidx.core.content.ContextCompat.startActivity
 
 open class BaseActivity : AppCompatActivity(), BottomSheetEx.BottomSheetListener {
 
-    public val context:Context = this@BaseActivity
+    public val context: Context = this@BaseActivity
     @Inject
     lateinit var prefs: Prefs
 
@@ -58,8 +58,8 @@ open class BaseActivity : AppCompatActivity(), BottomSheetEx.BottomSheetListener
 
     val scope = CoroutineScope(coroutineContext)
 
-    lateinit var errorStatusObserver : Observer<String>
-    lateinit var loadingStatusObserver :Observer<Boolean>
+    lateinit var errorStatusObserver: Observer<String>
+    lateinit var loadingStatusObserver: Observer<Boolean>
 
     override fun attachBaseContext(newBase: Context) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase))
@@ -91,7 +91,7 @@ open class BaseActivity : AppCompatActivity(), BottomSheetEx.BottomSheetListener
     open fun viewModelSetup(activity: AppCompatActivity, viewModel: BaseViewModel) {
 
         baseviewModel = viewModel
-        loadingStatusObserver =  Observer {
+        loadingStatusObserver = Observer {
             if (showProgress) {
                 if (it) {
                     showProgress("")
@@ -100,27 +100,28 @@ open class BaseActivity : AppCompatActivity(), BottomSheetEx.BottomSheetListener
                 }
             }
         }
-        baseviewModel.loadingStatus.observe(activity,loadingStatusObserver)
+        baseviewModel.loadingStatus.observe(activity, loadingStatusObserver)
 
-        errorStatusObserver =  Observer { error ->
+        errorStatusObserver = Observer { error ->
             if (showApiErrorMsg)
                 showException(error)
         }
-        baseviewModel.errorStatus.observe(activity,errorStatusObserver)
+        baseviewModel.errorStatus.observe(activity, errorStatusObserver)
     }
 
 
     override fun onBackPressed() {
         try {
-            if (baseviewModel.loadingStatus.value==true){
-                showMsg(progressCircular,"loading...please wait!!")
-            }else{
+            if (baseviewModel.loadingStatus.value == true) {
+                showMsg(progressCircular, "loading...please wait!!")
+            } else {
                 super.onBackPressed()
             }
         } catch (e: Exception) {
             super.onBackPressed()
         }
     }
+
     override fun onOptionClick(text: String) {
 
     }
@@ -184,7 +185,7 @@ open class BaseActivity : AppCompatActivity(), BottomSheetEx.BottomSheetListener
                 intent.putExtra("intent_data", intentData as Serializable)
             }
             val options = ActivityOptions.makeSceneTransitionAnimation(context as Activity?)
-            ContextCompat.startActivity(context,intent, options.toBundle())
+            ContextCompat.startActivity(context, intent, options.toBundle())
             //ContextCompat.startActivity(context, intent, null)
             return intent
         }
@@ -196,7 +197,7 @@ open class BaseActivity : AppCompatActivity(), BottomSheetEx.BottomSheetListener
                 .setAction("Action", null).show()
         }
 
-        open fun showMsgCantEmpty(msg: String) :String{
+        open fun showMsgCantEmpty(msg: String): String {
             return "$msg cannot be empty"
         }
 
@@ -273,7 +274,7 @@ open class BaseActivity : AppCompatActivity(), BottomSheetEx.BottomSheetListener
                 dialog.show()
             }
         } catch (e: Exception) {
-            Log.w("App Error:",e.localizedMessage)
+            Log.w("App Error:", e.localizedMessage)
         }
     }
 
@@ -301,7 +302,7 @@ open class BaseActivity : AppCompatActivity(), BottomSheetEx.BottomSheetListener
         dialog.show()
     }
 
-    public fun redirectStore(updateUrl:String){
+    public fun redirectStore(updateUrl: String) {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(updateUrl));
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)

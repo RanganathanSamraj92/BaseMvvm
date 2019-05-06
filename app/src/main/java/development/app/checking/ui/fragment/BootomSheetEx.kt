@@ -11,24 +11,26 @@ import kotlinx.android.synthetic.main.fragment_bottom_sheet_ex.view.*
 
 class BottomSheetEx : BottomSheetDialogFragment() {
 
-    private var mBottomSheetListener: BottomSheetListener?=null
+    private var mBottomSheetListener: BottomSheetListener? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_bottom_sheet_ex, container, false)
 
         //handle clicks
-       /* v.btnRetry.setOnClickListener {
-            mBottomSheetListener!!.onOptionClick("Call clicked...")
-            dismiss() //dismiss bottom sheet when item click
-        }*/
+        /* v.btnRetry.setOnClickListener {
+             mBottomSheetListener!!.onOptionClick("Call clicked...")
+             dismiss() //dismiss bottom sheet when item click
+         }*/
 
 
         return v
     }
 
-    interface BottomSheetListener{
+    interface BottomSheetListener {
         fun onOptionClick(text: String)
     }
 
@@ -37,8 +39,7 @@ class BottomSheetEx : BottomSheetDialogFragment() {
 
         try {
             mBottomSheetListener = context as BottomSheetListener?
-        }
-        catch (e: ClassCastException){
+        } catch (e: ClassCastException) {
             throw ClassCastException(context!!.toString())
         }
 

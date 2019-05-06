@@ -1,4 +1,3 @@
-
 object AppConfig {
     val buildToolsVersion = "28.0.0"
     val minSdkVersion = 21
@@ -7,18 +6,15 @@ object AppConfig {
     val applicationId = "development.app.checking"
     val versionCode = 1
     val versionName = "1.0.0"
-    val baseUrl="http://shamlatech.net/android_portal/"
-    val api_path="kotlinApps/api/"
+    val baseUrl = "http://shamlatech.net/android_portal/"
+    val api_path = "kotlinApps/api/"
     val applicaionName = "BaseApps"
     val BaseAppTitle = "Names"
     val applicationIdTwo = "development.app.sample"
 }
 
 
-
-
-
-object Versions{
+object Versions {
 
     val kotlin_version = "1.3.21"
     val gradle_version = "3.2.0"
@@ -85,7 +81,7 @@ object Libs {
         val androidProcessor = "com.google.dagger:dagger-android-processor:${Versions.dagger2_version}"
     }
 
-    object Support{
+    object Support {
         val appcompat = "androidx.appcompat:appcompat:${Versions.appcompat}"
         val constraint = "androidx.constraintlayout:constraintlayout:${Versions.constraint_layout}"
         val design = "com.android.support:design:${Versions.support_lib}"
@@ -93,14 +89,17 @@ object Libs {
         val cardview = "com.android.support:cardview-v7:${Versions.support_lib}"
 
     }
-    object Retrofit{
+
+    object Retrofit {
         val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
         val converter_moshi = "com.squareup.retrofit2:converter-moshi:${Versions.retrofit_version}"
-        val retrofit2_kotlin_coroutines = "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:${Versions.retrofit_adapter_version}"
+        val retrofit2_kotlin_coroutines =
+            "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:${Versions.retrofit_adapter_version}"
         val retrofit2_converter_gson = "com.squareup.retrofit2:converter-gson:${Versions.retrofit_gson_version}"
         val logging_interceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.retrofit_interceptor_version}"
     }
-    object Firebase{
+
+    object Firebase {
         val auth = "com.google.firebase:firebase-auth:${Versions.firebase_auth}"
         val messaging = "com.google.firebase:firebase-messaging:${Versions.firebase_messaging}"
         val database = "com.google.firebase:firebase-database:${Versions.firebase_database}"
@@ -113,21 +112,20 @@ object Libs {
 
     }
 
-    object MLKit{
+    object MLKit {
         val ml_vision = "com.google.firebase:firebase-ml-vision:${Versions.firebase_ml_vision}"
         val image_label = "com.google.firebase:firebase-ml-vision-image-label-model:${Versions.firebase_image_label}"
     }
 
 
+    object Kotlin {
+        val kotlin_std = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin_version}"
+    }
 
-   object Kotlin{
-       val kotlin_std = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin_version}"
-   }
-
-   object Test{
-       val runner = "androidx.test:runner:${Versions.runner_version}"
-       val espresso_core = "androidx.test.espresso:espresso-core:${Versions.espresso_core_version}"
-   }
+    object Test {
+        val runner = "androidx.test:runner:${Versions.runner_version}"
+        val espresso_core = "androidx.test.espresso:espresso-core:${Versions.espresso_core_version}"
+    }
 
     val material = "com.google.android.material:material:${Versions.material_version}"
 

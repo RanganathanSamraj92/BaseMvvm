@@ -48,7 +48,7 @@ class MLKitActivity : BaseActivity() {
     private fun getPermission() {
         askPermission(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE) {
             if (it.isAccepted) {
-                showMsg( toolbar, "Granted")
+                showMsg(toolbar, "Granted")
                 showPictureDialog()
             }
 
@@ -56,10 +56,10 @@ class MLKitActivity : BaseActivity() {
         }.onDeclined { e ->
             //at least one permission have been declined by the user
             if (e.hasDenied()) {
-                showMsg( toolbar, "Denied")
+                showMsg(toolbar, "Denied")
                 //the list of denied permissions
                 e.denied.forEach {
-                    showMsg( toolbar, "Denied")
+                    showMsg(toolbar, "Denied")
 
                 }
 
@@ -75,10 +75,10 @@ class MLKitActivity : BaseActivity() {
             }
 
             if (e.hasForeverDenied()) {
-                showMsg( toolbar, "ForeverDenied")
+                showMsg(toolbar, "ForeverDenied")
                 //the list of forever denied permissions, user has check 'never ask again'
                 e.foreverDenied.forEach {
-                    showMsg( toolbar, it)
+                    showMsg(toolbar, it)
                 }
                 // you need to open setting manually if you really need it
                 e.goToSettings();

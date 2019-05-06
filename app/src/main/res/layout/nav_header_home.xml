@@ -20,8 +20,8 @@
             app:srcCompat="@mipmap/ic_launcher_round"
             android:contentDescription="@string/nav_header_desc"
             android:id="@+id/imgNavProfile"
-    app:civ_border_color="@color/colorWhite"
-    app:civ_border_width="@dimen/_1sdp"/>
+            app:civ_border_color="@color/colorWhite"
+            app:civ_border_width="@dimen/_1sdp"/>
 
     <TextView
             android:id="@+id/txtNavName"

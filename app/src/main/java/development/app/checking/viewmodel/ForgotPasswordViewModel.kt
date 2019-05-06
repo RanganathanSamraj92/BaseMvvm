@@ -36,8 +36,6 @@ class ForgotPasswordViewModel : BaseViewModel() {
     }
 
 
-
-
     public override fun onCleared() {
         super.onCleared()
     }

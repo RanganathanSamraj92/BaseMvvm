@@ -11,24 +11,24 @@ import retrofit2.http.*
 interface AuthApiCallInterface {
 
     @POST(NetworkUtils.login)
-    fun loginAsync(@Body newPart : LoginRequest): Deferred<Response<APIResponse>>
+    fun loginAsync(@Body newPart: LoginRequest): Deferred<Response<APIResponse>>
 
 
     @POST(NetworkUtils.register)
-    fun registerAsync(@Body register : RegisterRequest): Deferred<Response<APIResponse>>
+    fun registerAsync(@Body register: RegisterRequest): Deferred<Response<APIResponse>>
 
 
     @GET(NetworkUtils.me)
-    fun profileAsync(@Header("x-access-token") token :String ): Deferred<Response<APIResponse>>
+    fun profileAsync(@Header("x-access-token") token: String): Deferred<Response<APIResponse>>
 
     @POST(NetworkUtils.authenticate)
-    fun authenticateAsync(@Body emailOrMobile :String ): Deferred<Response<APIResponse>>
+    fun authenticateAsync(@Body emailOrMobile: String): Deferred<Response<APIResponse>>
 
     @POST(NetworkUtils.sendOTP)
-    fun sendOTPAsync(@Body emailOrMobile :String ): Deferred<Response<APIResponse>>
+    fun sendOTPAsync(@Body emailOrMobile: String): Deferred<Response<APIResponse>>
 
     @POST(NetworkUtils.resetPassword)
-    fun resetPasswordAsync(@Body password :String ): Deferred<Response<APIResponse>>
+    fun resetPasswordAsync(@Body password: String): Deferred<Response<APIResponse>>
 
 
     @POST(NetworkUtils.login)

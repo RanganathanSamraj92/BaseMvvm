@@ -14,7 +14,6 @@ import javax.inject.Inject
 class ProfileViewModel : ImageUploadViewModel() {
 
 
-
     @Inject
     lateinit var authApiCall: AuthApiCallInterface
 
@@ -22,8 +21,6 @@ class ProfileViewModel : ImageUploadViewModel() {
     private val repository = AuthRepository(authApiCall)
 
     val userInfo = MutableLiveData<ProfileModel>()
-
-
 
 
     init {

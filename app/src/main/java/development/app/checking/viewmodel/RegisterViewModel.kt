@@ -33,12 +33,12 @@ class RegisterViewModel : BaseViewModel() {
     }
 
     internal fun signOut() {
-      auth.signOut()
+        auth.signOut()
     }
 
     private lateinit var idToken: String
 
-    fun register(name: String, email:String, password:String, image:String, mobile:String) {
+    fun register(name: String, email: String, password: String, image: String, mobile: String) {
         loadingStatus.value = true
         scope.launch {
             val registerRequest = RegisterRequest()
@@ -60,9 +60,9 @@ class RegisterViewModel : BaseViewModel() {
                             Log.e("user", user.toString())
                             user!!.getIdToken(true).addOnSuccessListener { tokenResult ->
                                 idToken = tokenResult.token.toString()
-                                Log.w("idToken",idToken)
-                                res.data.loginModel.token =idToken
-                                res.data.loginModel.uid =user.uid
+                                Log.w("idToken", idToken)
+                                res.data.loginModel.token = idToken
+                                res.data.loginModel.uid = user.uid
                                 loginResult.postValue(res.data.loginModel)
 
                             }
@@ -72,7 +72,7 @@ class RegisterViewModel : BaseViewModel() {
                         }
 
                     }
-                }else{
+                } else {
                     errorStatus.postValue(res.meta.message)
                 }
             } catch (e: Throwable) {
@@ -82,14 +82,15 @@ class RegisterViewModel : BaseViewModel() {
         }
     }
 
-    internal fun updateLoginIdToken(token: String,userId:String) {
+    internal fun updateLoginIdToken(token: String, userId: String) {
         scope.launch {
             //uploadingStatus.postValue(true)
             val datebaseRef = database.reference
             try {
-                var authIdTokenReference = datebaseRef.child("users/$userId/authIdToken").setValue(token).addOnSuccessListener {
-                    updateIdTokenResult.postValue(true)
-                }
+                var authIdTokenReference =
+                    datebaseRef.child("users/$userId/authIdToken").setValue(token).addOnSuccessListener {
+                        updateIdTokenResult.postValue(true)
+                    }
             } catch (e: Exception) {
                 //uploadingStatus.postValue(false)
                 updateIdTokenResult.postValue(false)

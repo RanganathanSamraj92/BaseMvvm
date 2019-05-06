@@ -33,6 +33,7 @@ class ResetPasswordViewModel : BaseViewModel() {
 
         }
     }
+
     public override fun onCleared() {
         super.onCleared()
     }

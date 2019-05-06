@@ -58,7 +58,7 @@ class HomeActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             if (key.isNotEmpty() && value.isNotEmpty())
                 homeVieModel.getUsers(key, value)
             else
-                showMsg(fab,resources.getString(R.string.please_enter_search_values))
+                showMsg(fab, resources.getString(R.string.please_enter_search_values))
         }
 
         val toggle = ActionBarDrawerToggle(
@@ -73,7 +73,7 @@ class HomeActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             txtNavName.text = me.name
             txtNavEmail.text = me.mobile
             if (me.image.isNotEmpty()) {
-                Picasso.get().load(me.image).into(imgNavProfile,object: Callback {
+                Picasso.get().load(me.image).into(imgNavProfile, object : Callback {
                     override fun onSuccess() {
                         //progressUploadProfileImage.visibility = View.GONE
                     }

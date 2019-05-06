@@ -24,7 +24,7 @@ class ResetPasswordActivity : BaseActivity() {
 
 
         resetPasswordViewModel.errorStatus.observe(this, Observer {
-            newIntent(context,LoginActivity::class.java,"")
+            newIntent(context, LoginActivity::class.java, "")
             finish()
         })
 
@@ -33,21 +33,19 @@ class ResetPasswordActivity : BaseActivity() {
         })
 
         btnResetPassword.setOnClickListener {
-            if (txtPassword.text.toString().isEmpty()){
-                showMsg(txtPassword,showMsgCantEmpty("Password "))
+            if (txtPassword.text.toString().isEmpty()) {
+                showMsg(txtPassword, showMsgCantEmpty("Password "))
                 return@setOnClickListener
             }
-            if (txtConfirmPassword.text.toString().isEmpty()){
-                showMsg(txtPassword,showMsgCantEmpty("Confirm Password "))
+            if (txtConfirmPassword.text.toString().isEmpty()) {
+                showMsg(txtPassword, showMsgCantEmpty("Confirm Password "))
                 return@setOnClickListener
             }
-            if (txtConfirmPassword.text.toString()==txtPassword.text.toString()) {
+            if (txtConfirmPassword.text.toString() == txtPassword.text.toString()) {
                 resetPasswordViewModel.resetPassword("9988776655")
-            }else{
-                showMsg(txtPassword,"Password mismatched!")
+            } else {
+                showMsg(txtPassword, "Password mismatched!")
             }
-
-
 
 
         }
