@@ -43,15 +43,14 @@ import kotlin.coroutines.CoroutineContext
 import android.app.ActivityOptions
 import android.net.Uri
 import androidx.core.content.ContextCompat.startActivity
+import apps.ranganathan.configlibrary.base.BaseAppActivity
 
 
-open class BaseActivity : AppCompatActivity(), BottomSheetEx.BottomSheetListener {
+open class BaseActivity : BaseAppActivity(), BottomSheetEx.BottomSheetListener {
 
-    public val context: Context = this@BaseActivity
     @Inject
     lateinit var prefs: Prefs
 
-    public val parentJob = Job()
 
     private val coroutineContext: CoroutineContext
         get() = parentJob + Dispatchers.Default

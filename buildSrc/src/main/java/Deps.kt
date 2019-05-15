@@ -67,6 +67,7 @@ object Versions {
 
     val firebase_ml_vision = "19.0.3"
     val firebase_image_label = "17.0.2"
+    val app_config = "0.0.10"
 
 }
 
@@ -126,6 +127,8 @@ object Libs {
         val runner = "androidx.test:runner:${Versions.runner_version}"
         val espresso_core = "androidx.test.espresso:espresso-core:${Versions.espresso_core_version}"
     }
+
+    val app_config = "com.github.ranganathansamraj92:ConfigApp:${Versions.app_config}"
 
     val material = "com.google.android.material:material:${Versions.material_version}"
 

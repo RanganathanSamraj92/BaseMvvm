@@ -10,7 +10,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
-            tools:replace="android:theme"
+            tools:replace="android:theme,android:label"
             android:name=".app.App"
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"

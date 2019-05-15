@@ -39,6 +39,7 @@ class HomeActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         setContentView(R.layout.activity_home)
         homeVieModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
 
+        showToast("Hello")
 
         setSupportActionBar(toolbar)
 

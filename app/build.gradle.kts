@@ -122,6 +122,7 @@ dependencies {
     implementation(Libs.runtimePermissions)
     implementation("com.github.mukeshsolanki:android-otpview-pinview:2.0.3")
     implementation(Libs.lottie)
+    implementation(Libs.app_config)
 
     implementation(project(":myapplication")) {
         exclude(group = "com.google.firebase")
